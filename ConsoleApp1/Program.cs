@@ -136,6 +136,23 @@ namespace ConsoleApp1
             }
         } // main
 
+        private static Location GetNextEmptyLocation()
+        {
+            for (int a = 0; a < 6; a++)
+            {
+                for (int b = 0; b < 6; b++)
+                {
+                    for (int g = 0; g < 6; g++)
+                    {
+                        if (BoardMap[a, b, g] == '-')
+                            return new Location(a, b, g);
+                    }
+                }
+            }
+
+            return new Location(-1, -1, -1);
+        }
+
         private static bool Collision(Piece piece)
         {
             var abs = piece.GetAbsolutePosition();
