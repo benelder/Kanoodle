@@ -16,6 +16,15 @@ namespace ClassLibrary1
             Nodes = nodes;
         }
 
+        public Piece(Node[] nodes)
+        {
+            RootPosition = new Location(0,0,0);
+            GRotation = 0;
+            ARotation = 0;
+            BRotation = 0;
+            Nodes = nodes;
+        }
+
         public string Name { get; set; }
         public char Character { get; set; }
         public Location RootPosition { get; set; }
@@ -124,6 +133,10 @@ namespace ClassLibrary1
         public int A { get; set; }
         public int B { get; set; }
         public int G { get; set; }
+        public override string ToString()
+        {
+            return $"{{{A}, {B}, {G}}}";
+        }
     }
 
     public class Node
@@ -134,12 +147,15 @@ namespace ClassLibrary1
         }
 
         public Location Offset { get; set; }
-
+        public override string ToString()
+        {
+            return Offset.ToString();
+        }
     }
 
     public class Gray : Piece
     {
-        public Gray(Location rootPosition) : base(rootPosition, new Node[] {
+        public Gray() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(0,1,0),
@@ -153,7 +169,7 @@ namespace ClassLibrary1
 
     public class Red : Piece
     {
-        public Red(Location rootPosition) : base(rootPosition, new Node[] {
+        public Red() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(0,1,0),
@@ -167,7 +183,7 @@ namespace ClassLibrary1
 
     public class Pink : Piece
     {
-        public Pink(Location rootPosition) : base(rootPosition, new Node[] {
+        public Pink() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(2,0,0),
@@ -182,7 +198,7 @@ namespace ClassLibrary1
 
     public class Green : Piece
     {
-        public Green(Location rootPosition) : base(rootPosition, new Node[] {
+        public Green() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(2,0,0),
@@ -197,7 +213,7 @@ namespace ClassLibrary1
 
     public class Purple : Piece
     {
-        public Purple(Location rootPosition) : base(rootPosition, new Node[] {
+        public Purple() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(2,0,0),
@@ -211,7 +227,7 @@ namespace ClassLibrary1
 
     public class White : Piece
     {
-        public White(Location rootPosition) : base(rootPosition, new Node[] {
+        public White() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(2,0,0),
@@ -226,7 +242,7 @@ namespace ClassLibrary1
 
     public class Peach : Piece
     {
-        public Peach(Location rootPosition) : base(rootPosition, new Node[] {
+        public Peach() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(1,1,0),
@@ -240,7 +256,7 @@ namespace ClassLibrary1
 
     public class Orange : Piece
     {
-        public Orange(Location rootPosition) : base(rootPosition, new Node[] {
+        public Orange() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(1,1,0),
@@ -254,7 +270,7 @@ namespace ClassLibrary1
 
     public class LightBlue : Piece
     {
-        public LightBlue(Location rootPosition) : base(rootPosition, new Node[] {
+        public LightBlue() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(2,0,0),
@@ -269,7 +285,7 @@ namespace ClassLibrary1
 
     public class DarkBlue : Piece
     {
-        public DarkBlue(Location rootPosition) : base(rootPosition, new Node[] {
+        public DarkBlue() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(2,0,0),
@@ -284,7 +300,7 @@ namespace ClassLibrary1
 
     public class Yellow : Piece
     {
-        public Yellow(Location rootPosition) : base(rootPosition, new Node[] {
+        public Yellow() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(2,0,0),
@@ -299,7 +315,7 @@ namespace ClassLibrary1
 
     public class Lime : Piece
     {
-        public Lime(Location rootPosition) : base(rootPosition, new Node[] {
+        public Lime() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
             new Node(1,1,0),
