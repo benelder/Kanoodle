@@ -16,6 +16,8 @@ namespace ClassLibrary1
             Nodes = nodes;
         }
 
+        public string Name { get; set; }
+        public char Character { get; set; }
         public Location RootPosition { get; set; }
         public int GRotation { get; set; }
         public int ARotation { get; set; }
@@ -133,6 +135,181 @@ namespace ClassLibrary1
 
         public Location Offset { get; set; }
 
+    }
+
+    public class Gray : Piece
+    {
+        public Gray(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(0,1,0),
+            new Node(1,1,0)
+        })
+        {
+            Name = "Gray";
+            Character = 'K';
+        }
+    }
+
+    public class Red : Piece
+    {
+        public Red(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(0,1,0),
+            new Node(2,1,0)
+        })
+        {
+            Name = "Red";
+            Character = 'E';
+        }
+    }
+
+    public class Pink : Piece
+    {
+        public Pink(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(2,0,0),
+            new Node(3,0,0),
+            new Node(1,1,0)
+        })
+        {
+            Name = "Pink";
+            Character = 'F';
+        }
+    }
+
+    public class Green : Piece
+    {
+        public Green(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(2,0,0),
+            new Node(0,1,0),
+            new Node(2,1,0)
+        })
+        {
+            Name = "Green";
+            Character = 'G';
+        }
+    }
+
+    public class Purple : Piece
+    {
+        public Purple(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(2,0,0),
+            new Node(1,1,0)
+        })
+        {
+            Name = "Purple";
+            Character = 'L';
+        }
+    }
+
+    public class White : Piece
+    {
+        public White(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(2,0,0),
+            new Node(0,1,0),
+            new Node(0,2,0)
+        })
+        {
+            Name = "White";
+            Character = 'H';
+        }
+    }
+
+    public class Peach : Piece
+    {
+        public Peach(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(1,1,0),
+            new Node(2,1,0)
+        })
+        {
+            Name = "Peach";
+            Character = 'J';
+        }
+    }
+
+    public class Orange : Piece
+    {
+        public Orange(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(1,1,0),
+            new Node(1,2,0)
+        })
+        {
+            Name = "Orange";
+            Character = 'B';
+        }
+    }
+
+    public class LightBlue : Piece
+    {
+        public LightBlue(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(2,0,0),
+            new Node(3,0,0),
+            new Node(0,1,0)
+        })
+        {
+            Name = "LightBlue";
+            Character = 'D';
+        }
+    }
+
+    public class DarkBlue : Piece
+    {
+        public DarkBlue(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(2,0,0),
+            new Node(2,1,0),
+            new Node(2,2,0)
+        })
+        {
+            Name = "DarkBlue";
+            Character = 'C';
+        }
+    }
+
+    public class Yellow : Piece
+    {
+        public Yellow(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(2,0,0),
+            new Node(1,1,0),
+            new Node(2,1,0)
+        })
+        {
+            Name = "Yellow";
+            Character = 'B';
+        }
+    }
+
+    public class Lime : Piece
+    {
+        public Lime(Location rootPosition) : base(rootPosition, new Node[] {
+            new Node(0,0,0),
+            new Node(1,0,0),
+            new Node(1,1,0),
+            new Node(1,2,0),
+            new Node(2,1,0)
+        })
+        {
+            Name = "Lime";
+            Character = 'A';
+        }
     }
 }
 
