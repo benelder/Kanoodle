@@ -172,8 +172,9 @@ namespace ClassLibrary1
         public Red() : base(new Node[] {
             new Node(0,0,0),
             new Node(1,0,0),
+            new Node(2,0,0),
             new Node(0,1,0),
-            new Node(2,1,0)
+            new Node(1,1,0)
         })
         {
             Name = "Red";
