@@ -92,14 +92,6 @@ namespace ClassLibrary1
             if (ARotation == 2)
                 return new Location { A = location.A + location.G, B = -(location.B + location.G), G = location.B };
 
-            if (ARotation == 3)
-                return new Location { A = location.A + location.G, B = -(location.B + location.G), G = -location.G };
-
-            if (ARotation == 4)
-                return new Location { A = location.A, B = location.G, G = -(location.B+location.G) };
-
-            if (ARotation == 5)
-                return new Location { A = location.A, B = location.B, G = -location.B };
 
             throw new Exception("invalid ARotation");
         }
@@ -110,19 +102,10 @@ namespace ClassLibrary1
                 return location;
 
             if (BRotation == 1)
-                return new Location { A = location.G, B = location.B, G = location.A };
+                return new Location { A = -location.G, B = location.B, G = location.A + location.G };
 
             if (BRotation == 2)
-                return new Location { A = -location.A, B = location.B, G = location.A };
-
-            if (BRotation == 3)
-                return new Location { A = -location.A, B = location.A + location.B, G = 0 };
-
-            if (BRotation == 4)
-                return new Location { A = 0, B = location.A + location.B, G = -location.A };
-
-            if (BRotation == 5)
-                return new Location { A = location.A, B = location.A + location.B, G = -location.A };
+                return new Location { A = -(location.A + location.G), B = location.B, G = location.A };
 
             throw new Exception("invalid BRotation");
         }
