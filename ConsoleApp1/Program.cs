@@ -6,28 +6,40 @@ namespace ConsoleApp1
 {
     class Program
     {
+        public static HashSet<string> Attempts { get; set; }
         public static List<Piece> UnusedPieces { get; set; }
         public static List<Piece> PiecesUsed { get; set; }
         public static char[,,] BoardMap { get; set; }
         static void Main(string[] args)
         {
             Console.WriteLine("CANOODLE!");
+            Attempts = new HashSet<string>();
             BoardMap = new char[6, 6, 6];
             PiecesUsed = new List<Piece>();
             UnusedPieces = new List<Piece>
             {
-                new Lime(),
-                new Green(),
-                new DarkBlue(),
-                new Pink(),
-                new LightBlue(),
-                new Orange(),
-                new White(),
-                new Yellow(),
-                new Peach(),
-                new Purple(),
+
+
                 new Gray(),
-                new Red()
+                new Purple(),
+
+                new Yellow(),
+
+                new Green(),
+                new White(),
+
+                new Orange(),
+
+                new LightBlue(),
+
+                new Lime(),
+
+                new DarkBlue(),
+                new Peach(),
+
+                new Red(),
+
+                new Pink()
             };
 
             for (int i = 0; i < 6; i++)
@@ -46,103 +58,141 @@ namespace ConsoleApp1
 
             var escape = false;
 
-            for (int a = 0; a < 6; a++)
-            {
-                if (escape) break;
+            var targetLocation = GetNextEmptyLocation();
 
-                for (int b = 0; b < 6; b++)
+            Console.WriteLine("Attempting to place pieces at location {0}, {1}, {2}", targetLocation.A, targetLocation.B, targetLocation.G);
+            var lastAttempt = "";
+            var pieceCount = UnusedPieces.Count;
+            var pieceAttempAtPosition = 0;
+            while (UnusedPieces.Count > 0)
+            {
+                while (!targetLocation.Equals(new Location(-1, -1, -1)))
                 {
                     if (escape) break;
+                    pieceCount = UnusedPieces.Count;
 
-                    for (int g = 0; g < 6; g++)
+                    if (pieceAttempAtPosition == pieceCount)
                     {
-                        if (escape) break;
+                        RemoveLastPlacedPiece();
+                        targetLocation = GetNextEmptyLocation();
+                        pieceAttempAtPosition = 0;
+                        PrintBoard();
 
-                        Console.WriteLine("Attempting to place pieces at location {0}, {1}, {2}", a, b, g);
-                        var lastAttempt = "";
-                        while (UnusedPieces.Count > 0)
+                        continue;
+                    }
+                    var piece = UnusedPieces[^1];
+                    pieceAttempAtPosition++;
+
+                    if (lastAttempt == piece.Name)
+                    {
+                        escape = true;
+                        Console.WriteLine("Aborting, repeating same piece");
+                        break;
+                    }
+                    else
+                    {
+                        lastAttempt = piece.Name;
+                    };
+
+                    var piecePlaced = false;
+
+                    for (int rb = 0; rb < 3; rb++)
+                    {
+                        for (int ra = 0; ra < 3; ra++)
                         {
-                            var piece = UnusedPieces[UnusedPieces.Count-1];
-                            
-                            if(lastAttempt == piece.Name)
-                            {
-                                escape = true;
-                                Console.WriteLine("Aborting, repeating same piece");
-                                break;
-                            }
-                            else
-                            {
-                                lastAttempt = piece.Name;
-                            };
-
-                            var piecePlaced = false;
-
                             for (int rg = 0; rg < 6; rg++)
                             {
-                                for (int ra = 0; ra < 3; ra++)
+
+
+
+                                piece.RootPosition = targetLocation;
+                                piece.ARotation = ra;
+                                piece.BRotation = rb;
+                                piece.GRotation = rg;
+
+                                if (Attempts.Contains(piece.AbsId()))
+                                    continue;
+
+                                //Console.WriteLine("Attempting to place {0} at location {1}, {2}, {3} with rotation {4}, {5}, {6}", piece.Name, targetLocation.A, targetLocation.B, targetLocation.G, ra, rb, rg);
+
+                                var abs = piece.GetAbsolutePosition();
+
+                                var absString = "";
+                                for (int i = 0; i < abs.Length; i++)
                                 {
-                                    for (int rb = 0; rb < 3; rb++)
+                                    if (i == 0)
+                                        absString = abs[0].ToString();
+                                    else
                                     {
-                                        Console.WriteLine("Attempting to place {0} at location {1}, {2}, {3} with rotation {4}, {5}, {6}", piece.Name, a, b, g, ra, rb, rg);
-
-                                        piece.RootPosition = new Location(a, b, g);
-                                        piece.ARotation = ra;
-                                        piece.BRotation = rb;
-                                        piece.GRotation = rg;
-
-                                        var abs = piece.GetAbsolutePosition();
-
-                                        var absString = "";
-                                        for (int i = 0; i < abs.Length; i++)
-                                        {
-                                            if (i == 0)
-                                                absString = abs[0].ToString();
-                                            else
-                                            {
-                                                absString += $", {abs[i]}";
-                                            }
-                                        }
-
-                                        var isInBounds = !piece.IsOutOfBounds();
-                                        Console.WriteLine("Absolute position is: {0}; InBounds = {1}", absString, isInBounds.ToString().ToUpper());
-
-                                        if (isInBounds)
-                                        {
-                                            Console.WriteLine($"Leaving {piece.Name} piece in place");
-
-                                            if (!Collision(piece))
-                                            {
-                                                AddPieceToBoard(piece);
-                                                PrintBoard();
-                                                piecePlaced = true;
-                                            }
-                                        }
-
-                                        if (piecePlaced) break;
-
-                                        // if we get here, piece wont fit in this position
-                                        UnusedPieces.Remove(piece);
-                                        UnusedPieces.Insert(0, piece);
+                                        absString += $", {abs[i]}";
                                     }
+                                }
 
-                                    if (piecePlaced) break;
+                                Attempts.Add(piece.AbsId());
+
+                                var isInBounds = !piece.IsOutOfBounds();
+                                //Console.WriteLine("Absolute position is: {0}; InBounds = {1}", absString, isInBounds.ToString().ToUpper());
+
+                                if (isInBounds)
+                                {
+                                    Console.WriteLine($"Attempting to place {piece.Name} piece");
+
+                                    if (!Collision(piece))
+                                    {
+                                        AddPieceToBoard(piece);
+                                        PrintBoard();
+                                        piecePlaced = true;
+                                        pieceAttempAtPosition = 0;
+                                        Console.WriteLine($"{piece.Name} placed successfully");
+
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"Collision detected. Attempting an alternate position");
+                                    }
                                 }
 
                                 if (piecePlaced) break;
                             }
+
+                            if (piecePlaced) break;
                         }
+
+                        if (piecePlaced) break;
+                    }
+
+                    if (!piecePlaced)
+                    {
+                        // if we get here, piece wont fit in this position,
+                        // pop it off the list and add to front
+                        UnusedPieces.Remove(piece);
+                        UnusedPieces.Insert(0, piece);
+                    }
+                    else
+                    {
+                        targetLocation = GetNextEmptyLocation();
                     }
                 }
             }
         } // main
 
+        private static void RemoveLastPlacedPiece()
+        {
+            var lastPiece = PiecesUsed[^1];
+            Console.WriteLine($"Removing {lastPiece.Name}");
+
+            ClearPieceFromMap(lastPiece);
+            PiecesUsed.Remove(lastPiece);
+            UnusedPieces.Insert(0, lastPiece);
+        }
+
         private static Location GetNextEmptyLocation()
         {
-            for (int a = 0; a < 6; a++)
+            for (int g = 0; g < 6; g++)
             {
                 for (int b = 0; b < 6; b++)
                 {
-                    for (int g = 0; g < 6; g++)
+                    for (int a = 0; a < 6; a++)
                     {
                         if (BoardMap[a, b, g] == '-')
                             return new Location(a, b, g);
@@ -199,11 +249,11 @@ namespace ConsoleApp1
 
         private static void ClearPieceFromMap(Piece piece)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 6; j++)
                 {
-                    for (int k = 0; k < 5; k++)
+                    for (int k = 0; k < 6; k++)
                     {
                         if (BoardMap[i, j, k] == piece.Character)
                             BoardMap[i, j, k] = '-';

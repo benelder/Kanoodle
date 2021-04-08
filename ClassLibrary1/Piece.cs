@@ -33,6 +33,11 @@ namespace ClassLibrary1
         public int BRotation { get; set; }
         public Node[] Nodes { get; set; }
 
+        public string AbsId()
+        {
+            return $"{Character}{RootPosition.A}{RootPosition.B}{RootPosition.G}{ARotation}{BRotation}{GRotation}";
+        }
+
         public Node[] GetAbsolutePosition()
         {
             var toRet = new List<Node>();
