@@ -18,7 +18,7 @@ namespace ClassLibrary1
 
         public Piece(Node[] nodes)
         {
-            RootPosition = new Location(0,0,0);
+            RootPosition = new Location(0, 0, 0);
             GRotation = 0;
             ARotation = 0;
             BRotation = 0;
@@ -38,22 +38,27 @@ namespace ClassLibrary1
             return $"{Character}{RootPosition.A}{RootPosition.B}{RootPosition.G}{ARotation}{BRotation}{GRotation}";
         }
 
+        private Node[] _absolutePosition;
         public Node[] GetAbsolutePosition()
         {
-            var toRet = new List<Node>();
-
-            for (int i = 0; i < Nodes.Length; i++)
+            if (_absolutePosition == null)
             {
-                var offset = RotateB(RotateA(RotateG(Nodes[i].Offset)));
+                var toRet = new List<Node>();
 
-                var toAdd = new Node(RootPosition.A + offset.A,
-                    RootPosition.B + offset.B,
-                    RootPosition.G + offset.G);
+                for (int i = 0; i < Nodes.Length; i++)
+                {
+                    var offset = RotateB(RotateA(RotateG(Nodes[i].Offset)));
 
-                toRet.Add(toAdd);
+                    var toAdd = new Node(RootPosition.A + offset.A,
+                        RootPosition.B + offset.B,
+                        RootPosition.G + offset.G);
+
+                    toRet.Add(toAdd);
+                }
+                _absolutePosition = toRet.ToArray();
             }
 
-            return toRet.ToArray();
+            return _absolutePosition;
         }
 
         public bool IsOutOfBounds()
