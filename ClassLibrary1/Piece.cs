@@ -47,7 +47,7 @@ namespace ClassLibrary1
 
                 for (int i = 0; i < Nodes.Length; i++)
                 {
-                    var offset = RotateB(RotateA(RotateG(Nodes[i].Offset)));
+                    var offset = RotateG(RotateB(RotateA(Nodes[i].Offset)));
 
                     var toAdd = new Node(RootPosition.A + offset.A,
                         RootPosition.B + offset.B,
@@ -112,7 +112,6 @@ namespace ClassLibrary1
 
             if (ARotation == 2)
                 return new Location { A = location.A + location.G, B = -(location.B + location.G), G = location.B };
-
 
             throw new Exception("invalid ARotation");
         }

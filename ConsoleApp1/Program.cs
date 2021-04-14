@@ -44,18 +44,22 @@ namespace ConsoleApp1
 
             UsedLocations = new HashSet<Location>();
 
-            AddPieceToBoard(new Red() { GRotation = 1, BRotation = 2, RootPosition = new Location(0, 0, 0) });
+            AddPieceToBoard(new Red() { GRotation = 4, BRotation = 0, RootPosition = new Location(0, 2, 0) });
+            AddPieceToBoard(new LightBlue() { GRotation = 2, ARotation = 0, RootPosition = new Location(3, 0, 0) });
+            AddPieceToBoard(new Yellow() { GRotation = 2, ARotation = 1, RootPosition = new Location(4, 0, 0) });
+            AddPieceToBoard(new Gray() { GRotation = 1, ARotation = 0, RootPosition = new Location(1, 3, 0) });
+            AddPieceToBoard(new Orange() { GRotation = 5, ARotation = 2, BRotation = 2, RootPosition = new Location(0, 4, 1) });
 
             LoadPossiblePositions();
 
             PrintBoard();
 
-            foreach (var red in GetUnusedPositions(RedPositions))
-            {
-                if (!Collision(red))
-                {
-                    AddPieceToBoard(red);
-                    PrintBoard();
+            //foreach (var red in GetUnusedPositions(RedPositions))
+            //{
+            //    if (!Collision(red))
+            //    {
+            //        AddPieceToBoard(red);
+            //        PrintBoard();
 
                     foreach (var pink in GetUnusedPositions(PinkPositions))
                     {
@@ -106,50 +110,50 @@ namespace ConsoleApp1
                                                                             AddPieceToBoard(green);
                                                                             //PrintBoard();
 
-                                                                            foreach (var yellow in GetUnusedPositions(YellowPositions))
-                                                                            {
-                                                                                if (!Collision(yellow))
-                                                                                {
-                                                                                    AddPieceToBoard(yellow);
-                                                                                    //PrintBoard();
+                                                                            //foreach (var yellow in GetUnusedPositions(YellowPositions))
+                                                                            //{
+                                                                            //    if (!Collision(yellow))
+                                                                            //    {
+                                                                            //        AddPieceToBoard(yellow);
+                                                                            //        //PrintBoard();
 
-                                                                                    foreach (var orange in GetUnusedPositions(OrangePositions))
-                                                                                    {
-                                                                                        if (!Collision(orange))
-                                                                                        {
-                                                                                            AddPieceToBoard(orange);
-                                                                                            //PrintBoard();
+                                                                                    //foreach (var orange in GetUnusedPositions(OrangePositions))
+                                                                                    //{
+                                                                                    //    if (!Collision(orange))
+                                                                                    //    {
+                                                                                    //        AddPieceToBoard(orange);
+                                                                                    //        //PrintBoard();
 
-                                                                                            foreach (var lightBlue in GetUnusedPositions(LightBluePositions))
-                                                                                            {
-                                                                                                if (!Collision(lightBlue))
-                                                                                                {
-                                                                                                    AddPieceToBoard(lightBlue);
-                                                                                                    //PrintBoard();
+                                                                                    //        foreach (var lightBlue in GetUnusedPositions(LightBluePositions))
+                                                                                    //        {
+                                                                                    //            if (!Collision(lightBlue))
+                                                                                    //            {
+                                                                                    //                AddPieceToBoard(lightBlue);
+                                                                                    //                //PrintBoard();
 
-                                                                                                    foreach (var gray in GetUnusedPositions(GrayPositions))
-                                                                                                    {
-                                                                                                        if (!Collision(gray))
-                                                                                                        {
-                                                                                                            AddPieceToBoard(gray);
+                                                                                    //                foreach (var gray in GetUnusedPositions(GrayPositions))
+                                                                                    //                {
+                                                                                    //                    if (!Collision(gray))
+                                                                                    //                    {
+                                                                                    //                        AddPieceToBoard(gray);
 
                                                                                                             break;
-                                                                                                        }
-                                                                                                    }
+                                                                                    //                    }
+                                                                                    //                }
 
-                                                                                                    RemovePieceFromBoard(lightBlue);
-                                                                                                }
-                                                                                            }
+                                                                                    //                RemovePieceFromBoard(lightBlue);
+                                                                                    //            }
+                                                                                    //        }
 
-                                                                                            RemovePieceFromBoard(orange);
-                                                                                        }
-                                                                                    }
+                                                                                    //        RemovePieceFromBoard(orange);
+                                                                                    //    }
+                                                                                    //}
 
-                                                                                    RemovePieceFromBoard(yellow);
-                                                                                }
-                                                                            }
+                                                                            //        RemovePieceFromBoard(yellow);
+                                                                            //    }
+                                                                            //}
 
-                                                                            RemovePieceFromBoard(green);
+                                                                            //RemovePieceFromBoard(green);
                                                                         }
                                                                     }
 
@@ -177,9 +181,9 @@ namespace ConsoleApp1
                         }
                     }
 
-                    RemovePieceFromBoard(red);
-                }
-            }
+                    //RemovePieceFromBoard(red);
+            //    }
+            //}
 
             PrintBoard();
 
@@ -219,51 +223,51 @@ namespace ConsoleApp1
                                 for (int rg = 0; rg < 6; rg++)
                                 {
                                     var red = new Red() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!red.IsOutOfBounds() && red.Nodes.All(m=> !UsedLocations.Contains(m.Offset)))
+                                    if (!red.IsOutOfBounds() && red.GetAbsolutePosition().All(m=> !UsedLocations.Contains(m.Offset)))
                                         RedPositions.Add(red);
 
                                     var orange = new Orange() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!orange.IsOutOfBounds() && orange.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!orange.IsOutOfBounds() && orange.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         OrangePositions.Add(orange);
 
                                     var pink = new Pink() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!pink.IsOutOfBounds() && pink.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!pink.IsOutOfBounds() && pink.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         PinkPositions.Add(pink);
 
                                     var purple = new Purple() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!purple.IsOutOfBounds() && purple.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!purple.IsOutOfBounds() && purple.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         PurplePositions.Add(purple);
 
                                     var gray = new Gray() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!gray.IsOutOfBounds() && gray.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!gray.IsOutOfBounds() && gray.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         GrayPositions.Add(gray);
 
                                     var darkBlue = new DarkBlue() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!darkBlue.IsOutOfBounds() && darkBlue.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!darkBlue.IsOutOfBounds() && darkBlue.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         DarkBluePositions.Add(darkBlue);
 
                                     var lightBlue = new LightBlue() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!lightBlue.IsOutOfBounds() && lightBlue.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!lightBlue.IsOutOfBounds() && lightBlue.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         LightBluePositions.Add(lightBlue);
 
                                     var peach = new Peach() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!peach.IsOutOfBounds() && peach.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!peach.IsOutOfBounds() && peach.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         PeachPositions.Add(peach);
 
                                     var white = new White() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!white.IsOutOfBounds() && white.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!white.IsOutOfBounds() && white.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         WhitePositions.Add(white);
 
                                     var yellow = new Yellow() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!yellow.IsOutOfBounds() && yellow.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!yellow.IsOutOfBounds() && yellow.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         YellowPositions.Add(yellow);
 
                                     var lime = new Lime() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!lime.IsOutOfBounds() && lime.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!lime.IsOutOfBounds() && lime.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         LimePositions.Add(lime);
 
                                     var green = new Green() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!green.IsOutOfBounds() && green.Nodes.All(m => !UsedLocations.Contains(m.Offset)))
+                                    if (!green.IsOutOfBounds() && green.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
                                         GreenPositions.Add(green);
                                 }
                             }
