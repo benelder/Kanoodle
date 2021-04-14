@@ -7,18 +7,18 @@ namespace ConsoleApp1
 {
     class Program
     {
-        public static List<Red> RedPositions { get; set; }
-        public static List<Pink> PinkPositions { get; set; }
-        public static List<Lime> LimePositions { get; set; }
-        public static List<DarkBlue> DarkBluePositions { get; set; }
-        public static List<LightBlue> LightBluePositions { get; set; }
-        public static List<Green> GreenPositions { get; set; }
-        public static List<Yellow> YellowPositions { get; set; }
-        public static List<Purple> PurplePositions { get; set; }
-        public static List<Peach> PeachPositions { get; set; }
-        public static List<Gray> GrayPositions { get; set; }
-        public static List<Orange> OrangePositions { get; set; }
-        public static List<White> WhitePositions { get; set; }
+        public static List<Piece> RedPositions { get; set; }
+        public static List<Piece> PinkPositions { get; set; }
+        public static List<Piece> LimePositions { get; set; }
+        public static List<Piece> DarkBluePositions { get; set; }
+        public static List<Piece> LightBluePositions { get; set; }
+        public static List<Piece> GreenPositions { get; set; }
+        public static List<Piece> YellowPositions { get; set; }
+        public static List<Piece> PurplePositions { get; set; }
+        public static List<Piece> PeachPositions { get; set; }
+        public static List<Piece> GrayPositions { get; set; }
+        public static List<Piece> OrangePositions { get; set; }
+        public static List<Piece> WhitePositions { get; set; }
 
         public static HashSet<Location> UsedLocations { get; set; }
         public static List<Piece> UnusedPieces { get; set; }
@@ -28,7 +28,7 @@ namespace ConsoleApp1
         {
             Console.WriteLine("CANOODLE!");
             BoardMap = new char[6, 6, 6];
-            
+
 
             for (int i = 0; i < 6; i++)
             {
@@ -44,11 +44,33 @@ namespace ConsoleApp1
 
             UsedLocations = new HashSet<Location>();
 
-            AddPieceToBoard(new Red() { GRotation = 4, BRotation = 0, RootPosition = new Location(0, 2, 0) });
-            AddPieceToBoard(new LightBlue() { GRotation = 2, ARotation = 0, RootPosition = new Location(3, 0, 0) });
-            AddPieceToBoard(new Yellow() { GRotation = 2, ARotation = 1, RootPosition = new Location(4, 0, 0) });
-            AddPieceToBoard(new Gray() { GRotation = 1, ARotation = 0, RootPosition = new Location(1, 3, 0) });
-            AddPieceToBoard(new Orange() { GRotation = 5, ARotation = 2, BRotation = 2, RootPosition = new Location(0, 4, 1) });
+            var red = new Red().Shapes.First();
+            red.GRotation = 4;
+            red.RootPosition = new Location(0, 2, 0);
+            AddPieceToBoard(red);
+
+            var lightBlue = new LightBlue().Shapes.First();
+            lightBlue.GRotation = 2;
+            lightBlue.RootPosition = new Location(3, 0, 0);
+            AddPieceToBoard(lightBlue);
+
+            var yellow = new Yellow().Shapes.First();
+            yellow.GRotation = 2;
+            yellow.ARotation = 1;
+            yellow.RootPosition = new Location(4, 0, 0);
+            AddPieceToBoard(yellow);
+
+            var gray = new Gray().Shapes.First();
+            gray.GRotation = 1;
+            gray.ARotation = 0;
+            gray.RootPosition = new Location(1, 3, 0);
+            AddPieceToBoard(gray);
+
+            var orange = new Orange().Shapes.ElementAt(2);
+            orange.ARotation = 1;
+            orange.GRotation = 2;
+            orange.RootPosition = new Location(4, 1, 0);
+            AddPieceToBoard(orange);
 
             LoadPossiblePositions();
 
@@ -61,127 +83,127 @@ namespace ConsoleApp1
             //        AddPieceToBoard(red);
             //        PrintBoard();
 
-                    foreach (var pink in GetUnusedPositions(PinkPositions))
+            foreach (var pink in GetUnusedPositions(PinkPositions))
+            {
+                if (!Collision(pink))
+                {
+                    AddPieceToBoard(pink);
+                    PrintBoard();
+
+                    foreach (var darkBlue in GetUnusedPositions(DarkBluePositions))
                     {
-                        if (!Collision(pink))
+                        if (!Collision(darkBlue))
                         {
-                            AddPieceToBoard(pink);
+                            AddPieceToBoard(darkBlue);
                             PrintBoard();
 
-                            foreach (var darkBlue in GetUnusedPositions(DarkBluePositions))
+                            foreach (var lime in GetUnusedPositions(LimePositions))
                             {
-                                if (!Collision(darkBlue))
+                                if (!Collision(lime))
                                 {
-                                    AddPieceToBoard(darkBlue);
+                                    AddPieceToBoard(lime);
                                     PrintBoard();
 
-                                    foreach (var lime in GetUnusedPositions(LimePositions))
+                                    foreach (var purple in GetUnusedPositions(PurplePositions))
                                     {
-                                        if (!Collision(lime))
+                                        if (!Collision(purple))
                                         {
-                                            AddPieceToBoard(lime);
+                                            AddPieceToBoard(purple);
                                             PrintBoard();
 
-                                            foreach (var purple in GetUnusedPositions(PurplePositions))
+                                            foreach (var peach in GetUnusedPositions(PeachPositions))
                                             {
-                                                if (!Collision(purple))
+                                                if (!Collision(peach))
                                                 {
-                                                    AddPieceToBoard(purple);
-                                                    PrintBoard();
+                                                    AddPieceToBoard(peach);
+                                                    //PrintBoard();
 
-                                                    foreach (var peach in GetUnusedPositions(PeachPositions))
+                                                    foreach (var white in GetUnusedPositions(WhitePositions))
                                                     {
-                                                        if (!Collision(peach))
+                                                        if (!Collision(white))
                                                         {
-                                                            AddPieceToBoard(peach);
+                                                            AddPieceToBoard(white);
                                                             //PrintBoard();
 
-                                                            foreach (var white in GetUnusedPositions(WhitePositions))
+                                                            foreach (var green in GetUnusedPositions(GreenPositions))
                                                             {
-                                                                if (!Collision(white))
+                                                                if (!Collision(green))
                                                                 {
-                                                                    AddPieceToBoard(white);
+                                                                    AddPieceToBoard(green);
                                                                     //PrintBoard();
 
-                                                                    foreach (var green in GetUnusedPositions(GreenPositions))
-                                                                    {
-                                                                        if (!Collision(green))
-                                                                        {
-                                                                            AddPieceToBoard(green);
-                                                                            //PrintBoard();
+                                                                    //foreach (var yellow in GetUnusedPositions(YellowPositions))
+                                                                    //{
+                                                                    //    if (!Collision(yellow))
+                                                                    //    {
+                                                                    //        AddPieceToBoard(yellow);
+                                                                    //        //PrintBoard();
 
-                                                                            //foreach (var yellow in GetUnusedPositions(YellowPositions))
-                                                                            //{
-                                                                            //    if (!Collision(yellow))
-                                                                            //    {
-                                                                            //        AddPieceToBoard(yellow);
-                                                                            //        //PrintBoard();
+                                                                    //foreach (var orange in GetUnusedPositions(OrangePositions))
+                                                                    //{
+                                                                    //    if (!Collision(orange))
+                                                                    //    {
+                                                                    //        AddPieceToBoard(orange);
+                                                                    //        //PrintBoard();
 
-                                                                                    //foreach (var orange in GetUnusedPositions(OrangePositions))
-                                                                                    //{
-                                                                                    //    if (!Collision(orange))
-                                                                                    //    {
-                                                                                    //        AddPieceToBoard(orange);
-                                                                                    //        //PrintBoard();
+                                                                    //        foreach (var lightBlue in GetUnusedPositions(LightBluePositions))
+                                                                    //        {
+                                                                    //            if (!Collision(lightBlue))
+                                                                    //            {
+                                                                    //                AddPieceToBoard(lightBlue);
+                                                                    //                //PrintBoard();
 
-                                                                                    //        foreach (var lightBlue in GetUnusedPositions(LightBluePositions))
-                                                                                    //        {
-                                                                                    //            if (!Collision(lightBlue))
-                                                                                    //            {
-                                                                                    //                AddPieceToBoard(lightBlue);
-                                                                                    //                //PrintBoard();
+                                                                    //                foreach (var gray in GetUnusedPositions(GrayPositions))
+                                                                    //                {
+                                                                    //                    if (!Collision(gray))
+                                                                    //                    {
+                                                                    //                        AddPieceToBoard(gray);
 
-                                                                                    //                foreach (var gray in GetUnusedPositions(GrayPositions))
-                                                                                    //                {
-                                                                                    //                    if (!Collision(gray))
-                                                                                    //                    {
-                                                                                    //                        AddPieceToBoard(gray);
+                                                                    break;
+                                                                    //                    }
+                                                                    //                }
 
-                                                                                                            break;
-                                                                                    //                    }
-                                                                                    //                }
+                                                                    //                RemovePieceFromBoard(lightBlue);
+                                                                    //            }
+                                                                    //        }
 
-                                                                                    //                RemovePieceFromBoard(lightBlue);
-                                                                                    //            }
-                                                                                    //        }
+                                                                    //        RemovePieceFromBoard(orange);
+                                                                    //    }
+                                                                    //}
 
-                                                                                    //        RemovePieceFromBoard(orange);
-                                                                                    //    }
-                                                                                    //}
+                                                                    //        RemovePieceFromBoard(yellow);
+                                                                    //    }
+                                                                    //}
 
-                                                                            //        RemovePieceFromBoard(yellow);
-                                                                            //    }
-                                                                            //}
-
-                                                                            //RemovePieceFromBoard(green);
-                                                                        }
-                                                                    }
-
-                                                                    RemovePieceFromBoard(white);
+                                                                    //RemovePieceFromBoard(green);
                                                                 }
                                                             }
 
-                                                            RemovePieceFromBoard(peach);
+                                                            RemovePieceFromBoard(white);
                                                         }
                                                     }
 
-                                                    RemovePieceFromBoard(purple);
+                                                    RemovePieceFromBoard(peach);
                                                 }
                                             }
 
-                                            RemovePieceFromBoard(lime);
+                                            RemovePieceFromBoard(purple);
                                         }
                                     }
 
-                                    RemovePieceFromBoard(darkBlue);
+                                    RemovePieceFromBoard(lime);
                                 }
                             }
 
-                            RemovePieceFromBoard(pink);
+                            RemovePieceFromBoard(darkBlue);
                         }
                     }
 
-                    //RemovePieceFromBoard(red);
+                    RemovePieceFromBoard(pink);
+                }
+            }
+
+            //RemovePieceFromBoard(red);
             //    }
             //}
 
@@ -197,18 +219,18 @@ namespace ConsoleApp1
 
         private static void LoadPossiblePositions()
         {
-            RedPositions = new List<Red>();
-            PinkPositions = new List<Pink>();
-            PurplePositions = new List<Purple>();
-            DarkBluePositions = new List<DarkBlue>();
-            LightBluePositions = new List<LightBlue>();
-            WhitePositions = new List<White>();
-            GrayPositions = new List<Gray>();
-            LimePositions = new List<Lime>();
-            OrangePositions = new List<Orange>();
-            PeachPositions = new List<Peach>();
-            YellowPositions = new List<Yellow>();
-            GreenPositions = new List<Green>();
+            RedPositions = new List<Piece>();
+            PinkPositions = new List<Piece>();
+            PurplePositions = new List<Piece>();
+            DarkBluePositions = new List<Piece>();
+            LightBluePositions = new List<Piece>();
+            WhitePositions = new List<Piece>();
+            GrayPositions = new List<Piece>();
+            LimePositions = new List<Piece>();
+            OrangePositions = new List<Piece>();
+            PeachPositions = new List<Piece>();
+            YellowPositions = new List<Piece>();
+            GreenPositions = new List<Piece>();
 
             for (int g = 0; g < 6; g++)
             {
@@ -216,59 +238,323 @@ namespace ConsoleApp1
                 {
                     for (int a = 0; a < 6; a++)
                     {
-                        for (int rb = 0; rb < 3; rb++)
+                        for (int rg = 0; rg < 6; rg++)
                         {
+                            for (int rb = 0; rb < 3; rb++)
+                            {
+                                var red = new Red();
+                                foreach (var shape in red.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && RedPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        RedPositions.Add(shape);
+                                }
+
+                                var orange = new Orange();
+                                foreach (var shape in orange.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && OrangePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        OrangePositions.Add(shape);
+                                }
+
+                                var pink = new Pink();
+                                foreach (var shape in pink.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && PinkPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        PinkPositions.Add(shape);
+                                }
+
+                                var purple = new Purple();
+                                foreach (var shape in purple.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && PurplePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        PurplePositions.Add(shape);
+                                }
+
+                                var gray = new Gray();
+                                foreach (var shape in gray.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && GrayPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        GrayPositions.Add(shape);
+                                }
+
+                                var darkBlue = new DarkBlue();
+                                foreach (var shape in darkBlue.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && DarkBluePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        DarkBluePositions.Add(shape);
+                                }
+
+                                var lightBlue = new LightBlue();
+                                foreach (var shape in lightBlue.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && LightBluePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        LightBluePositions.Add(shape);
+                                }
+
+                                var peach = new Peach();
+                                foreach (var shape in peach.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && PeachPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        PeachPositions.Add(shape);
+                                }
+
+                                var white = new White();
+                                foreach (var shape in white.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && WhitePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        WhitePositions.Add(shape);
+                                }
+
+                                var yellow = new Yellow();
+                                foreach (var shape in yellow.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && YellowPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        YellowPositions.Add(shape);
+                                }
+
+                                var lime = new Lime();
+                                foreach (var shape in lime.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && LimePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        LimePositions.Add(shape);
+                                }
+
+                                var green = new Green();
+                                foreach (var shape in green.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                        && GreenPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        GreenPositions.Add(shape);
+                                }
+                            }
+
                             for (int ra = 0; ra < 3; ra++)
                             {
-                                for (int rg = 0; rg < 6; rg++)
+                                var red = new Red();
+                                foreach (var shape in red.Shapes)
                                 {
-                                    var red = new Red() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!red.IsOutOfBounds() && red.GetAbsolutePosition().All(m=> !UsedLocations.Contains(m.Offset)))
-                                        RedPositions.Add(red);
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
 
-                                    var orange = new Orange() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!orange.IsOutOfBounds() && orange.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        OrangePositions.Add(orange);
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && RedPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        RedPositions.Add(shape); // todo: check for uniqueness!
+                                }
 
-                                    var pink = new Pink() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!pink.IsOutOfBounds() && pink.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        PinkPositions.Add(pink);
+                                var orange = new Orange();
+                                foreach (var shape in orange.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
 
-                                    var purple = new Purple() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!purple.IsOutOfBounds() && purple.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        PurplePositions.Add(purple);
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && OrangePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        OrangePositions.Add(shape);
+                                }
 
-                                    var gray = new Gray() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!gray.IsOutOfBounds() && gray.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        GrayPositions.Add(gray);
+                                var pink = new Pink();
+                                foreach (var shape in pink.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
 
-                                    var darkBlue = new DarkBlue() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!darkBlue.IsOutOfBounds() && darkBlue.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        DarkBluePositions.Add(darkBlue);
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && PinkPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        PinkPositions.Add(shape);
+                                }
 
-                                    var lightBlue = new LightBlue() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!lightBlue.IsOutOfBounds() && lightBlue.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        LightBluePositions.Add(lightBlue);
+                                var purple = new Purple();
+                                foreach (var shape in purple.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
 
-                                    var peach = new Peach() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!peach.IsOutOfBounds() && peach.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        PeachPositions.Add(peach);
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && PurplePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        PurplePositions.Add(shape);
+                                }
 
-                                    var white = new White() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!white.IsOutOfBounds() && white.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        WhitePositions.Add(white);
+                                var gray = new Gray();
+                                foreach (var shape in gray.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
 
-                                    var yellow = new Yellow() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!yellow.IsOutOfBounds() && yellow.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        YellowPositions.Add(yellow);
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && GrayPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        GrayPositions.Add(shape);
+                                }
 
-                                    var lime = new Lime() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!lime.IsOutOfBounds() && lime.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        LimePositions.Add(lime);
+                                var darkBlue = new DarkBlue();
+                                foreach (var shape in darkBlue.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
 
-                                    var green = new Green() { RootPosition = new Location(a, b, g), ARotation = ra, BRotation = rb, GRotation = rg };
-                                    if (!green.IsOutOfBounds() && green.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)))
-                                        GreenPositions.Add(green);
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && DarkBluePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        DarkBluePositions.Add(shape);
+                                }
+
+                                var lightBlue = new LightBlue();
+                                foreach (var shape in lightBlue.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && LightBluePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        LightBluePositions.Add(shape);
+                                }
+
+                                var peach = new Peach();
+                                foreach (var shape in peach.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && PeachPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        PeachPositions.Add(shape);
+                                }
+
+                                var white = new White();
+                                foreach (var shape in white.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && WhitePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        WhitePositions.Add(shape);
+                                }
+
+                                var yellow = new Yellow();
+                                foreach (var shape in yellow.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && YellowPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        YellowPositions.Add(shape);
+                                }
+
+                                var lime = new Lime();
+                                foreach (var shape in lime.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && LimePositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        LimePositions.Add(shape);
+                                }
+
+                                var green = new Green();
+                                foreach (var shape in green.Shapes)
+                                {
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
+
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
+                                        && GreenPositions.All(m => !m.IsInSamePositionAs(shape)))
+                                        GreenPositions.Add(shape);
                                 }
                             }
                         }
@@ -335,7 +621,7 @@ namespace ConsoleApp1
                     UsedLocations.Add(abs[i].Offset);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 RemovePieceFromBoard(piece);
                 throw;
@@ -347,7 +633,7 @@ namespace ConsoleApp1
             var abs = piece.GetAbsolutePosition();
             for (int i = 0; i < abs.Length; i++)
             {
-                BoardMap[abs[i].Offset.A, abs[i].Offset.B, abs[i].Offset.G] = '-'; 
+                BoardMap[abs[i].Offset.A, abs[i].Offset.B, abs[i].Offset.G] = '-';
                 UsedLocations.Remove(abs[i].Offset);
             }
         }

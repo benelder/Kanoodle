@@ -7,23 +7,18 @@ namespace ClassLibrary1
 {
     public class Piece
     {
-        public Piece(Location rootPosition, Node[] nodes)
+        public Piece(Location rootPosition, Node[] nodes, string name, char character)
         {
             RootPosition = rootPosition;
             GRotation = 0;
             ARotation = 0;
             BRotation = 0;
             Nodes = nodes;
+            Name = name;
+            Character = character;
         }
 
-        public Piece(Node[] nodes)
-        {
-            RootPosition = new Location(0, 0, 0);
-            GRotation = 0;
-            ARotation = 0;
-            BRotation = 0;
-            Nodes = nodes;
-        }
+        public Piece(Node[] nodes, string name, char character) : this(new Location(0, 0, 0), nodes, name, character) { }
 
         public string Name { get; set; }
         public char Character { get; set; }
@@ -47,7 +42,12 @@ namespace ClassLibrary1
 
                 for (int i = 0; i < Nodes.Length; i++)
                 {
-                    var offset = RotateG(RotateB(RotateA(Nodes[i].Offset)));
+                    if (BRotation != 0 && ARotation != 0)
+                        throw new Exception("invalid rotation sequence. either A or B must be zero");
+                    
+                    var offB = RotateB(Nodes[i].Offset);
+                    var offA = RotateA(offB);
+                    var offset = RotateG(offA);
 
                     var toAdd = new Node(RootPosition.A + offset.A,
                         RootPosition.B + offset.B,
@@ -79,25 +79,25 @@ namespace ClassLibrary1
             return false;
         }
 
-        private Location RotateG(Location location)
+        private Location RotateG(Location location) // todo: test all this logic extensively
         {
             if (GRotation == 0)
                 return location;
 
-            if (GRotation == 1)
-                return new Location { A = -location.B, B = location.A + location.B, G = location.G };
+            if (GRotation == 1) 
+                return new Location { A = -location.B + location.G, B = location.A + location.B, G = location.G };
 
             if (GRotation == 2)
-                return new Location { A = -(location.A + location.B), B = location.A, G = location.G };
+                return new Location { A = -(location.A + location.B + location.G), B = location.A, G = location.G };
 
             if (GRotation == 3)
-                return new Location { A = -location.A, B = -location.B, G = location.G };
+                return new Location { A = -(location.A + location.G), B = -(location.B + location.G), G = location.G };
 
             if (GRotation == 4)
-                return new Location { A = location.B, B = -(location.A + location.B), G = location.G };
+                return new Location { A = location.B, B = -(location.A + location.B+ location.G), G = location.G };
 
             if (GRotation == 5)
-                return new Location { A = location.A + location.B, B = -location.A, G = location.G };
+                return new Location { A = location.A + location.B + location.G, B = -(location.A + location.G), G = location.G };
 
             throw new Exception("invalid GRotation");
         }
@@ -108,10 +108,19 @@ namespace ClassLibrary1
                 return location;
 
             if (ARotation == 1)
-                return new Location { A = location.A, B = -location.G, G = location.B + location.G };
+                return new Location { A = location.A, B = 0, G = location.B };
+
+            // not valid if we rotate G -> A , since G will allways be zero
+            //if (ARotation == 1)
+            //    return new Location { A = location.A, B = -location.G, G = location.B + location.G };
 
             if (ARotation == 2)
-                return new Location { A = location.A + location.G, B = -(location.B + location.G), G = location.B };
+                return new Location { A = location.A + location.B, B = -location.B, G = 0 };
+
+            // not valid if we rotate G -> A , since G will allways be zero
+            //if (ARotation == 1)
+            //    return new Location { A = location.A + location.B + location.G, B = -location.B, G = -(location.B + location.G) };
+
 
             throw new Exception("invalid ARotation");
         }
@@ -122,12 +131,28 @@ namespace ClassLibrary1
                 return location;
 
             if (BRotation == 1)
-                return new Location { A = -location.G, B = location.B, G = location.A + location.G };
+                return new Location { A = 0, B = location.B, G = location.A };
 
             if (BRotation == 2)
-                return new Location { A = -(location.A + location.G), B = location.B, G = location.A };
+                return new Location { A = -location.A, B = location.B + location.A, G = 0 };
 
             throw new Exception("invalid BRotation");
+        }
+
+        public bool IsInSamePositionAs(Piece piece)
+        {
+            if (piece.Nodes.Count() != this.Nodes.Count())
+                return false; // not same shape
+
+            var p = GetAbsolutePosition();
+
+            foreach (var node in piece.GetAbsolutePosition())
+            {
+                if (!p.Contains(node))
+                    return false;
+            }
+
+            return true;
         }
     }
 
@@ -162,179 +187,432 @@ namespace ClassLibrary1
         }
     }
 
-    public class Gray : Piece
+    public class Color
     {
-        public Gray() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(0,1,0),
-            new Node(1,1,0)
-        })
+        public IEnumerable<Piece> Shapes { get; set; }
+    }
+
+    public class Gray : Color
+    {
+        public Gray()
         {
-            Name = "Gray";
-            Character = 'K';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(0,1,0),
+                    new Node(1,1,0)
+                }, "Gray", 'K'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,-1,0),
+                    new Node(2,-1,0)
+                }, "Gray", 'K')
+            };
         }
     }
 
-    public class Red : Piece
+    public class Red : Color
     {
-        public Red() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(2,0,0),
-            new Node(0,1,0),
-            new Node(1,1,0)
-        })
+        public Red()
         {
-            Name = "Red";
-            Character = 'E';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(0,1,0),
+                    new Node(1,1,0)
+                }, "Red", 'E'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(1,-1,0),
+                    new Node(2,-1,0)
+                }, "Red", 'E')
+            };
         }
     }
 
-    public class Pink : Piece
+    public class Pink : Color
     {
-        public Pink() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(2,0,0),
-            new Node(3,0,0),
-            new Node(1,1,0)
-        })
+        public Pink()
         {
-            Name = "Pink";
-            Character = 'F';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(3,0,0),
+                    new Node(1,1,0)
+                }, "Pink", 'F'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(3,0,0),
+                    new Node(2,-1,0)
+                }, "Pink", 'F'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(-1,-1,0),
+                    new Node(0,-1,0),
+                    new Node(1,-1,0),
+                    new Node(2,-1,0)
+                }, "Pink", 'F'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(-2,1,0),
+                    new Node(-1,1,0),
+                    new Node(0,1,0),
+                    new Node(1,1,0)
+                }, "Pink", 'F')
+            };
         }
     }
 
-    public class Green : Piece
+    public class Green : Color
     {
-        public Green() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(2,0,0),
-            new Node(0,1,0),
-            new Node(2,1,0)
-        })
+        public Green()
         {
-            Name = "Green";
-            Character = 'G';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(0,1,0),
+                    new Node(2,1,0)
+                }, "Green", 'G'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(1,-1,0),
+                    new Node(3,-1,0)
+                }, "Green", 'G'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(0,1,0),
+                    new Node(-1,2,0),
+                    new Node(-2,2,0)
+                }, "Green", 'G'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,-1,0),
+                    new Node(1,-2,0),
+                    new Node(0,-2,0)
+                }, "Green", 'G'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,1,0),
+                    new Node(1,2,0),
+                    new Node(0,2,0)
+                }, "Green", 'G'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,-1,0),
+                    new Node(2,-2,0),
+                    new Node(3,-2,0)
+                }, "Green", 'G')
+            };
+        }
+
+    }
+
+    public class Purple : Color
+    {
+        public Purple()
+        {
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(1,1,0)
+                }, "Purple", 'L'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(2,-1,0)
+                }, "Purple", 'L'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(0,1,0),
+                    new Node(0,2,0)
+                }, "Purple", 'L'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,-1,0),
+                    new Node(2,-2,0)
+                }, "Purple", 'L'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(-1,1,0),
+                    new Node(0,1,0),
+                    new Node(1,1,0)
+                }, "Purple", 'L'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(0,-1,0),
+                    new Node(1,-1,0),
+                    new Node(2,-1,0)
+                }, "Purple", 'L')
+            };
         }
     }
 
-    public class Purple : Piece
+    public class White : Color
     {
-        public Purple() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(2,0,0),
-            new Node(1,1,0)
-        })
+        public White()
         {
-            Name = "Purple";
-            Character = 'L';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(0,1,0),
+                    new Node(0,2,0)
+                }, "White", 'H'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(1,-1,0),
+                    new Node(2,-2,0)
+                }, "White", 'H'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(0,1,0),
+                    new Node(0,2,0),
+                    new Node(1,1,0),
+                    new Node(2,0,0)
+                }, "White", 'H'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,-1,0),
+                    new Node(2,-2,0),
+                    new Node(2,-1,0),
+                    new Node(2,0,0)
+                }, "White", 'H')
+            };
         }
     }
 
-    public class White : Piece
+    public class Peach : Color
     {
-        public White() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(2,0,0),
-            new Node(0,1,0),
-            new Node(0,2,0)
-        })
+        public Peach()
         {
-            Name = "White";
-            Character = 'H';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,1,0),
+                    new Node(2,1,0)
+                }, "Peach", 'J'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,-1,0),
+                    new Node(3,-1,0)
+                }, "Peach", 'J')
+            };
         }
     }
 
-    public class Peach : Piece
+    public class Orange : Color
     {
-        public Peach() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(1,1,0),
-            new Node(2,1,0)
-        })
+        public Orange()
         {
-            Name = "Peach";
-            Character = 'J';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,1,0),
+                    new Node(1,2,0)
+                }, "Orange", 'B'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,-1,0),
+                    new Node(3,-2,0)
+                }, "Orange", 'B'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(2,1,0)
+                }, "Orange", 'B'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(3,-1,0)
+                }, "Orange", 'B')
+            };
         }
     }
 
-    public class Orange : Piece
+    public class LightBlue : Color
     {
-        public Orange() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(1,1,0),
-            new Node(1,2,0)
-        })
+        public LightBlue()
         {
-            Name = "Orange";
-            Character = 'B';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(3,0,0),
+                    new Node(0,1,0)
+                }, "LightBlue", 'D'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(3,0,0),
+                    new Node(1,-1,0)
+                }, "LightBlue", 'D'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,-1,0),
+                    new Node(1,-2,0),
+                    new Node(1,-3,0)
+                }, "LightBlue", 'D'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(3,0,0),
+                    new Node(2,1,0)
+                }, "LightBlue", 'D'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(3,0,0),
+                    new Node(3,-1,0)
+                }, "LightBlue", 'D')
+            };
         }
     }
 
-    public class LightBlue : Piece
+    public class DarkBlue : Color
     {
-        public LightBlue() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(2,0,0),
-            new Node(3,0,0),
-            new Node(0,1,0)
-        })
+        public DarkBlue()
         {
-            Name = "LightBlue";
-            Character = 'D';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(2,1,0),
+                    new Node(2,2,0)
+                }, "DarkBlue", 'C'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(3,-1,0),
+                    new Node(4,-2,0)
+                }, "DarkBlue", 'C')
+            };
         }
     }
 
-    public class DarkBlue : Piece
+    public class Yellow : Color
     {
-        public DarkBlue() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(2,0,0),
-            new Node(2,1,0),
-            new Node(2,2,0)
-        })
+        public Yellow()
         {
-            Name = "DarkBlue";
-            Character = 'C';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(1,1,0),
+                    new Node(2,1,0)
+                }, "Yellow", 'B'),
+                 new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(2,-1,0),
+                    new Node(3,-1,0)
+                }, "Yellow", 'B'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(0,1,0),
+                    new Node(1,1,0),
+                    new Node(2,1,0)
+                }, "Yellow", 'B'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,-1,0),
+                    new Node(2,-1,0),
+                    new Node(3,-1,0)
+                }, "Yellow", 'B')
+            };
         }
     }
 
-    public class Yellow : Piece
+    public class Lime : Color
     {
-        public Yellow() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(2,0,0),
-            new Node(1,1,0),
-            new Node(2,1,0)
-        })
+        public Lime()
         {
-            Name = "Yellow";
-            Character = 'B';
-        }
-    }
-
-    public class Lime : Piece
-    {
-        public Lime() : base(new Node[] {
-            new Node(0,0,0),
-            new Node(1,0,0),
-            new Node(1,1,0),
-            new Node(1,2,0),
-            new Node(2,1,0)
-        })
-        {
-            Name = "Lime";
-            Character = 'A';
+            Shapes = new Piece[] {
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,1,0),
+                    new Node(1,2,0),
+                    new Node(2,1,0)
+                }, "Lime", 'A'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,-1,0),
+                    new Node(3,-1,0),
+                    new Node(3,-2,0)
+                }, "Lime", 'A'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(0,1,0),
+                    new Node(-1,2,0),
+                    new Node(-1,3,0)
+                }, "Lime", 'A'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(1,-1,0),
+                    new Node(1,-2,0),
+                    new Node(2,-3,0)
+                }, "Lime", 'A'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(0,1,0),
+                    new Node(3,-1,0)
+                }, "Lime", 'A'),
+                new Piece(new Node[] {
+                    new Node(0,0,0),
+                    new Node(1,0,0),
+                    new Node(2,0,0),
+                    new Node(1,-1,0),
+                    new Node(2,1,0)
+                }, "Lime", 'A')
+            };
         }
     }
 }
