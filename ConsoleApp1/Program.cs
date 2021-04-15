@@ -82,34 +82,39 @@ namespace ConsoleApp1
             //    {
             //        AddPieceToBoard(red);
             //        PrintBoard();
+            var count = 1;
+            var limePositions = GetUnusedPositions(LimePositions);
+            var solutionFound = false;
 
-            foreach (var pink in GetUnusedPositions(PinkPositions))
+            foreach (var lime in limePositions)
             {
-                if (!Collision(pink))
+                Console.WriteLine("Fitting Lime piece, position {0} of {1}", count, limePositions.Count());
+                count++;
+                if (!Collision(lime))
                 {
-                    AddPieceToBoard(pink);
-                    PrintBoard();
+                    AddPieceToBoard(lime);
+                    //PrintBoard();
 
                     foreach (var darkBlue in GetUnusedPositions(DarkBluePositions))
                     {
                         if (!Collision(darkBlue))
                         {
                             AddPieceToBoard(darkBlue);
-                            PrintBoard();
+                            //PrintBoard();
 
-                            foreach (var lime in GetUnusedPositions(LimePositions))
+                            foreach (var pink in GetUnusedPositions(PinkPositions))
                             {
-                                if (!Collision(lime))
+                                if (!Collision(pink))
                                 {
-                                    AddPieceToBoard(lime);
-                                    PrintBoard();
+                                    AddPieceToBoard(pink);
+                                    //PrintBoard();
 
-                                    foreach (var purple in GetUnusedPositions(PurplePositions))
+                                    foreach (var white in GetUnusedPositions(WhitePositions))
                                     {
-                                        if (!Collision(purple))
+                                        if (!Collision(white))
                                         {
-                                            AddPieceToBoard(purple);
-                                            PrintBoard();
+                                            AddPieceToBoard(white);
+                                            //PrintBoard();
 
                                             foreach (var peach in GetUnusedPositions(PeachPositions))
                                             {
@@ -118,11 +123,11 @@ namespace ConsoleApp1
                                                     AddPieceToBoard(peach);
                                                     //PrintBoard();
 
-                                                    foreach (var white in GetUnusedPositions(WhitePositions))
+                                                    foreach (var purple in GetUnusedPositions(PurplePositions))
                                                     {
-                                                        if (!Collision(white))
+                                                        if (!Collision(purple))
                                                         {
-                                                            AddPieceToBoard(white);
+                                                            AddPieceToBoard(purple);
                                                             //PrintBoard();
 
                                                             foreach (var green in GetUnusedPositions(GreenPositions))
@@ -130,7 +135,7 @@ namespace ConsoleApp1
                                                                 if (!Collision(green))
                                                                 {
                                                                     AddPieceToBoard(green);
-                                                                    //PrintBoard();
+                                                                    PrintBoard();
 
                                                                     //foreach (var yellow in GetUnusedPositions(YellowPositions))
                                                                     //{
@@ -159,6 +164,8 @@ namespace ConsoleApp1
                                                                     //                    {
                                                                     //                        AddPieceToBoard(gray);
 
+                                                                    Console.WriteLine("SOLUTION FOUND!!");
+                                                                    solutionFound = true;
                                                                     break;
                                                                     //                    }
                                                                     //                }
@@ -178,29 +185,31 @@ namespace ConsoleApp1
                                                                     //RemovePieceFromBoard(green);
                                                                 }
                                                             }
-
-                                                            RemovePieceFromBoard(white);
+                                                            if (solutionFound) break;
+                                                            RemovePieceFromBoard(purple);
                                                         }
                                                     }
-
+                                                    if (solutionFound) break;
                                                     RemovePieceFromBoard(peach);
                                                 }
                                             }
-
-                                            RemovePieceFromBoard(purple);
+                                            if (solutionFound) break;
+                                            RemovePieceFromBoard(white);
                                         }
                                     }
-
-                                    RemovePieceFromBoard(lime);
+                                    if (solutionFound) break;
+                                    RemovePieceFromBoard(pink);
                                 }
                             }
-
+                            if (solutionFound) break;
                             RemovePieceFromBoard(darkBlue);
                         }
                     }
 
-                    RemovePieceFromBoard(pink);
+                    if (solutionFound) break;
+                    RemovePieceFromBoard(lime);
                 }
+                if (solutionFound) break;
             }
 
             //RemovePieceFromBoard(red);
@@ -208,8 +217,7 @@ namespace ConsoleApp1
             //}
 
             PrintBoard();
-
-
+            Console.ReadLine();
         } // main
 
         private static IEnumerable<Piece> GetUnusedPositions(IEnumerable<Piece> pieces)
@@ -242,6 +250,8 @@ namespace ConsoleApp1
                         {
                             for (int rb = 0; rb < 3; rb++)
                             {
+                                if (rb == 1 && rg == 1) continue; // incompatible transformation
+
                                 var red = new Red();
                                 foreach (var shape in red.Shapes)
                                 {
@@ -640,25 +650,23 @@ namespace ConsoleApp1
 
         public static void PrintBoard()
         {
-            for (int i = 0; i < 6; i++)
+            for (int g = 5; g >= 0; g--)
             {
-                for (int j = 0; j < 6; j++)
+                for (int b = 5; b >= 0; b--)
                 {
-                    var toPrint = "";
+                    var toPrint = string.Empty;
 
-                    // indent
-                    for (int l = 0; l < 6 - j; l++)
+                    for (int l = 0; l < 6 - g; l++)
                     {
                         toPrint += " ";
                     }
 
-
-                    for (int k = 0; k < 6; k++)
+                    for (int a = 0; a < 6; a++)
                     {
-                        toPrint += BoardMap[k, j, i];
+                        toPrint += BoardMap[a, b, g];
                     }
 
-                    Console.WriteLine(toPrint);
+                    if(!string.IsNullOrEmpty(toPrint.Trim())) Console.WriteLine(toPrint);
                 }
             }
         }

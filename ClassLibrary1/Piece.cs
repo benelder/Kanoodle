@@ -84,20 +84,20 @@ namespace ClassLibrary1
             if (GRotation == 0)
                 return location;
 
-            if (GRotation == 1) 
-                return new Location { A = -location.B + location.G, B = location.A + location.B, G = location.G };
-
+            if (GRotation == 1)
+                    return new Location { A = -(location.B + location.G), B = location.A + location.B, G = location.G };
+            
             if (GRotation == 2)
                 return new Location { A = -(location.A + location.B + location.G), B = location.A, G = location.G };
 
             if (GRotation == 3)
-                return new Location { A = -(location.A + location.G), B = -(location.B + location.G), G = location.G };
+                return new Location { A = -location.A, B = -(location.B + location.G), G = location.G };
 
             if (GRotation == 4)
                 return new Location { A = location.B, B = -(location.A + location.B+ location.G), G = location.G };
 
             if (GRotation == 5)
-                return new Location { A = location.A + location.B + location.G, B = -(location.A + location.G), G = location.G };
+                return new Location { A = location.A + location.B, B = -(location.A + location.G), G = location.G };
 
             throw new Exception("invalid GRotation");
         }
@@ -146,13 +146,7 @@ namespace ClassLibrary1
 
             var p = GetAbsolutePosition();
 
-            foreach (var node in piece.GetAbsolutePosition())
-            {
-                if (!p.Contains(node))
-                    return false;
-            }
-
-            return true;
+            return piece.GetAbsolutePosition().All(m => p.Any(n => n.Offset.Equals(m.Offset)));
         }
     }
 
@@ -438,25 +432,25 @@ namespace ClassLibrary1
                     new Node(1,0,0),
                     new Node(1,1,0),
                     new Node(1,2,0)
-                }, "Orange", 'B'),
+                }, "Orange", 'I'),
                 new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(1,0,0),
                     new Node(2,-1,0),
                     new Node(3,-2,0)
-                }, "Orange", 'B'),
+                }, "Orange", 'I'),
                  new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(1,0,0),
                     new Node(2,0,0),
                     new Node(2,1,0)
-                }, "Orange", 'B'),
+                }, "Orange", 'I'),
                  new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(1,0,0),
                     new Node(2,0,0),
                     new Node(3,-1,0)
-                }, "Orange", 'B')
+                }, "Orange", 'I')
             };
         }
     }
