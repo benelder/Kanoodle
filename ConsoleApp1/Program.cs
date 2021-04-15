@@ -1,10 +1,11 @@
-﻿using ClassLibrary1;
+﻿using Kanoodle.Core;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace ConsoleApp1
+namespace Kanoodle.App
 {
     class Program
     {
@@ -21,34 +22,48 @@ namespace ConsoleApp1
         public static List<Piece> GrayPositions { get; set; }
         public static List<Piece> OrangePositions { get; set; }
         public static List<Piece> WhitePositions { get; set; }
-
         public static HashSet<Location> UsedLocations { get; set; }
-        public static List<Piece> UnusedPieces { get; set; }
         public static List<char> PiecesUsed { get; set; }
         public static char[,,] BoardMap { get; set; }
-
         public static int PositionCount { get; set; }
+        
         static void Main(string[] args)
         {
-            Console.WriteLine("CANOODLE!");
+            Console.WriteLine("KANOODLE!");
             
             BoardMap = new char[6, 6, 6];
             UsedLocations = new HashSet<Location>();
             PiecesUsed = new List<char>();
+            var boardInitialized = false;
 
             InitializeBoard();
+
+            while (!boardInitialized)
+            {
+                Console.WriteLine("Please enter a number between 1 and 100 to load a game");
+
+                var gameNumStr = Console.ReadLine();
+
+                var isNum = int.TryParse(gameNumStr, out int gameNum);
+
+                if (!isNum)
+                {
+                    Console.WriteLine("Not a number");
+                    continue;
+                }
+
+                var piecesAdded = AddInitialPiecesToBoard(gameNum);
+
+                if (!piecesAdded)
+                {
+                    Console.WriteLine("That game is not in the catalog. Please try a different number");
+                    continue;
+                }
+                
+                boardInitialized = true;
+            }
             
-            Console.WriteLine("Please enter a number between 1 and 100 to load a game");
-
-            var gameNumStr = Console.ReadLine();
-
-            int gameNum;
-            int.TryParse(gameNumStr, out gameNum);
-
-
-
-
-            AddInitialPiecesToBoard(gameNum);
+            
 
             LoadPossiblePositions();
 
@@ -132,113 +147,32 @@ namespace ConsoleApp1
                 {
                     _games = new Dictionary<int, IEnumerable<Piece>>();
 
-                    _games.Add(44, Game44());
-                    _games.Add(45, Game45());
-                    _games.Add(100, Game100());
+                    _games.Add(44, GameFactory.Game44());
+                    _games.Add(45, GameFactory.Game45());
+                    _games.Add(100, GameFactory.Game100());
                 }
 
                 return _games;
             } }
 
-        private static void AddInitialPiecesToBoard(int gameNum)
+        private static bool AddInitialPiecesToBoard(int gameNum)
         {
-            var game = Games[gameNum];
-
-            foreach (var piece in game)
+            try
             {
-                AddPieceToBoard(piece);
+                var game = Games[gameNum];
+
+                foreach (var piece in game)
+                {
+                    AddPieceToBoard(piece);
+                }
+
+                return true;
             }
-        }
-
-        private static IEnumerable<Piece> Game45()
-        {
-            var toRet = new List<Piece>();
-
-            var green = new Green().Shapes.ElementAt(1);
-            green.GRotation = 1;
-            green.RootPosition = new Location(0, 0, 0);
-            toRet.Add(green);
-
-            var yellow = new Yellow().Shapes.ElementAt(3);
-            yellow.ARotation = 1;
-            yellow.RootPosition = new Location(1, 0, 1);
-            toRet.Add(yellow);
-
-            var lightBlue = new LightBlue().Shapes.ElementAt(3);
-            lightBlue.RootPosition = new Location(1, 1, 0);
-            toRet.Add(lightBlue);
-
-            var white = new White().Shapes.ElementAt(2);
-            white.RootPosition = new Location(0, 3, 0);
-            toRet.Add(white);
-
-            var orange = new Orange().Shapes.ElementAt(0);
-            orange.ARotation = 1;
-            orange.GRotation = 5;
-            orange.RootPosition = new Location(1, 3, 0);
-            toRet.Add(orange);
-
-            return toRet;
-        }
-
-        private static IEnumerable<Piece> Game100()
-        {
-            var toRet = new List<Piece>();
-
-            var green = new Green().Shapes.ElementAt(3);
-            green.BRotation = 1;
-            green.GRotation = 4;
-            green.RootPosition = new Location(2, 2, 0);
-            toRet.Add(green);
-
-            var gray = new Gray().Shapes.ElementAt(0);
-            gray.GRotation = 4;
-            gray.ARotation = 1;
-            gray.RootPosition = new Location(0, 3, 0);
-            toRet.Add(gray);
-
-            var purple = new Purple().Shapes.ElementAt(5);
-            purple.GRotation = 2;
-            purple.ARotation = 1;
-            purple.RootPosition = new Location(2, 2, 1);
-            toRet.Add(purple);
-
-            return toRet;
-        }
-
-        private static IEnumerable<Piece> Game44()
-        {
-            var toRet = new List<Piece>();
-
-            var red = new Red().Shapes.First();
-            red.GRotation = 4;
-            red.RootPosition = new Location(0, 2, 0);
-            toRet.Add(red);
-
-            var lightBlue = new LightBlue().Shapes.First();
-            lightBlue.GRotation = 2;
-            lightBlue.RootPosition = new Location(3, 0, 0);
-            toRet.Add(lightBlue);
-
-            var yellow = new Yellow().Shapes.First();
-            yellow.GRotation = 2;
-            yellow.ARotation = 1;
-            yellow.RootPosition = new Location(4, 0, 0);
-            toRet.Add(yellow);
-
-            var gray = new Gray().Shapes.First();
-            gray.GRotation = 1;
-            gray.ARotation = 0;
-            gray.RootPosition = new Location(1, 3, 0);
-            toRet.Add(gray);
-
-            var orange = new Orange().Shapes.ElementAt(2);
-            orange.ARotation = 1;
-            orange.GRotation = 2;
-            orange.RootPosition = new Location(4, 1, 0);
-            toRet.Add(orange);
-
-            return toRet;
+            catch (Exception)
+            {
+                InitializeBoard();
+                return false;                
+            }
         }
 
         private static void InitializeBoard()
@@ -679,12 +613,47 @@ namespace ConsoleApp1
 
                     for (int a = 0; a < 6; a++)
                     {
-                        toPrint += BoardMap[a, b, g] + " ";
+                        toPrint += FormatPiece(BoardMap[a, b, g]) + " ";
                     }
 
-                    if (!string.IsNullOrWhiteSpace(toPrint.Trim())) Console.WriteLine(toPrint);
+                    if (!string.IsNullOrWhiteSpace(toPrint.Trim())) AnsiConsole.MarkupLine(toPrint);
                 }
                 Console.WriteLine();
+            }
+        }
+
+        private static string FormatPiece(char v)
+        {
+            switch (v)
+            {
+                case 'A':
+                    return $"[bold palegreen3]{v}[/]";
+                case 'B':
+                    return $"[bold yellow]{v}[/]";
+                case 'C':
+                    return $"[bold blue1]{v}[/]";
+                case 'D':
+                    return $"[bold steelblue1]{v}[/]";
+                case 'E':
+                    return $"[bold red]{v}[/]";
+                case 'F':
+                    return $"[bold fuchsia]{v}[/]";
+                case 'G':
+                    return $"[bold darkgreen]{v}[/]";
+                case 'H':
+                    return $"[bold white]{v}[/]";
+                case 'I':
+                    return $"[bold darkorange]{v}[/]";
+                case 'J':
+                    return $"[bold lightpink1]{v}[/]";
+                case 'K':
+                    return $"[bold grey70]{v}[/]";
+                case 'L':
+                    return $"[bold purple4]{v}[/]";
+                case '-':
+                    return $"[bold grey39]{v}[/]";
+                default:
+                    return " ";
             }
         }
     }
