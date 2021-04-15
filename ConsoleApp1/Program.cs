@@ -1,6 +1,7 @@
 ﻿using ClassLibrary1;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -25,9 +26,12 @@ namespace ConsoleApp1
         public static List<Piece> UnusedPieces { get; set; }
         public static List<char> PiecesUsed { get; set; }
         public static char[,,] BoardMap { get; set; }
+
+        public static int PositionCount { get; set; }
         static void Main(string[] args)
         {
             Console.WriteLine("CANOODLE!");
+            
             BoardMap = new char[6, 6, 6];
             UsedLocations = new HashSet<Location>();
             PiecesUsed = new List<char>();
@@ -40,14 +44,31 @@ namespace ConsoleApp1
 
             InitializeColors();
 
+            Console.WriteLine("Board loaded. Initial setup looks like this");
+
             PrintBoard();
+
+            Console.WriteLine("Press any key to attempt to solve");
+
+            Console.ReadKey();
+
+            var timer = new Stopwatch();
+            timer.Start();
+
+            Console.WriteLine("Attempting to place pieces");
+
 
             PlacePieces();
 
             if (SolutionFound)
+            {
+                timer.Stop();
+                PrintBoard();
                 Console.WriteLine("SOLUTION FOUND!!");
+                Console.WriteLine("Time elapsed: {0}", timer.Elapsed);
+                Console.WriteLine("Piece positions tried: {0}", PositionCount);
+            }
 
-            PrintBoard();
             Console.ReadLine();
         } // main
 
@@ -96,6 +117,39 @@ namespace ConsoleApp1
 
         private static void AddInitialPiecesToBoard()
         {
+            LoadGame44();
+            //LoadGame45();
+        }
+
+        private static void LoadGame45()
+        {
+            var green = new Green().Shapes.ElementAt(1);
+            green.GRotation = 1;
+            green.RootPosition = new Location(0, 0, 0);
+            AddPieceToBoard(green);
+
+            var yellow = new Yellow().Shapes.ElementAt(3);
+            yellow.ARotation = 1;
+            yellow.RootPosition = new Location(1, 0, 1);
+            AddPieceToBoard(yellow);
+
+            var lightBlue = new LightBlue().Shapes.ElementAt(3);
+            lightBlue.RootPosition = new Location(1, 1, 0);
+            AddPieceToBoard(lightBlue);
+
+            var white = new White().Shapes.ElementAt(2);
+            white.RootPosition = new Location(0, 3, 0);
+            AddPieceToBoard(white);
+
+            var orange = new Orange().Shapes.ElementAt(0);
+            orange.ARotation = 1;
+            orange.GRotation = 5;
+            orange.RootPosition = new Location(1, 3, 0);
+            AddPieceToBoard(orange);
+        }
+
+        private static void LoadGame44()
+        {
             var red = new Red().Shapes.First();
             red.GRotation = 4;
             red.RootPosition = new Location(0, 2, 0);
@@ -135,6 +189,8 @@ namespace ConsoleApp1
                     {
                         if (i + j + k < 6)
                             BoardMap[i, j, k] = '-';
+                        else
+                            BoardMap[i, j, k] = ' ';
                     }
                 }
             }
@@ -526,6 +582,7 @@ namespace ConsoleApp1
                     UsedLocations.Add(abs[i].Offset);
                 }
                 PiecesUsed.Add(piece.Character);
+                PositionCount++;
             }
             catch (Exception)
             {
@@ -551,20 +608,21 @@ namespace ConsoleApp1
             {
                 for (int b = 5; b >= 0; b--)
                 {
-                    var toPrint = string.Empty;
+                    var toPrint = "    ";
 
-                    for (int l = 0; l < 6 - g; l++)
+                    for (int i = 0; i < b; i++)
                     {
                         toPrint += " ";
                     }
 
                     for (int a = 0; a < 6; a++)
                     {
-                        toPrint += BoardMap[a, b, g];
+                        toPrint += BoardMap[a, b, g] + " ";
                     }
 
-                    if (!string.IsNullOrEmpty(toPrint.Trim())) Console.WriteLine(toPrint);
+                    if (!string.IsNullOrWhiteSpace(toPrint.Trim())) Console.WriteLine(toPrint);
                 }
+                Console.WriteLine();
             }
         }
     }
