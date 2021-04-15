@@ -7,6 +7,7 @@ namespace ConsoleApp1
 {
     class Program
     {
+        public static Dictionary<char, List<Piece>> Colors { get; set; }
         public static List<Piece> RedPositions { get; set; }
         public static List<Piece> PinkPositions { get; set; }
         public static List<Piece> LimePositions { get; set; }
@@ -22,13 +23,14 @@ namespace ConsoleApp1
 
         public static HashSet<Location> UsedLocations { get; set; }
         public static List<Piece> UnusedPieces { get; set; }
-        public static List<Piece> PiecesUsed { get; set; }
+        public static List<char> PiecesUsed { get; set; }
         public static char[,,] BoardMap { get; set; }
         static void Main(string[] args)
         {
             Console.WriteLine("CANOODLE!");
             BoardMap = new char[6, 6, 6];
             UsedLocations = new HashSet<Location>();
+            PiecesUsed = new List<char>();
 
             InitializeBoard();
 
@@ -36,147 +38,63 @@ namespace ConsoleApp1
 
             LoadPossiblePositions();
 
+            InitializeColors();
+
             PrintBoard();
 
-            //foreach (var red in GetUnusedPositions(RedPositions))
-            //{
-            //    if (!Collision(red))
-            //    {
-            //        AddPieceToBoard(red);
-            //        PrintBoard();
-            var count = 1;
-            var limePositions = GetUnusedPositions(LimePositions);
-            var solutionFound = false;
+            PlacePieces();
 
-            foreach (var lime in limePositions)
-            {
-                Console.WriteLine("Fitting Lime piece, position {0} of {1}", count, limePositions.Count());
-                count++;
-                if (!Collision(lime))
-                {
-                    AddPieceToBoard(lime);
-                    //PrintBoard();
-
-                    foreach (var darkBlue in GetUnusedPositions(DarkBluePositions))
-                    {
-                        if (!Collision(darkBlue))
-                        {
-                            AddPieceToBoard(darkBlue);
-                            //PrintBoard();
-
-                            foreach (var pink in GetUnusedPositions(PinkPositions))
-                            {
-                                if (!Collision(pink))
-                                {
-                                    AddPieceToBoard(pink);
-                                    //PrintBoard();
-
-                                    foreach (var white in GetUnusedPositions(WhitePositions))
-                                    {
-                                        if (!Collision(white))
-                                        {
-                                            AddPieceToBoard(white);
-                                            //PrintBoard();
-
-                                            foreach (var peach in GetUnusedPositions(PeachPositions))
-                                            {
-                                                if (!Collision(peach))
-                                                {
-                                                    AddPieceToBoard(peach);
-                                                    //PrintBoard();
-
-                                                    foreach (var purple in GetUnusedPositions(PurplePositions))
-                                                    {
-                                                        if (!Collision(purple))
-                                                        {
-                                                            AddPieceToBoard(purple);
-                                                            //PrintBoard();
-
-                                                            foreach (var green in GetUnusedPositions(GreenPositions))
-                                                            {
-                                                                if (!Collision(green))
-                                                                {
-                                                                    AddPieceToBoard(green);
-                                                                    PrintBoard();
-
-                                                                    //foreach (var yellow in GetUnusedPositions(YellowPositions))
-                                                                    //{
-                                                                    //    if (!Collision(yellow))
-                                                                    //    {
-                                                                    //        AddPieceToBoard(yellow);
-                                                                    //        //PrintBoard();
-
-                                                                    //foreach (var orange in GetUnusedPositions(OrangePositions))
-                                                                    //{
-                                                                    //    if (!Collision(orange))
-                                                                    //    {
-                                                                    //        AddPieceToBoard(orange);
-                                                                    //        //PrintBoard();
-
-                                                                    //        foreach (var lightBlue in GetUnusedPositions(LightBluePositions))
-                                                                    //        {
-                                                                    //            if (!Collision(lightBlue))
-                                                                    //            {
-                                                                    //                AddPieceToBoard(lightBlue);
-                                                                    //                //PrintBoard();
-
-                                                                    //                foreach (var gray in GetUnusedPositions(GrayPositions))
-                                                                    //                {
-                                                                    //                    if (!Collision(gray))
-                                                                    //                    {
-                                                                    //                        AddPieceToBoard(gray);
-
-                                                                    Console.WriteLine("SOLUTION FOUND!!");
-                                                                    solutionFound = true;
-                                                                    break;
-                                                                    //                    }
-                                                                    //                }
-
-                                                                    //                RemovePieceFromBoard(lightBlue);
-                                                                    //            }
-                                                                    //        }
-
-                                                                    //        RemovePieceFromBoard(orange);
-                                                                    //    }
-                                                                    //}
-
-                                                                    //        RemovePieceFromBoard(yellow);
-                                                                    //    }
-                                                                    //}
-
-                                                                    //RemovePieceFromBoard(green);
-                                                                }
-                                                            }
-                                                            if (solutionFound) break;
-                                                            RemovePieceFromBoard(purple);
-                                                        }
-                                                    }
-                                                    if (solutionFound) break;
-                                                    RemovePieceFromBoard(peach);
-                                                }
-                                            }
-                                            if (solutionFound) break;
-                                            RemovePieceFromBoard(white);
-                                        }
-                                    }
-                                    if (solutionFound) break;
-                                    RemovePieceFromBoard(pink);
-                                }
-                            }
-                            if (solutionFound) break;
-                            RemovePieceFromBoard(darkBlue);
-                        }
-                    }
-
-                    if (solutionFound) break;
-                    RemovePieceFromBoard(lime);
-                }
-                if (solutionFound) break;
-            }
+            if (SolutionFound)
+                Console.WriteLine("SOLUTION FOUND!!");
 
             PrintBoard();
             Console.ReadLine();
         } // main
+
+        private static bool SolutionFound;
+        private static void PlacePieces()
+        {
+            if (SolutionFound) return;
+
+            var pieces = Colors.Where(m => !PiecesUsed.Contains(m.Key)).First().Value;
+
+            foreach (var position in pieces)
+            {
+                if (!Collision(position))
+                {
+                    AddPieceToBoard(position);
+                    if (PiecesUsed.Count() == 12)
+                    {
+                        SolutionFound = true;
+                        PrintBoard();
+                    }
+                    else
+                    {
+                        PlacePieces();
+                        RemovePieceFromBoard(position);
+                    }
+                }
+            }
+        }
+
+        private static void InitializeColors()
+        {
+            Colors = new Dictionary<char, List<Piece>>()
+            {
+                { 'A', LimePositions },
+                { 'B', YellowPositions },
+                { 'C', DarkBluePositions },
+                { 'D', LightBluePositions },
+                { 'E', RedPositions },
+                { 'F', PinkPositions },
+                { 'G', GreenPositions },
+                { 'H', WhitePositions },
+                { 'I', OrangePositions },
+                { 'J', PinkPositions },
+                { 'K', GrayPositions },
+                { 'L', PurplePositions },
+            };
+        }
 
         private static void AddInitialPiecesToBoard()
         {
@@ -291,7 +209,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && PinkPositions.All(m => !m.IsInSamePositionAs(shape)))
                                         PinkPositions.Add(shape);
                                 }
@@ -304,7 +222,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && PurplePositions.All(m => !m.IsInSamePositionAs(shape)))
                                         PurplePositions.Add(shape);
                                 }
@@ -317,7 +235,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && GrayPositions.All(m => !m.IsInSamePositionAs(shape)))
                                         GrayPositions.Add(shape);
                                 }
@@ -330,7 +248,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && DarkBluePositions.All(m => !m.IsInSamePositionAs(shape)))
                                         DarkBluePositions.Add(shape);
                                 }
@@ -343,7 +261,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && LightBluePositions.All(m => !m.IsInSamePositionAs(shape)))
                                         LightBluePositions.Add(shape);
                                 }
@@ -356,7 +274,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && PeachPositions.All(m => !m.IsInSamePositionAs(shape)))
                                         PeachPositions.Add(shape);
                                 }
@@ -369,7 +287,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && WhitePositions.All(m => !m.IsInSamePositionAs(shape)))
                                         WhitePositions.Add(shape);
                                 }
@@ -382,7 +300,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && YellowPositions.All(m => !m.IsInSamePositionAs(shape)))
                                         YellowPositions.Add(shape);
                                 }
@@ -395,7 +313,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && LimePositions.All(m => !m.IsInSamePositionAs(shape)))
                                         LimePositions.Add(shape);
                                 }
@@ -408,7 +326,7 @@ namespace ConsoleApp1
                                     shape.BRotation = rb;
                                     shape.GRotation = rg;
 
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset)) 
+                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && GreenPositions.All(m => !m.IsInSamePositionAs(shape)))
                                         GreenPositions.Add(shape);
                                 }
@@ -579,33 +497,6 @@ namespace ConsoleApp1
             }
         }
 
-        private static void RemoveLastPlacedPiece()
-        {
-            var lastPiece = PiecesUsed[^1];
-            Console.WriteLine($"Removing {lastPiece.Name}");
-
-            RemovePieceFromBoard(lastPiece);
-            PiecesUsed.Remove(lastPiece);
-            UnusedPieces.Insert(0, lastPiece);
-        }
-
-        private static Location GetNextEmptyLocation()
-        {
-            for (int g = 0; g < 6; g++)
-            {
-                for (int b = 0; b < 6; b++)
-                {
-                    for (int a = 0; a < 6; a++)
-                    {
-                        if (BoardMap[a, b, g] == '-')
-                            return new Location(a, b, g);
-                    }
-                }
-            }
-
-            return new Location(-1, -1, -1);
-        }
-
         private static bool Collision(Piece piece)
         {
             var abs = piece.GetAbsolutePosition();
@@ -636,8 +527,9 @@ namespace ConsoleApp1
                     BoardMap[abs[i].Offset.A, abs[i].Offset.B, abs[i].Offset.G] = piece.Character;
                     UsedLocations.Add(abs[i].Offset);
                 }
+                PiecesUsed.Add(piece.Character);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 RemovePieceFromBoard(piece);
                 throw;
@@ -652,6 +544,7 @@ namespace ConsoleApp1
                 BoardMap[abs[i].Offset.A, abs[i].Offset.B, abs[i].Offset.G] = '-';
                 UsedLocations.Remove(abs[i].Offset);
             }
+            PiecesUsed.Remove(piece.Character);
         }
 
         public static void PrintBoard()
@@ -672,7 +565,7 @@ namespace ConsoleApp1
                         toPrint += BoardMap[a, b, g];
                     }
 
-                    if(!string.IsNullOrEmpty(toPrint.Trim())) Console.WriteLine(toPrint);
+                    if (!string.IsNullOrEmpty(toPrint.Trim())) Console.WriteLine(toPrint);
                 }
             }
         }
