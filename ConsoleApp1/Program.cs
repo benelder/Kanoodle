@@ -196,11 +196,6 @@ namespace ConsoleApp1
             }
         }
 
-        private static IEnumerable<Piece> GetUnusedPositions(IEnumerable<Piece> pieces)
-        {
-            return pieces.Where(m => m.GetAbsolutePosition().All(n => !UsedLocations.Contains(n.Offset)));
-        }
-
         private static void LoadPossiblePositions()
         {
             RedPositions = new List<Piece>();
