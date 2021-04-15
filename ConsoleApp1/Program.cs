@@ -54,25 +54,23 @@ namespace ConsoleApp1
         private static bool SolutionFound;
         private static void PlacePieces()
         {
-            if (SolutionFound) return;
+            var unusedColors = Colors.Where(m => !PiecesUsed.Contains(m.Key)).ToArray();
+            if (unusedColors.Length == 0)
+            {
+                SolutionFound = true;
+                return;
+            }
 
-            var pieces = Colors.Where(m => !PiecesUsed.Contains(m.Key)).First().Value;
+            var pieces = unusedColors.First().Value;
 
             foreach (var position in pieces)
             {
                 if (!Collision(position))
                 {
                     AddPieceToBoard(position);
-                    if (PiecesUsed.Count() == 12)
-                    {
-                        SolutionFound = true;
-                        PrintBoard();
-                    }
-                    else
-                    {
-                        PlacePieces();
-                        RemovePieceFromBoard(position);
-                    }
+                    PlacePieces();
+                    if (SolutionFound) return;
+                    RemovePieceFromBoard(position);
                 }
             }
         }
@@ -90,7 +88,7 @@ namespace ConsoleApp1
                 { 'G', GreenPositions },
                 { 'H', WhitePositions },
                 { 'I', OrangePositions },
-                { 'J', PinkPositions },
+                { 'J', PeachPositions },
                 { 'K', GrayPositions },
                 { 'L', PurplePositions },
             };
