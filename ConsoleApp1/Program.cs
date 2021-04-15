@@ -28,49 +28,11 @@ namespace ConsoleApp1
         {
             Console.WriteLine("CANOODLE!");
             BoardMap = new char[6, 6, 6];
-
-
-            for (int i = 0; i < 6; i++)
-            {
-                for (int j = 0; j < 6; j++)
-                {
-                    for (int k = 0; k < 6; k++)
-                    {
-                        if (i + j + k < 6)
-                            BoardMap[i, j, k] = '-';
-                    }
-                }
-            }
-
             UsedLocations = new HashSet<Location>();
 
-            var red = new Red().Shapes.First();
-            red.GRotation = 4;
-            red.RootPosition = new Location(0, 2, 0);
-            AddPieceToBoard(red);
+            InitializeBoard();
 
-            var lightBlue = new LightBlue().Shapes.First();
-            lightBlue.GRotation = 2;
-            lightBlue.RootPosition = new Location(3, 0, 0);
-            AddPieceToBoard(lightBlue);
-
-            var yellow = new Yellow().Shapes.First();
-            yellow.GRotation = 2;
-            yellow.ARotation = 1;
-            yellow.RootPosition = new Location(4, 0, 0);
-            AddPieceToBoard(yellow);
-
-            var gray = new Gray().Shapes.First();
-            gray.GRotation = 1;
-            gray.ARotation = 0;
-            gray.RootPosition = new Location(1, 3, 0);
-            AddPieceToBoard(gray);
-
-            var orange = new Orange().Shapes.ElementAt(2);
-            orange.ARotation = 1;
-            orange.GRotation = 2;
-            orange.RootPosition = new Location(4, 1, 0);
-            AddPieceToBoard(orange);
+            AddInitialPiecesToBoard();
 
             LoadPossiblePositions();
 
@@ -212,13 +174,55 @@ namespace ConsoleApp1
                 if (solutionFound) break;
             }
 
-            //RemovePieceFromBoard(red);
-            //    }
-            //}
-
             PrintBoard();
             Console.ReadLine();
         } // main
+
+        private static void AddInitialPiecesToBoard()
+        {
+            var red = new Red().Shapes.First();
+            red.GRotation = 4;
+            red.RootPosition = new Location(0, 2, 0);
+            AddPieceToBoard(red);
+
+            var lightBlue = new LightBlue().Shapes.First();
+            lightBlue.GRotation = 2;
+            lightBlue.RootPosition = new Location(3, 0, 0);
+            AddPieceToBoard(lightBlue);
+
+            var yellow = new Yellow().Shapes.First();
+            yellow.GRotation = 2;
+            yellow.ARotation = 1;
+            yellow.RootPosition = new Location(4, 0, 0);
+            AddPieceToBoard(yellow);
+
+            var gray = new Gray().Shapes.First();
+            gray.GRotation = 1;
+            gray.ARotation = 0;
+            gray.RootPosition = new Location(1, 3, 0);
+            AddPieceToBoard(gray);
+
+            var orange = new Orange().Shapes.ElementAt(2);
+            orange.ARotation = 1;
+            orange.GRotation = 2;
+            orange.RootPosition = new Location(4, 1, 0);
+            AddPieceToBoard(orange);
+        }
+
+        private static void InitializeBoard()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    for (int k = 0; k < 6; k++)
+                    {
+                        if (i + j + k < 6)
+                            BoardMap[i, j, k] = '-';
+                    }
+                }
+            }
+        }
 
         private static IEnumerable<Piece> GetUnusedPositions(IEnumerable<Piece> pieces)
         {
@@ -248,6 +252,7 @@ namespace ConsoleApp1
                     {
                         for (int rg = 0; rg < 6; rg++)
                         {
+                            // B rotations
                             for (int rb = 0; rb < 3; rb++)
                             {
                                 if (rb == 1 && rg == 1) continue; // incompatible transformation
@@ -409,6 +414,7 @@ namespace ConsoleApp1
                                 }
                             }
 
+                            // A rotations
                             for (int ra = 0; ra < 3; ra++)
                             {
                                 var red = new Red();
