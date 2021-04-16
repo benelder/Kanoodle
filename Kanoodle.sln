@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kanoodle.App", "ConsoleApp1\Kanoodle.App.csproj", "{9E98AF71-0B5C-469B-BD81-7C97F1529979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kanoodle.App", "Kanoodle.App\Kanoodle.App.csproj", "{9E98AF71-0B5C-469B-BD81-7C97F1529979}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kanoodle.Core", "ClassLibrary1\Kanoodle.Core.csproj", "{C4C385BB-C70D-454F-B50F-86BDC241E1E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kanoodle.Core", "Kanoodle.Core\Kanoodle.Core.csproj", "{C4C385BB-C70D-454F-B50F-86BDC241E1E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Kanoodle.App": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
