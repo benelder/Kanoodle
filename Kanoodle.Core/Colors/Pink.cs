@@ -11,28 +11,28 @@
                     new Node(2,0,0),
                     new Node(3,0,0),
                     new Node(1,1,0)
-                }, "Pink", 'F'),
+                }, "Pink 0", 'F'),
                  new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(1,0,0),
                     new Node(2,0,0),
                     new Node(3,0,0),
                     new Node(2,-1,0)
-                }, "Pink", 'F'),
+                }, "Pink 1", 'F'),
                  new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(-1,-1,0),
                     new Node(0,-1,0),
                     new Node(1,-1,0),
                     new Node(2,-1,0)
-                }, "Pink", 'F'),
+                }, "Pink 2", 'F'),
                  new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(-2,1,0),
                     new Node(-1,1,0),
                     new Node(0,1,0),
                     new Node(1,1,0)
-                }, "Pink", 'F')
+                }, "Pink 3", 'F')
             };
         }
     }

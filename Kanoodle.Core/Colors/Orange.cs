@@ -10,25 +10,25 @@
                     new Node(1,0,0),
                     new Node(1,1,0),
                     new Node(1,2,0)
-                }, "Orange", 'I'),
+                }, "Orange 0", 'I'),
                 new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(1,0,0),
                     new Node(2,-1,0),
                     new Node(3,-2,0)
-                }, "Orange", 'I'),
+                }, "Orange 1", 'I'),
                  new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(1,0,0),
                     new Node(2,0,0),
                     new Node(2,1,0)
-                }, "Orange", 'I'),
+                }, "Orange 2", 'I'),
                  new Piece(new Node[] {
                     new Node(0,0,0),
                     new Node(1,0,0),
                     new Node(2,0,0),
                     new Node(3,-1,0)
-                }, "Orange", 'I')
+                }, "Orange 3", 'I')
             };
         }
     }

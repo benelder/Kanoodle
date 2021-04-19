@@ -98,5 +98,76 @@ namespace Kanoodle.App
 
             return toRet;
         }
+
+        public static IEnumerable<Piece> Game95()
+        {
+            var toRet = new List<Piece>();
+
+            var white = new White().Shapes.ElementAt(4);
+            white.BRotation = 1;
+            white.RootPosition = new Location(0, 2, 0);
+            toRet.Add(white);
+
+            var yellow = new Yellow().Shapes.ElementAt(0);
+            yellow.GRotation = 5;
+            yellow.ARotation = 1;
+            yellow.RootPosition = new Location(0, 3, 0);
+            toRet.Add(yellow);
+
+            var orange = new Orange().Shapes.ElementAt(1);
+            orange.GRotation = 2;
+            orange.ARotation = 1;
+            orange.RootPosition = new Location(1, 2, 2);
+            toRet.Add(orange);
+
+            return toRet;
+        }
+
+        public static IEnumerable<Piece> Game99()
+        {
+            var toRet = new List<Piece>();
+
+            var white = new White().Shapes.ElementAt(2);
+            white.ARotation = 1;
+            white.GRotation = 5;
+            white.RootPosition = new Location(1, 4, 0);
+            toRet.Add(white);
+
+            var yellow = new Yellow().Shapes.ElementAt(0);
+            yellow.GRotation = 4;
+            yellow.ARotation = 1;
+            yellow.RootPosition = new Location(0, 5, 0);
+            toRet.Add(yellow);
+
+            var purple = new Purple().Shapes.ElementAt(5);
+            purple.GRotation = 1;
+            purple.RootPosition = new Location(0, 2, 0);
+            toRet.Add(purple);
+
+            return toRet;
+        }
+
+        public static IEnumerable<Piece> Game96()
+        {
+            var toRet = new List<Piece>();
+
+            var green = new Green().Shapes.ElementAt(4);
+            green.RootPosition = new Location(3, 1, 0);
+            green.GRotation = 1;
+            toRet.Add(green);
+
+            var peach = new Peach().Shapes.ElementAt(0);
+            peach.ARotation = 1;
+            peach.RootPosition = new Location(0, 2, 0);
+            toRet.Add(peach);
+
+            var purple = new Purple().Shapes.ElementAt(5);
+            purple.BRotation = 1;
+            purple.GRotation = 3;
+            purple.RootPosition = new Location(0, 4, 0);
+            toRet.Add(purple);
+
+            return toRet;
+        }
     }
 }

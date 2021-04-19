@@ -11,14 +11,14 @@
                     new Node(2,0,0),
                     new Node(2,1,0),
                     new Node(2,2,0)
-                }, "DarkBlue", 'C'),
+                }, "DarkBlue 0", 'C'),
                 new Piece(new Node[] {
                     new Node(0,0,0),    // 0 0 0
                     new Node(1,0,0),    //      0
                     new Node(2,0,0),    //       0
                     new Node(3,-1,0),   
                     new Node(4,-2,0)
-                }, "DarkBlue", 'C')
+                }, "DarkBlue 1", 'C')
             };
         }
     }
