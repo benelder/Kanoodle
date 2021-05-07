@@ -25,6 +25,7 @@ namespace Kanoodle.App
         public static List<Piece> WhitePositions { get; set; }
         public static HashSet<Location> UsedLocations { get; set; }
         public static List<char> PiecesUsed { get; set; }
+        public static List<Piece> PositionsUsed { get; set; }
         public static char[,,] BoardMap { get; set; }
         public static int PositionCount { get; set; }
 
@@ -34,12 +35,16 @@ namespace Kanoodle.App
             var escape = false;
             while (!escape)
             {
-                Console.WriteLine("Choose and option: (S)olver, (P)ieces, (E)xit");
+                Console.WriteLine("Choose and option: (S)olver, (P)ieces, (B)uilder, (E)xit");
                 var module = Console.ReadLine();
 
                 if (module == "S")
                 {
                     Solver();
+                }
+                if (module == "B")
+                {
+                    Builder();
                 }
                 else if (module == "P")
                 {
@@ -56,6 +61,141 @@ namespace Kanoodle.App
             }
 
         } // main
+
+        private static void Builder()
+        {
+            var escape = false;
+            BoardMap = new char[6, 6, 6];
+            UsedLocations = new HashSet<Location>();
+            PiecesUsed = new List<char>();
+            PositionsUsed = new List<Piece>();
+            LoadPossiblePositions();
+            InitializeColors();
+
+            while (!escape)
+            {
+                Console.WriteLine("Select a color A-L to place a piece on the board, or Q to exit");
+                var module = Console.ReadLine();
+
+                if (module == "Q")
+                {
+                    escape = true;
+                    continue;
+                }
+
+                if (PiecesUsed.Contains(char.Parse(module)))
+                {
+                    Console.WriteLine("That piece is already in use");
+                    continue;
+                }
+
+                SelectPosition(char.Parse(module));
+
+                PrintBoard();
+            }
+
+            Console.WriteLine("Final board initialized state:");
+            for (int i = 0; i < PositionsUsed.Count(); i++)
+            {
+                var piece = PositionsUsed.ElementAt(i);
+                Console.WriteLine(piece);
+            }
+        }
+
+        private static void SelectPosition(char module)
+        {
+            var escape = false;
+
+            while (!escape)
+            {
+                Console.WriteLine("(F)ilter by location or (A)ll; (Q) to exit");
+                var selection = Console.ReadLine();
+
+                if (selection == "Q")
+                {
+                    escape = true;
+                    continue;
+                }
+
+                if (selection == "F")
+                {
+                    var success = false;
+                    while (!success)
+                    {
+                        try
+                        {
+                            Console.WriteLine("Filter to positions that include a specific location. Enter the three-digit position as ABG or Q to quit");
+                            var coords = Console.ReadLine();
+
+                            if (coords == "Q")
+                                break;
+
+                            var a = int.Parse(coords[0].ToString());
+                            var b = int.Parse(coords[1].ToString());
+                            var g = int.Parse(coords[2].ToString());
+                            var positions = Colors[module].Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g)).ToArray();
+                            var total = positions.Count();
+
+                            for (int i = 0; i < total; i++)
+                            {
+                                var item = positions[i];
+                                InitializeBoard();
+                                AddPieceToBoard(item);
+                                PrintBoard();
+                                Console.WriteLine("Position {1} of {2}", item.Name, i, total);
+                                Console.WriteLine("{0} @ Root:{1} Ar:{2} Br:{3} Gr:{4}", item.Name, item.RootPosition, item.ARotation, item.BRotation, item.GRotation);
+                                Console.WriteLine("Press SPACE to select this piece position");
+                                var next = Console.ReadKey();
+                                if (next.Key == ConsoleKey.Spacebar)
+                                {
+                                    PositionsUsed.Add(item);
+                                    success = true;
+                                    break;
+                                }
+                                if (next.Key == ConsoleKey.Escape)
+                                {
+                                    break;
+                                }
+                                else if (next.Key == ConsoleKey.LeftArrow)
+                                {
+                                    if (i > 1)
+                                        i -= 2;
+                                }
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid coordinates. Please try again");
+                        }
+                    }
+                }
+
+                if (selection == "A") // cycle through ALL possible positions
+                {
+                    var positions = Colors[module];
+                    var total = positions.Count();
+                    for (int i = 0; i < total; i++)
+                    {
+                        var item = positions[i];
+                        InitializeBoard();
+                        AddPieceToBoard(item);
+                        PrintBoard();
+                        Console.WriteLine("{0} position {1} of {2}", item.Name, i, total);
+                        Console.WriteLine("Root:{0} Ar:{1} Br:{2} Gr:{3}", item.RootPosition, item.ARotation, item.BRotation, item.GRotation);
+                        var next = Console.ReadKey();
+                        if (next.Key == ConsoleKey.Escape)
+                        {
+                            break;
+                        }
+                        else if (next.Key == ConsoleKey.LeftArrow)
+                        {
+                            if (i > 1)
+                                i -= 2;
+                        }
+                    }
+                }
+            }
+        }
 
         private static void Pieces()
         {
@@ -113,7 +253,7 @@ namespace Kanoodle.App
                             var a = int.Parse(coords[0].ToString());
                             var b = int.Parse(coords[1].ToString());
                             var g = int.Parse(coords[2].ToString());
-                            var positions = Colors[module].Where(m=>m.GetAbsolutePosition().Any(n=>n.Offset.A == a && n.Offset.B == b && n.Offset.G == g)).ToArray();
+                            var positions = Colors[module].Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g)).ToArray();
                             var total = positions.Count();
 
                             for (int i = 0; i < total; i++)
@@ -181,27 +321,39 @@ namespace Kanoodle.App
 
             while (!gameLoaded)
             {
-                Console.WriteLine("Please enter a number between 1 and 100 to load a game");
+                Console.WriteLine("Please enter a number between 1 and 100 to load a game. Enter (B) to used current Builder game");
 
                 var gameNumStr = Console.ReadLine();
 
-                var isNum = int.TryParse(gameNumStr, out int gameNum);
-
-                if (!isNum)
+                if (gameNumStr == "B")
                 {
-                    Console.WriteLine("Not a number");
+                    AddBuilderPiecesToBoard();
+                    gameLoaded = true;
                     continue;
                 }
-
-                var piecesAdded = AddInitialPiecesToBoard(gameNum);
-
-                if (!piecesAdded)
+                else
                 {
-                    Console.WriteLine("That game is not in the catalog. Please try a different number");
-                    continue;
-                }
+                    PositionsUsed = new List<Piece>();
+                    
 
-                gameLoaded = true;
+                    var isNum = int.TryParse(gameNumStr, out int gameNum);
+
+                    if (!isNum)
+                    {
+                        Console.WriteLine("Not a number");
+                        continue;
+                    }
+
+                    var piecesAdded = AddInitialPiecesToBoard(gameNum);
+
+                    if (!piecesAdded)
+                    {
+                        Console.WriteLine("That game is not in the catalog. Please try a different number");
+                        continue;
+                    }
+
+                    gameLoaded = true;
+                }
             }
 
             LoadPossiblePositions();
@@ -303,6 +455,7 @@ namespace Kanoodle.App
 
                     _games.Add(44, GameFactory.Game44());
                     _games.Add(45, GameFactory.Game45());
+                    _games.Add(89, GameFactory.Game89());
                     _games.Add(95, GameFactory.Game95());
                     _games.Add(96, GameFactory.Game96());
                     _games.Add(99, GameFactory.Game99());
@@ -320,6 +473,24 @@ namespace Kanoodle.App
                 var game = Games[gameNum];
 
                 foreach (var piece in game)
+                {
+                    AddPieceToBoard(piece);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                InitializeBoard();
+                return false;
+            }
+        }
+
+        private static bool AddBuilderPiecesToBoard()
+        {
+            try
+            {
+                foreach (var piece in PositionsUsed)
                 {
                     AddPieceToBoard(piece);
                 }
@@ -549,7 +720,7 @@ namespace Kanoodle.App
 
                                     if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
                                         && RedPositions.All(m => !m.IsInSamePositionAs(shape)))
-                                        RedPositions.Add(shape); 
+                                        RedPositions.Add(shape);
                                 }
 
                                 var orange = new Orange();
