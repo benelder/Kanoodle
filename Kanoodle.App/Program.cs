@@ -150,6 +150,7 @@ namespace Kanoodle.App
                                 {
                                     PositionsUsed.Add(item);
                                     success = true;
+                                    escape = true;
                                     break;
                                 }
                                 if (next.Key == ConsoleKey.Escape)
@@ -391,6 +392,10 @@ namespace Kanoodle.App
                 Console.WriteLine("Time elapsed: {0}", timer.Elapsed);
                 Console.WriteLine("Piece positions tried: {0}", PositionCount.ToString("N0"));
             }
+            else
+            {
+                Console.WriteLine("It appears that this is an unsolvable state");
+            }
 
             Console.ReadLine();
         }
@@ -465,6 +470,8 @@ namespace Kanoodle.App
                     _games.Add(99, GameFactory.Game99());
                     _games.Add(100, GameFactory.Game100());
                     _games.Add(201, GameFactory.Game201());
+                    _games.Add(202, GameFactory.Game202());
+                    _games.Add(203, GameFactory.Game203());
                 }
 
                 return _games;

@@ -83,6 +83,58 @@ namespace Kanoodle.App
             return toRet;
         }
 
+        public static IEnumerable<Piece> Game202()
+        {
+            var toRet = new List<Piece>();
+
+            var gray = new Gray().Shapes.ElementAt(0);
+            gray.RootPosition = new Location(0, 0, 0);
+            toRet.Add(gray);
+
+            var red = new Red().Shapes.ElementAt(0);
+            red.GRotation = 1;
+            red.RootPosition = new Location(0, 3, 0);
+            toRet.Add(red);
+
+            var orange = new Orange().Shapes.ElementAt(3);
+            orange.BRotation = 2;
+            orange.RootPosition = new Location(3, 0, 0);
+            toRet.Add(orange);
+
+            var purple = new Purple().Shapes.ElementAt(4);
+            purple.BRotation = 2;
+            purple.RootPosition = new Location(4, 0, 0);
+            toRet.Add(purple);
+
+            return toRet;
+        }
+
+        public static IEnumerable<Piece> Game203()
+        {
+            var toRet = new List<Piece>();
+
+            var gray = new Gray().Shapes.ElementAt(0);
+            gray.RootPosition = new Location(2, 1, 0);
+            toRet.Add(gray);
+
+            var yellow = new Yellow().Shapes.ElementAt(2);
+            yellow.GRotation = 1;
+            yellow.RootPosition = new Location(1, 2, 0);
+            toRet.Add(yellow);
+
+            var orange = new Orange().Shapes.ElementAt(0);
+            orange.GRotation = 1;
+            orange.ARotation = 1;
+            orange.RootPosition = new Location(0, 1, 0);
+            toRet.Add(orange);
+
+            var purple = new Purple().Shapes.ElementAt(0);
+            purple.RootPosition = new Location(0, 0, 0);
+            toRet.Add(purple);
+
+            return toRet;
+        }
+
         public static IEnumerable<Piece> Game100()
         {
             var toRet = new List<Piece>();
