@@ -17,6 +17,11 @@ namespace Kanoodle.Core
             Character = character;
         }
 
+        public override string ToString()
+        {
+            return $"{Name} / {RootPosition} / G:{GRotation} A:{ARotation} B:{BRotation}";
+        }
+
         public Piece(Node[] nodes, string name, char character) : this(new Location(0, 0, 0), nodes, name, character) { }
 
         public string Name { get; set; }
@@ -84,7 +89,7 @@ namespace Kanoodle.Core
                 return location;
 
             if (GRotation == 1)
-                    return new Location { A = -(location.B + location.G), B = location.A + location.B, G = location.G };
+                    return new Location { A = -location.B, B = location.A + location.B, G = location.G };
             
             if (GRotation == 2)
                 return new Location { A = -(location.A + location.B + location.G), B = location.A, G = location.G };
