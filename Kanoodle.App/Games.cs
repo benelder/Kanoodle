@@ -62,6 +62,27 @@ namespace Kanoodle.App
             return toRet;
         }
 
+        public static IEnumerable<Piece> Game201()
+        {
+            var toRet = new List<Piece>();
+
+            var pink = new Pink().Shapes.ElementAt(0);
+            pink.RootPosition = new Location(2, 0, 0);
+            toRet.Add(pink);
+
+            var peach = new Peach().Shapes.ElementAt(0);
+            peach.ARotation = 1;
+            peach.RootPosition = new Location(1, 1, 0);
+            toRet.Add(peach);
+
+            var orange = new Orange().Shapes.ElementAt(0);
+            orange.RootPosition = new Location(0, 0, 0);
+            orange.ARotation = 1;
+            toRet.Add(orange);
+
+            return toRet;
+        }
+
         public static IEnumerable<Piece> Game100()
         {
             var toRet = new List<Piece>();

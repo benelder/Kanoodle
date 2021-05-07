@@ -321,7 +321,11 @@ namespace Kanoodle.App
 
             while (!gameLoaded)
             {
-                Console.WriteLine("Please enter a number between 1 and 100 to load a game. Enter (B) to used current Builder game");
+                foreach (var item in Games)
+                {
+                    Console.WriteLine(item.Key);
+                }
+                Console.WriteLine("Select a game number from the list to load a game. Enter (B) to used current Builder game");
 
                 var gameNumStr = Console.ReadLine();
 
@@ -460,6 +464,7 @@ namespace Kanoodle.App
                     _games.Add(96, GameFactory.Game96());
                     _games.Add(99, GameFactory.Game99());
                     _games.Add(100, GameFactory.Game100());
+                    _games.Add(201, GameFactory.Game201());
                 }
 
                 return _games;
