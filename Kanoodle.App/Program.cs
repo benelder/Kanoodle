@@ -175,11 +175,11 @@ namespace Kanoodle.App
             BoardMap = new char[6, 6, 6];
             UsedLocations = new HashSet<Location>();
             PiecesUsed = new List<char>();
-            var boardInitialized = false;
+            var gameLoaded = false;
 
             InitializeBoard();
 
-            while (!boardInitialized)
+            while (!gameLoaded)
             {
                 Console.WriteLine("Please enter a number between 1 and 100 to load a game");
 
@@ -201,7 +201,7 @@ namespace Kanoodle.App
                     continue;
                 }
 
-                boardInitialized = true;
+                gameLoaded = true;
             }
 
             LoadPossiblePositions();
