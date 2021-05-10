@@ -29,38 +29,7 @@ namespace Kanoodle.App
             }
             else
             {
-                var gameLoaded = false;
-
-                while (!gameLoaded)
-                {
-                    foreach (var item in Board.Games)
-                    {
-                        Console.WriteLine(item.Key);
-                    }
-
-                    Console.WriteLine("Select a game number from the list to load a game");
-
-                    var gameNumStr = Console.ReadLine();
-
-                    var isNum = int.TryParse(gameNumStr, out int gameNum);
-
-                    if (!isNum)
-                    {
-                        Console.WriteLine("Not a number");
-                        continue;
-                    }
-
-                    gameLoaded = Board.LoadGame(gameNum);
-
-                    if (!gameLoaded)
-                    {
-                        Console.WriteLine("That game is not in the catalog. Please try a different number");
-                        continue;
-                    }
-
-                    gameLoaded = true;
-
-                }
+                SelectAndLoadGame();
             }
 
             Console.WriteLine("Board loaded. Initial setup looks like this");
@@ -74,6 +43,13 @@ namespace Kanoodle.App
 
             Console.ReadKey();
 
+            AttemptToSolve();
+
+            Console.ReadLine();
+        }
+
+        private void AttemptToSolve()
+        {
             var timer = new Stopwatch();
             timer.Start();
 
@@ -93,8 +69,41 @@ namespace Kanoodle.App
             {
                 Console.WriteLine("It appears that this is an unsolvable state");
             }
+        }
 
-            Console.ReadLine();
+        private void SelectAndLoadGame()
+        {
+            var gameLoaded = false;
+
+            while (!gameLoaded)
+            {
+                foreach (var item in Board.Games)
+                {
+                    Console.WriteLine(item.Key);
+                }
+
+                Console.WriteLine("Select a game number from the list to load a game");
+
+                var gameNumStr = Console.ReadLine();
+
+                var isNum = int.TryParse(gameNumStr, out int gameNum);
+
+                if (!isNum)
+                {
+                    Console.WriteLine("Not a number");
+                    continue;
+                }
+
+                gameLoaded = Board.LoadGame(gameNum);
+
+                if (!gameLoaded)
+                {
+                    Console.WriteLine("That game is not in the catalog. Please try a different number");
+                    continue;
+                }
+
+                gameLoaded = true;
+            }
         }
 
         private bool LoadState(IEnumerable<Piece> state)
@@ -118,29 +127,28 @@ namespace Kanoodle.App
         private bool PlacePieces()
         {
             var unusedColors = Board.GetUnusedColors();
-            if (unusedColors.Count() == 0)
+            
+            if (unusedColors.Count() == 0) // all pieces have been placed! We've solved it!
             {
                 return true;
             }
 
-            var pieces = unusedColors.First().Value;
+            var pieces = unusedColors.First().Value; // take next unused color
 
             foreach (var position in pieces)
             {
-                PositionCount++;
+                PositionCount++; // increment counter of position attempts
 
-                if (!Board.Collision(position))
+                if (!Board.Collision(position)) // if piece fits onto board
                 {
-                    Board.PlacePiece(position);
-                    var s = PlacePieces();
+                    Board.PlacePiece(position); 
+                    var s = PlacePieces(); // recurse
                     if (s) return true;
-                    Board.RemovePiece(position);
+                    Board.RemovePiece(position); // remove piece from board and loop to try next position
                 }
             }
 
-            return false;
+            return false; // we've exhausted all possible positions for this color without finding a solution
         }
-
-        
     }
 }
