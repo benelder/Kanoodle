@@ -12,7 +12,7 @@ namespace Kanoodle.App
             var escape = false;
             while (!escape)
             {
-                Console.WriteLine("Choose and option: (S)olver, (P)ieces, (B)uilder, (E)xit");
+                Console.WriteLine("Choose and option: (S)olver, (P)ieces, (I)nfo, (B)uilder, (E)xit");
                 var module = Console.ReadLine();
 
                 if (module == "S") // solve a pre-configured game state
@@ -25,7 +25,7 @@ namespace Kanoodle.App
                     var builder = new Builder();
                     var state = builder.Build();
 
-                    if(state != null)
+                    if (state != null)
                     {
                         var solver = new Solver();
                         solver.Solve(state);
@@ -35,6 +35,11 @@ namespace Kanoodle.App
                 {
                     var browser = new Browser();
                     browser.Browse();
+                }
+                else if (module == "I") // browse piece info
+                {
+                    var browser = new Browser();
+                    browser.Info();
                 }
                 else if (module == "E") // quit
                 {

@@ -15,6 +15,12 @@ namespace Kanoodle.App
             Board = new Board();
         }
 
+        public void Info()
+        {
+            Console.WriteLine("Statistics for valid shape configurations");
+            Board.WriteShapeStats();
+        }
+
         public void Browse()
         {
             var escape = false;

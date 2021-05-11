@@ -482,7 +482,21 @@ namespace Kanoodle.App
                 }
             }
 
-            Console.WriteLine("All possible positions initialized.  Total of {0} positions tested.", totalPositionsTested);
+            Console.WriteLine("All possible positions initialized.");
+            Console.WriteLine("Total of {0} positions tested.", totalPositionsTested);
+            Console.WriteLine("Total of {0} positions registered as valid.",
+                LimePositions.Count +
+                YellowPositions.Count +
+                DarkBluePositions.Count +
+                LightBluePositions.Count +
+                RedPositions.Count +
+                PinkPositions.Count +
+                GreenPositions.Count +
+                WhitePositions.Count +
+                OrangePositions.Count +
+                PeachPositions.Count +
+                GrayPositions.Count +
+                PurplePositions.Count);
         }
 
         private void InitializeColors()
@@ -658,6 +672,35 @@ namespace Kanoodle.App
                 }
             }
             return toRet;
+        }
+
+        public void WriteShapeStats()
+        {
+            WriteShapeStats(LimePositions);
+            WriteShapeStats(YellowPositions);
+            WriteShapeStats(DarkBluePositions);
+            WriteShapeStats(LightBluePositions);
+            WriteShapeStats(RedPositions);
+            WriteShapeStats(PinkPositions);
+            WriteShapeStats(GreenPositions);
+            WriteShapeStats(WhitePositions);
+            WriteShapeStats(OrangePositions);
+            WriteShapeStats(PeachPositions);
+            WriteShapeStats(GrayPositions);
+            WriteShapeStats(PurplePositions);
+        }
+
+        private void WriteShapeStats(List<Piece> positions)
+        {
+            foreach (var color in positions.GroupBy(m => m.Character))
+            {
+                Console.WriteLine(color.Key);
+                foreach (var piece in color.GroupBy(m => m.Name))
+                {
+                    Console.WriteLine($"{piece.Key} - {piece.Count()}");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
