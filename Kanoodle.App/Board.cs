@@ -167,6 +167,7 @@ namespace Kanoodle.App
                                     _totalPositionsTested++;
                                     red = new T();
                                     var shape = red.Shapes.ElementAt(i);
+                                    shape.RootPosition = new Location(a, b, g);
                                     shape.ARotation = ra;
                                     shape.BRotation = 0;
                                     shape.GRotation = rg;
