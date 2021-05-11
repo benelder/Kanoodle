@@ -148,9 +148,25 @@ namespace Kanoodle.Core
             if (piece.Nodes.Count() != this.Nodes.Count())
                 return false; // not same shape
 
-            var p = GetAbsolutePosition();
+            var t = GetAbsolutePosition();
 
-            return piece.GetAbsolutePosition().All(m => p.Any(n => n.Offset.Equals(m.Offset)));
+            var p = piece.GetAbsolutePosition();
+
+            for (int i = 0; i < t.Length; i++)
+            {
+                var nodeMatch = false;
+                for (int j = 0; j < p.Length; j++)
+                {
+                    if (t[i].Offset.Equals(p[j].Offset))
+                    {
+                        nodeMatch = true;
+                        break;
+                    }
+                }
+                if (!nodeMatch) return false;
+            }
+
+            return true;
         }
     }
 }
