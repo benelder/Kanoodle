@@ -57,7 +57,7 @@ namespace Kanoodle.App
         {
             InitializeBoard();
             UsedLocations = new HashSet<Location>();
-            LoadPossiblePositions();
+            LoadPossiblePositions2();
             InitializeColors();
         }
 
@@ -81,410 +81,25 @@ namespace Kanoodle.App
             PiecesUsed = new List<char>();
         }
 
-        private void LoadPossiblePositions()
+        private int _totalPositionsTested = 0;
+
+        private void LoadPossiblePositions2()
         {
-            RedPositions = new List<Piece>();
-            PinkPositions = new List<Piece>();
-            PurplePositions = new List<Piece>();
-            DarkBluePositions = new List<Piece>();
-            LightBluePositions = new List<Piece>();
-            WhitePositions = new List<Piece>();
-            GrayPositions = new List<Piece>();
-            LimePositions = new List<Piece>();
-            OrangePositions = new List<Piece>();
-            PeachPositions = new List<Piece>();
-            YellowPositions = new List<Piece>();
-            GreenPositions = new List<Piece>();
-
-            var totalPositionsTested = 0;
-
-            for (int g = 0; g < 6; g++)
-            {
-                for (int b = 0; b < 6; b++)
-                {
-                    for (int a = 0; a < 6; a++)
-                    {
-                        if (a + b + g > 5) // will be out of bounds
-                            continue;
-
-                        for (int rg = 0; rg < 6; rg++)
-                        {
-                            // B rotations
-                            for (int rb = 0; rb < 3; rb++)
-                            {
-                                if (rb == 1 && rg == 1) continue; // incompatible transformation
-
-                                var red = new Red();
-                                foreach (var shape in red.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !RedPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        RedPositions.Add(shape);
-                                }
-
-                                var orange = new Orange();
-                                foreach (var shape in orange.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !OrangePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        OrangePositions.Add(shape);
-                                }
-
-                                var pink = new Pink();
-                                foreach (var shape in pink.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !PinkPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        PinkPositions.Add(shape);
-                                }
-
-                                var purple = new Purple();
-                                foreach (var shape in purple.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !PurplePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        PurplePositions.Add(shape);
-                                }
-
-                                var gray = new Gray();
-                                foreach (var shape in gray.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !GrayPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        GrayPositions.Add(shape);
-                                }
-
-                                var darkBlue = new DarkBlue();
-                                foreach (var shape in darkBlue.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !DarkBluePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        DarkBluePositions.Add(shape);
-                                }
-
-                                var lightBlue = new LightBlue();
-                                foreach (var shape in lightBlue.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !LightBluePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        LightBluePositions.Add(shape);
-                                }
-
-                                var peach = new Peach();
-                                foreach (var shape in peach.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !PeachPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        PeachPositions.Add(shape);
-                                }
-
-                                var white = new White();
-                                foreach (var shape in white.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !WhitePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        WhitePositions.Add(shape);
-                                }
-
-                                var yellow = new Yellow();
-                                foreach (var shape in yellow.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !YellowPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        YellowPositions.Add(shape);
-                                }
-
-                                var lime = new Lime();
-                                foreach (var shape in lime.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !LimePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        LimePositions.Add(shape);
-                                }
-
-                                var green = new Green();
-                                foreach (var shape in green.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !GreenPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        GreenPositions.Add(shape);
-                                }
-                            }
-
-                            // A rotations
-                            for (int ra = 1; ra < 3; ra++) // ra starts at 1 because zero was already accounted for in the B rotation loop above
-                            {
-                                var red = new Red();
-                                foreach (var shape in red.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !RedPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        RedPositions.Add(shape);
-                                }
-
-                                var orange = new Orange();
-                                foreach (var shape in orange.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !OrangePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        OrangePositions.Add(shape);
-                                }
-
-                                var pink = new Pink();
-                                foreach (var shape in pink.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !PinkPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        PinkPositions.Add(shape);
-                                }
-
-                                var purple = new Purple();
-                                foreach (var shape in purple.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !PurplePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        PurplePositions.Add(shape);
-                                }
-
-                                var gray = new Gray();
-                                foreach (var shape in gray.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !GrayPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        GrayPositions.Add(shape);
-                                }
-
-                                var darkBlue = new DarkBlue();
-                                foreach (var shape in darkBlue.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !DarkBluePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        DarkBluePositions.Add(shape);
-                                }
-
-                                var lightBlue = new LightBlue();
-                                foreach (var shape in lightBlue.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !LightBluePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        LightBluePositions.Add(shape);
-                                }
-
-                                var peach = new Peach();
-                                foreach (var shape in peach.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !PeachPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        PeachPositions.Add(shape);
-                                }
-
-                                var white = new White();
-                                foreach (var shape in white.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !WhitePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        WhitePositions.Add(shape);
-                                }
-
-                                var yellow = new Yellow();
-                                foreach (var shape in yellow.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !YellowPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        YellowPositions.Add(shape);
-                                }
-
-                                var lime = new Lime();
-                                foreach (var shape in lime.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !LimePositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        LimePositions.Add(shape);
-                                }
-
-                                var green = new Green();
-                                foreach (var shape in green.Shapes)
-                                {
-                                    totalPositionsTested++;
-
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
-
-                                    if (!shape.IsOutOfBounds() && shape.GetAbsolutePosition().All(m => !UsedLocations.Contains(m.Offset))
-                                        && !GreenPositions.Any(m => m.IsInSamePositionAs(shape)))
-                                        GreenPositions.Add(shape);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            RedPositions = LoadPositionsForColor<Red>();
+            PinkPositions = LoadPositionsForColor<Pink>();
+            PurplePositions = LoadPositionsForColor<Purple>();
+            DarkBluePositions = LoadPositionsForColor<DarkBlue>(); ;
+            LightBluePositions = LoadPositionsForColor<LightBlue>(); ;
+            WhitePositions = LoadPositionsForColor<White>(); ;
+            GrayPositions = LoadPositionsForColor<Gray>(); ;
+            LimePositions = LoadPositionsForColor<Lime>(); ;
+            OrangePositions = LoadPositionsForColor<Orange>(); ;
+            PeachPositions = LoadPositionsForColor<Peach>(); ;
+            YellowPositions = LoadPositionsForColor<Yellow>(); ;
+            GreenPositions = LoadPositionsForColor<Green>(); ;
 
             Console.WriteLine("All possible positions initialized.");
-            Console.WriteLine("Total of {0} positions tested.", totalPositionsTested);
+            Console.WriteLine("Total of {0} positions tested.", _totalPositionsTested);
             Console.WriteLine("Total of {0} positions registered as valid.",
                 LimePositions.Count +
                 YellowPositions.Count +
@@ -499,6 +114,83 @@ namespace Kanoodle.App
                 GrayPositions.Count +
                 PurplePositions.Count);
         }
+
+        private List<Piece> LoadPositionsForColor<T>() where T : Core.Color, new()
+        {
+            var red = new T();
+            var toRet = new List<Piece>();
+
+            for (int i = 0; i < red.Shapes.Count(); i++)
+            {
+                for (int g = 0; g < 6; g++)
+                {
+                    for (int b = 0; b < 6; b++)
+                    {
+                        for (int a = 0; a < 6; a++)
+                        {
+                            if (a + b + g > 5) // will be out of bounds
+                                continue;
+
+                            for (int rg = 0; rg < 6; rg++)
+                            {
+                                // B rotations
+                                for (int rb = 0; rb < 3; rb++)
+                                {
+                                    if (rb == 1 && rg == 1) continue; // incompatible transformation
+
+                                    _totalPositionsTested++;
+                                    red = new T();
+                                    var shape = red.Shapes.ElementAt(i);
+
+                                    shape.RootPosition = new Location(a, b, g);
+
+                                    shape.ARotation = 0;
+                                    shape.BRotation = rb;
+                                    shape.GRotation = rg;
+
+                                    if (shape.IsOutOfBounds())
+                                        continue;
+
+                                    if (shape.GetAbsolutePosition().Any(m => UsedLocations.Contains(m.Offset)))
+                                        continue;
+
+                                    if (toRet.Any(m => m.IsInSamePositionAs(shape)))
+                                        continue;
+
+                                    toRet.Add(shape);
+                                }
+
+                                // A rotations
+                                for (int ra = 1; ra < 3; ra++) // ra starts at 1 because zero was already accounted for in the B rotation loop above
+                                {
+
+                                    _totalPositionsTested++;
+                                    red = new T();
+                                    var shape = red.Shapes.ElementAt(i);
+                                    shape.ARotation = ra;
+                                    shape.BRotation = 0;
+                                    shape.GRotation = rg;
+
+                                    if (shape.IsOutOfBounds())
+                                        continue;
+
+                                    if (shape.GetAbsolutePosition().Any(m => UsedLocations.Contains(m.Offset)))
+                                        continue;
+
+                                    if (toRet.Any(m => m.IsInSamePositionAs(shape)))
+                                        continue;
+
+                                    toRet.Add(shape);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return toRet;
+        }
+
 
         private void InitializeColors()
         {

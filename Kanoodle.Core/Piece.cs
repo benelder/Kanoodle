@@ -26,10 +26,15 @@ namespace Kanoodle.Core
 
         public string Name { get; set; }
         public char Character { get; set; }
-        public Location RootPosition { get; set; }
-        public int GRotation { get; set; }
-        public int ARotation { get; set; }
-        public int BRotation { get; set; }
+
+        private Location _rootPosition;
+        public Location RootPosition { get { return _rootPosition; } set { _absolutePosition = null; _rootPosition = value;  } }
+        private int _gRotation;
+        public int GRotation { get { return _gRotation; } set { _absolutePosition = null; _gRotation = value; } }
+        private int _aRotation;
+        public int ARotation { get { return _aRotation; } set { _absolutePosition = null; _aRotation = value; } }
+        private int _bRotation;
+        public int BRotation { get { return _bRotation; } set { _absolutePosition = null; _bRotation = value; } }
         public Node[] Nodes { get; set; }
 
         public string AbsId()
