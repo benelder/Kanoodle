@@ -91,14 +91,8 @@ namespace Kanoodle.App
             toRet.Add(gray);
 
             var red = new Red().Shapes.ElementAt(0);
-            red.GRotation = 1;
             red.RootPosition = new Location(0, 3, 0);
             toRet.Add(red);
-
-            var orange = new Orange().Shapes.ElementAt(3);
-            orange.BRotation = 2;
-            orange.RootPosition = new Location(3, 0, 0);
-            toRet.Add(orange);
 
             var purple = new Purple().Shapes.ElementAt(4);
             purple.BRotation = 2;
