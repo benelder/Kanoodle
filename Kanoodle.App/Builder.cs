@@ -38,8 +38,6 @@ namespace Kanoodle.App
                 }
 
                 SelectPosition(char.Parse(module));
-
-                Board.Print();
             }
 
             Console.WriteLine("Final board initialized state:");
@@ -56,7 +54,7 @@ namespace Kanoodle.App
                 var result = Console.ReadLine();
                 if (result == "Y")
                 {
-                    GenerateCode();   
+                    GenerateCode();
                     showCode = true;
                 }
                 else if (result == "N")
@@ -134,7 +132,7 @@ namespace Kanoodle.App
             }
         }
 
-        private void SelectPosition(char module)
+        private void SelectPosition(char color)
         {
             var escape = false;
 
@@ -165,7 +163,10 @@ namespace Kanoodle.App
                             var a = int.Parse(coords[0].ToString());
                             var b = int.Parse(coords[1].ToString());
                             var g = int.Parse(coords[2].ToString());
-                            var positions = Board.Colors[module].Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g)).ToArray();
+                            var positions = Board.Colors[color]
+                                .Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g) &&
+                                m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset)))
+                                .ToArray();
                             var result = CycleThroughPositions(positions);
                             success = result;
                             escape = result;
@@ -179,7 +180,7 @@ namespace Kanoodle.App
 
                 if (selection == "A") // cycle through ALL possible positions
                 {
-                    var positions = Board.Colors[module];
+                    var positions = Board.Colors[color].Where(m => m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset))).ToArray();
                     var result = CycleThroughPositions(positions);
                     escape = result;
                 }
@@ -195,30 +196,46 @@ namespace Kanoodle.App
             {
                 var item = positions.ElementAt(i);
                 Board.Clear();
+                AddSelectedPiecesToBoard();
                 Board.PlacePiece(item);
                 Board.Print();
-                Console.WriteLine("Position {1} of {2}", item.Name, i, total);
+                Console.WriteLine("Position {1} of {2}", item.Name, i + 1, total);
                 Console.WriteLine("{0} @ Root:{1} Ar:{2} Br:{3} Gr:{4}", item.Name, item.RootPosition, item.ARotation, item.BRotation, item.GRotation);
                 Console.WriteLine("Press SPACE to select this piece position");
                 var next = Console.ReadKey();
                 if (next.Key == ConsoleKey.Spacebar)
                 {
                     PositionsUsed.Add(item);
-                    toRet = true; 
+                    toRet = true;
                     break;
                 }
-                if (next.Key == ConsoleKey.Escape)
+                else if (next.Key == ConsoleKey.Escape)
                 {
                     break;
                 }
                 else if (next.Key == ConsoleKey.LeftArrow)
                 {
-                    if (i > 1)
+                    if (i == 0)
+                        i = total - 2;
+                    else
                         i -= 2;
+                }
+                else if (next.Key == ConsoleKey.RightArrow)
+                {
+                    if (i == total - 1)
+                        i = -1;
                 }
             }
 
             return toRet;
+        }
+
+        private void AddSelectedPiecesToBoard()
+        {
+            foreach (var item in PositionsUsed)
+            {
+                Board.PlacePiece(item);
+            }
         }
     }
 }

@@ -32,6 +32,7 @@ namespace Kanoodle.App
                     _games.Add(203, GameFactory.Game203());
                     _games.Add(204, GameFactory.Game204());
                     _games.Add(205, GameFactory.Game205());
+                    _games.Add(206, GameFactory.Game206());
                 }
 
                 return _games;
@@ -51,7 +52,7 @@ namespace Kanoodle.App
         private List<Piece> GrayPositions { get; set; }
         private List<Piece> OrangePositions { get; set; }
         private List<Piece> WhitePositions { get; set; }
-        private HashSet<Location> UsedLocations { get; set; }
+        public HashSet<Location> UsedLocations { get; set; }
         private List<char> PiecesUsed { get; set; }
         private char[,,] BoardMap { get; set; }
 
@@ -81,6 +82,7 @@ namespace Kanoodle.App
                 }
             }
             PiecesUsed = new List<char>();
+            UsedLocations = new HashSet<Location>();
         }
 
         private int _totalPositionsTested = 0;
