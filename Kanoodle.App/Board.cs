@@ -59,7 +59,7 @@ namespace Kanoodle.App
         {
             InitializeBoard();
             UsedLocations = new HashSet<Location>();
-            LoadPossiblePositions2();
+            LoadPossiblePositions();
             InitializeColors();
         }
 
@@ -85,7 +85,7 @@ namespace Kanoodle.App
 
         private int _totalPositionsTested = 0;
 
-        private void LoadPossiblePositions2()
+        private void LoadPossiblePositions()
         {
             RedPositions = LoadPositionsForColor<Red>();
             PinkPositions = LoadPositionsForColor<Pink>();
