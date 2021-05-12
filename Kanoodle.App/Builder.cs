@@ -18,6 +18,87 @@ namespace Kanoodle.App
 
         public List<Piece> Build()
         {
+            LoadInitialState();
+
+            ChoosePieces();
+
+            DisplayFinalBoardState();
+
+            RequestCodeGenInput();
+
+            return RequestSolverInput();
+
+        }
+
+        private void LoadInitialState()
+        {
+            var escape = false;
+
+            while (!escape)
+            {
+                Console.WriteLine("(L)oad initial game state, or start with (E)mpty board?");
+                var state = Console.ReadLine();
+
+                if (state == "L")
+                {
+
+                    var gameLoaded = false;
+
+                    while (!gameLoaded)
+                    {
+                        foreach (var item in Board.Games)
+                        {
+                            Console.WriteLine(item.Key);
+                        }
+
+                        Console.WriteLine("Select a game number from the list to load a game");
+
+                        var gameNumStr = Console.ReadLine();
+
+                        var isNum = int.TryParse(gameNumStr, out int gameNum);
+
+                        if (!isNum)
+                        {
+                            Console.WriteLine("Not a number");
+                            continue;
+                        }
+
+                        try
+                        {
+                            var game = Board.Games[gameNum];
+
+                            foreach (var piece in game)
+                            {
+                                PositionsUsed.Add(piece);
+                                Board.PlacePiece(piece);
+                            }
+                            gameLoaded = true;
+
+                        }
+                        catch (Exception)
+                        {
+                            gameLoaded = false;
+                        }
+                        
+
+                        if (!gameLoaded)
+                        {
+                            Console.WriteLine("That game is not in the catalog. Please try a different number");
+                            continue;
+                        }
+                    }
+
+                    escape = true;
+                }
+                else if (state == "E")
+                {
+                    escape = true;
+                }
+            }
+        }
+
+        private void ChoosePieces()
+        {
             var escape = false;
 
             while (!escape)
@@ -39,14 +120,20 @@ namespace Kanoodle.App
 
                 SelectPosition(char.Parse(module));
             }
+        }
 
+        private void DisplayFinalBoardState()
+        {
             Console.WriteLine("Final board initialized state:");
             for (int i = 0; i < PositionsUsed.Count(); i++)
             {
                 var piece = PositionsUsed.ElementAt(i);
                 Console.WriteLine(piece);
             }
+        }
 
+        private void RequestCodeGenInput()
+        {
             var showCode = false;
             while (!showCode)
             {
@@ -54,7 +141,8 @@ namespace Kanoodle.App
                 var result = Console.ReadLine();
                 if (result == "Y")
                 {
-                    GenerateCode();
+                    var codeGen = new CodeGenerator();
+                    codeGen.GenerateCode(PositionsUsed);
                     showCode = true;
                 }
                 else if (result == "N")
@@ -62,7 +150,10 @@ namespace Kanoodle.App
                     showCode = true;
                 }
             }
+        }
 
+        private List<Piece> RequestSolverInput()
+        {
             var validInput = false;
             while (!validInput)
             {
@@ -80,56 +171,6 @@ namespace Kanoodle.App
             }
 
             return null;
-        }
-
-        private void GenerateCode(Piece piece)
-        {
-            var varName = piece.Character.ToString().ToLower();
-
-            Console.WriteLine($"    var {varName} = new {GetColorName(piece.Character)}().Shapes.ElementAt(0);");
-            Console.WriteLine($"    {varName}.RootPosition = new Location({piece.RootPosition.A}, {piece.RootPosition.B}, {piece.RootPosition.G});");
-            Console.WriteLine($"    {varName}.ARotation = {piece.ARotation};");
-            Console.WriteLine($"    {varName}.BRotation = {piece.BRotation};");
-            Console.WriteLine($"    {varName}.GRotation = {piece.GRotation};");
-            Console.WriteLine($"    toRet.Add({varName});");
-            Console.WriteLine();
-        }
-
-        private void GenerateCode()
-        {
-            Console.WriteLine("public static IEnumerable<Piece> GameX()");
-            Console.WriteLine("{");
-            Console.WriteLine("    var toRet = new List<Piece>();");
-            Console.WriteLine();
-
-            for (int i = 0; i < PositionsUsed.Count(); i++)
-            {
-                GenerateCode(PositionsUsed[i]);
-            }
-
-            Console.WriteLine("    return toRet;");
-            Console.WriteLine("}");
-            Console.WriteLine();
-        }
-
-        private string GetColorName(char c)
-        {
-            switch (c)
-            {
-                case 'A': return "Lime";
-                case 'B': return "Yellow";
-                case 'C': return "DarkBlue";
-                case 'D': return "LightBlue";
-                case 'E': return "Red";
-                case 'F': return "Pink";
-                case 'G': return "Green";
-                case 'H': return "White";
-                case 'I': return "Orange";
-                case 'J': return "Peach";
-                case 'K': return "Gray";
-                case 'L': return "Purple";
-                default: throw new Exception("Invlaid color char");
-            }
         }
 
         private void SelectPosition(char color)

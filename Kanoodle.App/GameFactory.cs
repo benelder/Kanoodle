@@ -7,6 +7,125 @@ namespace Kanoodle.App
 {
     public static class GameFactory
     {
+        public static IEnumerable<Piece> Game20()
+        {
+            var toRet = new List<Piece>();
+
+            var k = new Gray().Shapes.ElementAt(0);
+            k.RootPosition = new Location(0, 0, 0);
+            k.ARotation = 0;
+            k.BRotation = 0;
+            k.GRotation = 0;
+            toRet.Add(k);
+
+            var d = new LightBlue().Shapes.ElementAt(0);
+            d.RootPosition = new Location(5, 0, 0);
+            d.ARotation = 0;
+            d.BRotation = 2;
+            d.GRotation = 1;
+            toRet.Add(d);
+
+            var j = new Peach().Shapes.ElementAt(0);
+            j.RootPosition = new Location(3, 1, 0);
+            j.ARotation = 0;
+            j.BRotation = 2;
+            j.GRotation = 1;
+            toRet.Add(j);
+
+            var a = new Lime().Shapes.ElementAt(0);
+            a.RootPosition = new Location(3, 2, 0);
+            a.ARotation = 0;
+            a.BRotation = 2;
+            a.GRotation = 1;
+            toRet.Add(a);
+
+            var g = new Green().Shapes.ElementAt(0);
+            g.RootPosition = new Location(0, 5, 0);
+            g.ARotation = 1;
+            g.BRotation = 0;
+            g.GRotation = 5;
+            toRet.Add(g);
+
+            var i = new Orange().Shapes.ElementAt(0);
+            i.RootPosition = new Location(3, 1, 1);
+            i.ARotation = 0;
+            i.BRotation = 2;
+            i.GRotation = 1;
+            toRet.Add(i);
+
+            var e = new Red().Shapes.ElementAt(0);
+            e.RootPosition = new Location(0, 0, 1);
+            e.ARotation = 2;
+            e.BRotation = 0;
+            e.GRotation = 1;
+            toRet.Add(e);
+
+            var c = new DarkBlue().Shapes.ElementAt(0);
+            c.RootPosition = new Location(4, 0, 1);
+            c.ARotation = 1;
+            c.BRotation = 0;
+            c.GRotation = 0;
+            toRet.Add(c);
+
+            return toRet;
+        }
+
+        public static IEnumerable<Piece> Game207()
+        {
+            var toRet = new List<Piece>();
+
+            var k = new Gray().Shapes.ElementAt(0);
+            k.RootPosition = new Location(0, 0, 0);
+            k.ARotation = 0;
+            k.BRotation = 0;
+            k.GRotation = 0;
+            toRet.Add(k);
+
+            var d = new LightBlue().Shapes.ElementAt(0);
+            d.RootPosition = new Location(5, 0, 0);
+            d.ARotation = 0;
+            d.BRotation = 2;
+            d.GRotation = 1;
+            toRet.Add(d);
+
+            var j = new Peach().Shapes.ElementAt(0);
+            j.RootPosition = new Location(3, 1, 0);
+            j.ARotation = 0;
+            j.BRotation = 2;
+            j.GRotation = 1;
+            toRet.Add(j);
+
+            var a = new Lime().Shapes.ElementAt(0);
+            a.RootPosition = new Location(3, 2, 0);
+            a.ARotation = 0;
+            a.BRotation = 2;
+            a.GRotation = 1;
+            toRet.Add(a);
+
+            var g = new Green().Shapes.ElementAt(0);
+            g.RootPosition = new Location(0, 5, 0);
+            g.ARotation = 1;
+            g.BRotation = 0;
+            g.GRotation = 5;
+            toRet.Add(g);
+
+            var i = new Orange().Shapes.ElementAt(0);
+            i.RootPosition = new Location(3, 1, 1);
+            i.ARotation = 0;
+            i.BRotation = 2;
+            i.GRotation = 1;
+            toRet.Add(i);
+
+            var e = new Red().Shapes.ElementAt(0);
+            e.RootPosition = new Location(0, 0, 1);
+            e.ARotation = 2;
+            e.BRotation = 0;
+            e.GRotation = 1;
+            toRet.Add(e);
+
+            return toRet;
+        }
+
         public static IEnumerable<Piece> Game206()
         {
             var toRet = new List<Piece>();

@@ -19,6 +19,7 @@ namespace Kanoodle.App
                 {
                     _games = new Dictionary<int, IEnumerable<Piece>>();
 
+                    _games.Add(20, GameFactory.Game20());
                     _games.Add(28, GameFactory.Game28());
                     _games.Add(44, GameFactory.Game44());
                     _games.Add(45, GameFactory.Game45());
@@ -33,6 +34,7 @@ namespace Kanoodle.App
                     _games.Add(204, GameFactory.Game204());
                     _games.Add(205, GameFactory.Game205());
                     _games.Add(206, GameFactory.Game206());
+                    _games.Add(207, GameFactory.Game207());
                 }
 
                 return _games;
