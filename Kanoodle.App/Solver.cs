@@ -38,13 +38,60 @@ namespace Kanoodle.App
             var totalPositionCount = Board.GetTotalPositionCount();
             Console.WriteLine("There are {0} total position combinations possible in this game", totalPositionCount.ToString("N0"));
 
-            Console.WriteLine("Press any key to attempt to solve");
-
-            Console.ReadKey();
-
-            AttemptToSolve();
+            GetSolveInput();
 
             Console.ReadLine();
+        }
+
+        private void GetSolveInput()
+        {
+            var escape = false;
+
+            while (!escape)
+            {
+                Console.WriteLine("(C)ount all possible solutions. or (S)olve");
+
+                var response = Console.ReadLine();
+
+                if(response == "S")
+                {
+                    AttemptToSolve();
+                    escape = true;
+                }
+                else if(response == "C")
+                {
+                    CountPossibleSolutions();
+                    escape = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                }
+            }
+        }
+
+        private void CountPossibleSolutions()
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+
+            Console.WriteLine("Attempting to place pieces");
+
+            _solutionCount = 0;
+            CountSolutions();
+
+            if (_solutionCount > 0)
+            {
+                timer.Stop();
+                Board.Print();
+                Console.WriteLine($"Total of {_solutionCount} possible solutions found!");
+                Console.WriteLine("Time elapsed: {0}", timer.Elapsed);
+            }
+            else
+            {
+                timer.Stop();
+                Console.WriteLine("It appears that this is an unsolvable state");
+            }
         }
 
         private void AttemptToSolve()
@@ -143,6 +190,34 @@ namespace Kanoodle.App
                     Board.PlacePiece(position); 
                     var s = PlacePieces(); // recurse
                     if (s) return true;
+                    Board.RemovePiece(position); // remove piece from board and loop to try next position
+                }
+            }
+
+            return false; // we've exhausted all possible positions for this color without finding a solution
+        }
+
+        private int _solutionCount = 0;
+        private bool CountSolutions()
+        {
+            var unusedColors = Board.GetUnusedColors();
+            
+            if (unusedColors.Count() == 0) // all pieces have been placed! We've solved it!
+            {
+                _solutionCount++;
+                return true;
+            }
+
+            var pieces = unusedColors.First().Value; // take next unused color
+
+            foreach (var position in pieces)
+            {
+                PositionCount++; // increment counter of position attempts
+
+                if (!Board.Collision(position)) // if piece fits onto board
+                {
+                    Board.PlacePiece(position);
+                    CountSolutions(); // recurse
                     Board.RemovePiece(position); // remove piece from board and loop to try next position
                 }
             }

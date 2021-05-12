@@ -7,6 +7,41 @@ namespace Kanoodle.App
 {
     public static class GameFactory
     {
+        public static IEnumerable<Piece> Game208()
+        {
+            var toRet = new List<Piece>();
+
+            var h = new White().Shapes.ElementAt(0);
+            h.RootPosition = new Location(0, 0, 0);
+            h.ARotation = 0;
+            h.BRotation = 0;
+            h.GRotation = 0;
+            toRet.Add(h);
+
+            var b = new Yellow().Shapes.ElementAt(0);
+            b.RootPosition = new Location(2, 3, 0);
+            b.ARotation = 0;
+            b.BRotation = 2;
+            b.GRotation = 2;
+            toRet.Add(b);
+
+            var k = new Gray().Shapes.ElementAt(0);
+            k.RootPosition = new Location(4, 0, 0);
+            k.ARotation = 0;
+            k.BRotation = 2;
+            k.GRotation = 0;
+            toRet.Add(k);
+
+            var e = new Red().Shapes.ElementAt(0);
+            e.RootPosition = new Location(0, 3, 0);
+            e.ARotation = 2;
+            e.BRotation = 0;
+            e.GRotation = 1;
+            toRet.Add(e);
+
+            return toRet;
+        }
+
         public static IEnumerable<Piece> Game20()
         {
             var toRet = new List<Piece>();

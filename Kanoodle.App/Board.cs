@@ -35,6 +35,7 @@ namespace Kanoodle.App
                     _games.Add(205, GameFactory.Game205());
                     _games.Add(206, GameFactory.Game206());
                     _games.Add(207, GameFactory.Game207());
+                    _games.Add(208, GameFactory.Game208());
                 }
 
                 return _games;
