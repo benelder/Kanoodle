@@ -95,7 +95,7 @@ namespace Kanoodle.App
             e.GRotation = 1;
             toRet.Add(e);
 
-            var c = new DarkBlue().Shapes.ElementAt(0);
+            var c = new DarkBlue().Shapes.ElementAt(2);
             c.RootPosition = new Location(4, 0, 1);
             c.ARotation = 1;
             c.BRotation = 0;
