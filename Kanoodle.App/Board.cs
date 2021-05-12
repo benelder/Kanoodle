@@ -119,10 +119,10 @@ namespace Kanoodle.App
 
         private List<Piece> LoadPositionsForColor<T>() where T : Core.Color, new()
         {
-            var red = new T();
+            var color = new T();
             var toRet = new List<Piece>();
 
-            for (int i = 0; i < red.Shapes.Count(); i++)
+            for (int i = 0; i < color.Shapes.Count(); i++)
             {
                 for (int g = 0; g < 6; g++)
                 {
@@ -141,8 +141,8 @@ namespace Kanoodle.App
                                     if (rb == 1 && rg == 1) continue; // incompatible transformation
 
                                     _totalPositionsTested++;
-                                    red = new T();
-                                    var shape = red.Shapes.ElementAt(i);
+                                    color = new T();
+                                    var shape = color.Shapes.ElementAt(i);
 
                                     shape.RootPosition = new Location(a, b, g);
 
@@ -167,8 +167,8 @@ namespace Kanoodle.App
                                 {
 
                                     _totalPositionsTested++;
-                                    red = new T();
-                                    var shape = red.Shapes.ElementAt(i);
+                                    color = new T();
+                                    var shape = color.Shapes.ElementAt(i);
                                     shape.RootPosition = new Location(a, b, g);
                                     shape.ARotation = ra;
                                     shape.BRotation = 0;
