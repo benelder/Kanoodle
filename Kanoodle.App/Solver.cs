@@ -12,7 +12,6 @@ namespace Kanoodle.App
         public Board Board { get; set; }
         public int PositionCount { get; set; }
 
-
         public void Solve()
         {
             Solve(null);

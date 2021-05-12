@@ -278,5 +278,77 @@ namespace Kanoodle.App
 
             return toRet;
         }
+
+        public static IEnumerable<Piece> Game28()
+        {
+            var toRet = new List<Piece>();
+
+            var orange = new Orange().Shapes.ElementAt(0);
+            orange.RootPosition = new Location(1, 2, 0);
+            orange.GRotation = 3;
+            toRet.Add(orange);
+
+            var purple = new Purple().Shapes.ElementAt(0);
+            purple.RootPosition = new Location(3, 0, 0);
+            purple.GRotation = 1;
+            purple.BRotation = 2;
+            toRet.Add(purple);
+
+            var yellow = new Yellow().Shapes.ElementAt(0);
+            yellow.RootPosition = new Location(2, 3, 0);
+            yellow.GRotation = 3;
+            yellow.BRotation = 2;
+            toRet.Add(yellow);
+
+            var lime = new Lime().Shapes.ElementAt(0);
+            lime.RootPosition = new Location(2, 1, 0);
+            lime.GRotation = 1;
+            toRet.Add(lime);
+
+            var green = new Green().Shapes.ElementAt(1);
+            green.RootPosition = new Location(0, 2, 1);
+            green.GRotation = 1;
+            green.ARotation = 1;
+            toRet.Add(green);
+
+            var red = new Red().Shapes.ElementAt(0);
+            red.RootPosition = new Location(3, 1, 1);
+            red.GRotation = 2;
+            toRet.Add(red);
+
+            var pink = new Pink().Shapes.ElementAt(0);
+            pink.RootPosition = new Location(0, 0, 1);
+            toRet.Add(pink);
+
+            return toRet;
+        }
+
+        public static IEnumerable<Piece> Game205()
+        {
+            var toRet = new List<Piece>();
+
+            var a = new Lime().Shapes.ElementAt(0);
+            a.RootPosition = new Location(0, 0, 0);
+            a.ARotation = 0;
+            a.BRotation = 0;
+            a.GRotation = 0;
+            toRet.Add(a);
+
+            var b = new Yellow().Shapes.ElementAt(0);
+            b.RootPosition = new Location(5, 0, 0);
+            b.ARotation = 0;
+            b.BRotation = 0;
+            b.GRotation = 2;
+            toRet.Add(b);
+
+            var i = new Orange().Shapes.ElementAt(0);
+            i.RootPosition = new Location(0, 0, 2);
+            i.ARotation = 0;
+            i.BRotation = 1;
+            i.GRotation = 0;
+            toRet.Add(i);
+
+            return toRet;
+        }
     }
 }

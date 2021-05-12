@@ -49,6 +49,22 @@ namespace Kanoodle.App
                 Console.WriteLine(piece);
             }
 
+            var showCode = false;
+            while (!showCode)
+            {
+                Console.WriteLine("Would you like to generate code to add this build to the solution? (Y)es, (N)o");
+                var result = Console.ReadLine();
+                if (result == "Y")
+                {
+                    GenerateCode();   
+                    showCode = true;
+                }
+                else if (result == "N")
+                {
+                    showCode = true;
+                }
+            }
+
             var validInput = false;
             while (!validInput)
             {
@@ -66,6 +82,56 @@ namespace Kanoodle.App
             }
 
             return null;
+        }
+
+        private void GenerateCode(Piece piece)
+        {
+            var varName = piece.Character.ToString().ToLower();
+
+            Console.WriteLine($"    var {varName} = new {GetColorName(piece.Character)}().Shapes.ElementAt(0);");
+            Console.WriteLine($"    {varName}.RootPosition = new Location({piece.RootPosition.A}, {piece.RootPosition.B}, {piece.RootPosition.G});");
+            Console.WriteLine($"    {varName}.ARotation = {piece.ARotation};");
+            Console.WriteLine($"    {varName}.BRotation = {piece.BRotation};");
+            Console.WriteLine($"    {varName}.GRotation = {piece.GRotation};");
+            Console.WriteLine($"    toRet.Add({varName});");
+            Console.WriteLine();
+        }
+
+        private void GenerateCode()
+        {
+            Console.WriteLine("public static IEnumerable<Piece> GameX()");
+            Console.WriteLine("{");
+            Console.WriteLine("    var toRet = new List<Piece>();");
+            Console.WriteLine();
+
+            for (int i = 0; i < PositionsUsed.Count(); i++)
+            {
+                GenerateCode(PositionsUsed[i]);
+            }
+
+            Console.WriteLine("    return toRet;");
+            Console.WriteLine("}");
+            Console.WriteLine();
+        }
+
+        private string GetColorName(char c)
+        {
+            switch (c)
+            {
+                case 'A': return "Lime";
+                case 'B': return "Yellow";
+                case 'C': return "DarkBlue";
+                case 'D': return "LightBlue";
+                case 'E': return "Red";
+                case 'F': return "Pink";
+                case 'G': return "Green";
+                case 'H': return "White";
+                case 'I': return "Orange";
+                case 'J': return "Peach";
+                case 'K': return "Gray";
+                case 'L': return "Purple";
+                default: throw new Exception("Invlaid color char");
+            }
         }
 
         private void SelectPosition(char module)

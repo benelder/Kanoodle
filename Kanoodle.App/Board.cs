@@ -19,6 +19,7 @@ namespace Kanoodle.App
                 {
                     _games = new Dictionary<int, IEnumerable<Piece>>();
 
+                    _games.Add(28, GameFactory.Game28());
                     _games.Add(44, GameFactory.Game44());
                     _games.Add(45, GameFactory.Game45());
                     _games.Add(89, GameFactory.Game89());
@@ -30,6 +31,7 @@ namespace Kanoodle.App
                     _games.Add(202, GameFactory.Game202());
                     _games.Add(203, GameFactory.Game203());
                     _games.Add(204, GameFactory.Game204());
+                    _games.Add(205, GameFactory.Game205());
                 }
 
                 return _games;
@@ -304,6 +306,7 @@ namespace Kanoodle.App
             }
             catch (Exception)
             {
+                Console.WriteLine($"Error placing {piece.Name}");
                 RemovePiece(piece);
                 throw;
             }
