@@ -95,15 +95,15 @@ namespace Kanoodle.App
             RedPositions = LoadPositionsForColor<Red>();
             PinkPositions = LoadPositionsForColor<Pink>();
             PurplePositions = LoadPositionsForColor<Purple>();
-            DarkBluePositions = LoadPositionsForColor<DarkBlue>(); ;
-            LightBluePositions = LoadPositionsForColor<LightBlue>(); ;
-            WhitePositions = LoadPositionsForColor<White>(); ;
-            GrayPositions = LoadPositionsForColor<Gray>(); ;
-            LimePositions = LoadPositionsForColor<Lime>(); ;
-            OrangePositions = LoadPositionsForColor<Orange>(); ;
-            PeachPositions = LoadPositionsForColor<Peach>(); ;
-            YellowPositions = LoadPositionsForColor<Yellow>(); ;
-            GreenPositions = LoadPositionsForColor<Green>(); ;
+            DarkBluePositions = LoadPositionsForColor<DarkBlue>();
+            LightBluePositions = LoadPositionsForColor<LightBlue>();
+            WhitePositions = LoadPositionsForColor<White>();
+            GrayPositions = LoadPositionsForColor<Gray>();
+            LimePositions = LoadPositionsForColor<Lime>();
+            OrangePositions = LoadPositionsForColor<Orange>();
+            PeachPositions = LoadPositionsForColor<Peach>();
+            YellowPositions = LoadPositionsForColor<Yellow>();
+            GreenPositions = LoadPositionsForColor<Green>();
 
             Console.WriteLine("All possible positions initialized.");
             Console.WriteLine("Total of {0} positions tested.", _totalPositionsTested);
@@ -249,47 +249,12 @@ namespace Kanoodle.App
 
                     for (int a = 0; a < 6; a++)
                     {
-                        toPrint += FormatPiece(BoardMap[a, b, g]) + " ";
+                        toPrint += BoardMap[a, b, g].FormatForBoardPrint() + " ";
                     }
 
                     if (!string.IsNullOrWhiteSpace(toPrint.Trim())) AnsiConsole.MarkupLine(toPrint);
                 }
                 Console.WriteLine();
-            }
-        }
-
-        private string FormatPiece(char v)
-        {
-            switch (v)
-            {
-                case 'A':
-                    return $"[bold palegreen3]{v}[/]";
-                case 'B':
-                    return $"[bold yellow]{v}[/]";
-                case 'C':
-                    return $"[bold blue1]{v}[/]";
-                case 'D':
-                    return $"[bold steelblue1]{v}[/]";
-                case 'E':
-                    return $"[bold red]{v}[/]";
-                case 'F':
-                    return $"[bold fuchsia]{v}[/]";
-                case 'G':
-                    return $"[bold darkgreen]{v}[/]";
-                case 'H':
-                    return $"[bold white]{v}[/]";
-                case 'I':
-                    return $"[bold darkorange]{v}[/]";
-                case 'J':
-                    return $"[bold lightpink1]{v}[/]";
-                case 'K':
-                    return $"[bold grey70]{v}[/]";
-                case 'L':
-                    return $"[bold purple4]{v}[/]";
-                case '-':
-                    return $"[bold grey39]{v}[/]";
-                default:
-                    return " ";
             }
         }
 
