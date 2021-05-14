@@ -46,7 +46,7 @@ namespace Kanoodle.App
 
                     while (!gameLoaded)
                     {
-                        foreach (var item in Board.Games)
+                        foreach (var item in GameFactory.Games)
                         {
                             Console.WriteLine(item.Key);
                         }
@@ -65,7 +65,7 @@ namespace Kanoodle.App
 
                         try
                         {
-                            var game = Board.Games[gameNum];
+                            var game = GameFactory.Games[gameNum];
 
                             foreach (var piece in game)
                             {
@@ -204,7 +204,7 @@ namespace Kanoodle.App
                             var a = int.Parse(coords[0].ToString());
                             var b = int.Parse(coords[1].ToString());
                             var g = int.Parse(coords[2].ToString());
-                            var positions = Board.Colors[color]
+                            var positions = Board.PieceRegistry.Colors[color]
                                 .Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g) &&
                                 m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset)))
                                 .ToArray();
@@ -221,7 +221,7 @@ namespace Kanoodle.App
 
                 if (selection == "A") // cycle through ALL possible positions
                 {
-                    var positions = Board.Colors[color].Where(m => m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset))).ToArray();
+                    var positions = Board.PieceRegistry.Colors[color].Where(m => m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset))).ToArray();
                     var result = CycleThroughPositions(positions);
                     escape = result;
                 }

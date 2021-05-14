@@ -7,6 +7,40 @@ namespace Kanoodle.App
 {
     public static class GameFactory
     {
+        private static Dictionary<int, IEnumerable<Piece>> _games;
+        public static Dictionary<int, IEnumerable<Piece>> Games
+        {
+            get
+            {
+
+                if (_games == null)
+                {
+                    _games = new Dictionary<int, IEnumerable<Piece>>();
+
+                    _games.Add(20, Game20());
+                    _games.Add(28, Game28());
+                    _games.Add(44, Game44());
+                    _games.Add(45, Game45());
+                    _games.Add(89, Game89());
+                    _games.Add(95, Game95());
+                    _games.Add(96, Game96());
+                    _games.Add(99, Game99());
+                    _games.Add(100, Game100());
+                    _games.Add(201, Game201());
+                    _games.Add(202, Game202());
+                    _games.Add(203, Game203());
+                    _games.Add(204, Game204());
+                    _games.Add(205, Game205());
+                    _games.Add(206, Game206());
+                    _games.Add(207, Game207());
+                    _games.Add(208, Game208());
+                }
+
+                return _games;
+            }
+        }
+
+
         public static IEnumerable<Piece> Game208()
         {
             var toRet = new List<Piece>();

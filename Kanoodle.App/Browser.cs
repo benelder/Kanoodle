@@ -18,7 +18,7 @@ namespace Kanoodle.App
         public void Info()
         {
             Console.WriteLine("Statistics for valid shape configurations");
-            Board.WriteShapeStats();
+            Board.PieceRegistry.WriteShapeStats();
         }
 
         public void Browse()
@@ -72,7 +72,7 @@ namespace Kanoodle.App
                             var a = int.Parse(coords[0].ToString());
                             var b = int.Parse(coords[1].ToString());
                             var g = int.Parse(coords[2].ToString());
-                            var positions = Board.Colors[module].Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g)).ToArray();
+                            var positions = Board.PieceRegistry.Colors[module].Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g)).ToArray();
                             
                             BrowseThroughPositions(positions);
                         }
@@ -85,7 +85,7 @@ namespace Kanoodle.App
 
                 if (selection == "A") // cycle through ALL possible positions
                 {
-                    var positions = Board.Colors[module];
+                    var positions = Board.PieceRegistry.Colors[module];
                     BrowseThroughPositions(positions);
                 }
             }

@@ -83,7 +83,6 @@ namespace Kanoodle.App
             if (_solutionCount > 0)
             {
                 timer.Stop();
-                Board.Print();
                 Console.WriteLine($"Total of {_solutionCount} possible solutions found!");
                 Console.WriteLine("Time elapsed: {0}", timer.Elapsed);
             }
@@ -123,7 +122,7 @@ namespace Kanoodle.App
 
             while (!gameLoaded)
             {
-                foreach (var item in Board.Games)
+                foreach (var item in GameFactory.Games)
                 {
                     Console.WriteLine(item.Key);
                 }
@@ -179,7 +178,10 @@ namespace Kanoodle.App
                 return true;
             }
 
-            var pieces = unusedColors.First().Value; // take next unused color
+            // take next unused color ensuring it doesn't collide with a taken position
+            var pieces = unusedColors.First().Value
+                .Where(s => s.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset)))
+                .ToArray(); 
 
             foreach (var position in pieces)
             {
@@ -205,6 +207,8 @@ namespace Kanoodle.App
             if (unusedColors.Count() == 0) // all pieces have been placed! We've solved it!
             {
                 _solutionCount++;
+                Console.WriteLine($"SOLUTION {_solutionCount} FOUND");
+                Board.Print();
                 return true;
             }
 
