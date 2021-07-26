@@ -58,13 +58,14 @@ namespace Kanoodle.Core
                 {
                     var offset = Rotate(Nodes[i].Offset);
                     var lean = ApplyLean(offset);
-                    var transpose = TransposeToPlane(lean);
 
-                    var toAdd = new Node(RootPosition.A + transpose.A,
-                        RootPosition.B + transpose.B,
-                        RootPosition.G + transpose.G);
+                    var origin = new Location(RootPosition.A + lean.A,
+                        RootPosition.B + lean.B,
+                        RootPosition.G + lean.G);
 
-                    toRet.Add(toAdd);
+                    var transpose = TransposeToPlane(origin);
+                    
+                    toRet.Add(new Node(transpose.A, transpose.B, transpose.G));
                 }
                 _absolutePosition = toRet.ToArray();
             }
@@ -93,12 +94,12 @@ namespace Kanoodle.Core
 
             else if (Plane == 1)
             {
-                return new Location { A = 5 - (origin.A + origin.B), B = origin.A, G = origin.G };
+                return new Location { A = 5 - (origin.A + origin.B + origin.G), B = origin.A, G = origin.G };
             }
 
             else if (Plane == 2)
             {
-                return new Location { A = origin.B, B = 5 - (origin.A + origin.B), G = origin.G };
+                return new Location { A = origin.B, B = 5 - (origin.A + origin.B + origin.G), G = origin.G };
             }
 
             throw new Exception("Plane must be between 0 and 2");

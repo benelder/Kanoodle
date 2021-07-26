@@ -1,6 +1,6 @@
 ﻿namespace Kanoodle.Core
 {
-    public class Node
+    public struct Node
     {
         public Node(int a, int b, int g)
         {

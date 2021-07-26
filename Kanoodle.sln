@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kanoodle.App", "Kanoodle.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kanoodle.Core", "Kanoodle.Core\Kanoodle.Core.csproj", "{C4C385BB-C70D-454F-B50F-86BDC241E1E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanoodle.Core.Test", "Kanoodle.Core.Test\Kanoodle.Core.Test.csproj", "{A7807BDE-8BED-42CE-9979-46C9EE06CCF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C4C385BB-C70D-454F-B50F-86BDC241E1E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4C385BB-C70D-454F-B50F-86BDC241E1E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4C385BB-C70D-454F-B50F-86BDC241E1E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7807BDE-8BED-42CE-9979-46C9EE06CCF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7807BDE-8BED-42CE-9979-46C9EE06CCF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7807BDE-8BED-42CE-9979-46C9EE06CCF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7807BDE-8BED-42CE-9979-46C9EE06CCF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

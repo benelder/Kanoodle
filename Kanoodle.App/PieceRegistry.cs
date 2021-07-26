@@ -101,6 +101,7 @@ namespace Kanoodle.App
                                     var shape = color.Shapes.ElementAt(i);
 
                                     shape.RootPosition = new Location(a, b, g);
+                                    shape.Plane = p;
                                     shape.Rotation = rg;
                                     shape.Lean = false;
 
@@ -116,8 +117,14 @@ namespace Kanoodle.App
                                     toRet.Add(shape);
 
                                     // test lean orientation
-                                    _totalPositionsTested++; 
+                                    _totalPositionsTested++;
 
+                                    color = new T();
+                                    shape = color.Shapes.ElementAt(i);
+
+                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.Plane = p;
+                                    shape.Rotation = rg;
                                     shape.Lean = true;
 
                                     if (shape.IsOutOfBounds())
@@ -136,8 +143,6 @@ namespace Kanoodle.App
 
             return toRet;
         }
-
-
 
         public void WriteShapeStats()
         {
