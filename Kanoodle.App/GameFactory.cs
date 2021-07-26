@@ -22,7 +22,7 @@ namespace Kanoodle.App
                     //_games.Add(44, Game44());
                     //_games.Add(45, Game45());
                     //_games.Add(89, Game89());
-                    _games.Add(89, Game82());
+                    _games.Add(82, Game82());
                     //_games.Add(95, Game95());
                     //_games.Add(96, Game96());
                     //_games.Add(99, Game99());
