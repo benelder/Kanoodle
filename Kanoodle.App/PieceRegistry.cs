@@ -84,31 +84,28 @@ namespace Kanoodle.App
 
             for (int i = 0; i < color.Shapes.Count(); i++)
             {
-                for (int g = 0; g < 6; g++)
+                for (int g = 0; g < 6; g++) // for each root position
                 {
-                    for (int b = 0; b < 6; b++)
+                    for (int b = 0; b < 6; b++) // for each root position
                     {
-                        for (int a = 0; a < 6; a++)
+                        for (int a = 0; a < 6; a++) // for each root position
                         {
                             if (a + b + g > 5) // will be out of bounds
                                 continue;
 
-                            for (int rg = 0; rg < 6; rg++)
+                            for (int rg = 0; rg < 6; rg++) // for each rotated position
                             {
-                                // B rotations
-                                for (int rb = 0; rb < 3; rb++)
+                                for (int p = 0; p < 3; p++) // for each plane
                                 {
-                                    if (rb == 1 && rg == 1) continue; // incompatible transformation
-
-                                    _totalPositionsTested++;
                                     color = new T();
                                     var shape = color.Shapes.ElementAt(i);
 
                                     shape.RootPosition = new Location(a, b, g);
+                                    shape.Rotation = rg;
+                                    shape.Lean = false;
 
-                                    shape.ARotation = 0;
-                                    shape.BRotation = rb;
-                                    shape.GRotation = rg;
+                                    // test flat orientation
+                                    _totalPositionsTested++; 
 
                                     if (shape.IsOutOfBounds())
                                         continue;
@@ -117,19 +114,11 @@ namespace Kanoodle.App
                                         continue;
 
                                     toRet.Add(shape);
-                                }
 
-                                // A rotations
-                                for (int ra = 1; ra < 3; ra++) // ra starts at 1 because zero was already accounted for in the B rotation loop above
-                                {
+                                    // test lean orientation
+                                    _totalPositionsTested++; 
 
-                                    _totalPositionsTested++;
-                                    color = new T();
-                                    var shape = color.Shapes.ElementAt(i);
-                                    shape.RootPosition = new Location(a, b, g);
-                                    shape.ARotation = ra;
-                                    shape.BRotation = 0;
-                                    shape.GRotation = rg;
+                                    shape.Lean = true;
 
                                     if (shape.IsOutOfBounds())
                                         continue;

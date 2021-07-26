@@ -6,12 +6,13 @@ namespace Kanoodle.Core
 {
     public class Piece
     {
-        public Piece(Location rootPosition, Node[] nodes, string name, char character)
+        public Piece(Location rootPosition, Node[] nodes, string name, char character) : this(rootPosition, 0, 0, false, nodes, name, character) { }
+
+        public Piece(Location rootPosition, int rotation, int plane, bool lean, Node[] nodes, string name, char character)
         {
             RootPosition = rootPosition;
-            GRotation = 0;
-            ARotation = 0;
-            BRotation = 0;
+            Rotation = rotation;
+            Plane = plane;
             Nodes = nodes;
             Name = name;
             Character = character;
@@ -19,7 +20,7 @@ namespace Kanoodle.Core
 
         public override string ToString()
         {
-            return $"{Name} / {RootPosition} / G:{GRotation} A:{ARotation} B:{BRotation}";
+            return $"{Name} / {RootPosition} / P:{Plane} R:{Rotation}";
         }
 
         public Piece(Node[] nodes, string name, char character) : this(new Location(0, 0, 0), nodes, name, character) { }
@@ -28,18 +29,22 @@ namespace Kanoodle.Core
         public char Character { get; set; }
 
         private Location _rootPosition;
-        public Location RootPosition { get { return _rootPosition; } set { _absolutePosition = null; _rootPosition = value;  } }
-        private int _gRotation;
-        public int GRotation { get { return _gRotation; } set { _absolutePosition = null; _gRotation = value; } }
-        private int _aRotation;
-        public int ARotation { get { return _aRotation; } set { _absolutePosition = null; _aRotation = value; } }
-        private int _bRotation;
-        public int BRotation { get { return _bRotation; } set { _absolutePosition = null; _bRotation = value; } }
+        public Location RootPosition { get { return _rootPosition; } set { _absolutePosition = null; _rootPosition = value; } }
+
+        public int _plane { get; set; }
+        public int Plane { get { return _plane; } set { _absolutePosition = null; _plane = value; } }
+
+        public bool _lean { get; set; }
+        public bool Lean { get { return _lean; } set { _absolutePosition = null; _lean = value; } }
+
+        private int _rotation;
+        public int Rotation { get { return _rotation; } set { _absolutePosition = null; _rotation = value; } }
+
         public Node[] Nodes { get; set; }
 
         public string AbsId()
         {
-            return $"{Character}{RootPosition.A}{RootPosition.B}{RootPosition.G}{ARotation}{BRotation}{GRotation}";
+            return $"{Character}{RootPosition.A}{RootPosition.B}{RootPosition.G}{Plane}{Rotation}";
         }
 
         private Node[] _absolutePosition;
@@ -51,16 +56,13 @@ namespace Kanoodle.Core
 
                 for (int i = 0; i < Nodes.Length; i++)
                 {
-                    if (BRotation != 0 && ARotation != 0)
-                        throw new Exception("invalid rotation sequence. either A or B must be zero");
-                    
-                    var offB = RotateB(Nodes[i].Offset);
-                    var offA = RotateA(offB);
-                    var offset = RotateG(offA);
+                    var offset = Rotate(Nodes[i].Offset);
+                    var lean = ApplyLean(offset);
+                    var transpose = TransposeToPlane(lean);
 
-                    var toAdd = new Node(RootPosition.A + offset.A,
-                        RootPosition.B + offset.B,
-                        RootPosition.G + offset.G);
+                    var toAdd = new Node(RootPosition.A + transpose.A,
+                        RootPosition.B + transpose.B,
+                        RootPosition.G + transpose.G);
 
                     toRet.Add(toAdd);
                 }
@@ -68,6 +70,38 @@ namespace Kanoodle.Core
             }
 
             return _absolutePosition;
+        }
+
+        private Location ApplyLean(Location offset)
+        {
+            if (Lean)
+            {
+                return new Location { A = offset.A, B = 0, G = offset.B };
+            }
+            else
+            {
+                return offset;
+            }
+        }
+
+        private Location TransposeToPlane(Location origin)
+        {
+            if (Plane == 0)
+            {
+                return origin; // transposition is based on Plane 0, so no change if Plane == 0
+            }
+
+            else if (Plane == 1)
+            {
+                return new Location { A = 5 - (origin.A + origin.B), B = origin.A, G = origin.G };
+            }
+
+            else if (Plane == 2)
+            {
+                return new Location { A = origin.B, B = 5 - (origin.A + origin.B), G = origin.G };
+            }
+
+            throw new Exception("Plane must be between 0 and 2");
         }
 
         public bool IsOutOfBounds()
@@ -88,64 +122,27 @@ namespace Kanoodle.Core
             return false;
         }
 
-        private Location RotateG(Location location) // todo: test all this logic extensively
+        private Location Rotate(Location location) // todo: test all this logic extensively
         {
-            if (GRotation == 0)
+            if (Rotation == 0)
                 return location;
 
-            if (GRotation == 1)
-                    return new Location { A = -location.B, B = location.A + location.B, G = location.G };
-            
-            if (GRotation == 2)
+            if (Rotation == 1)
+                return new Location { A = -location.B, B = location.A + location.B, G = location.G };
+
+            if (Rotation == 2)
                 return new Location { A = -(location.A + location.B + location.G), B = location.A, G = location.G };
 
-            if (GRotation == 3)
+            if (Rotation == 3)
                 return new Location { A = -location.A, B = -(location.B + location.G), G = location.G };
 
-            if (GRotation == 4)
-                return new Location { A = location.B, B = -(location.A + location.B+ location.G), G = location.G };
+            if (Rotation == 4)
+                return new Location { A = location.B, B = -(location.A + location.B + location.G), G = location.G };
 
-            if (GRotation == 5)
+            if (Rotation == 5)
                 return new Location { A = location.A + location.B, B = -(location.A + location.G), G = location.G };
 
             throw new Exception("invalid GRotation");
-        }
-
-        private Location RotateA(Location location)
-        {
-            if (ARotation == 0)
-                return location;
-
-            if (ARotation == 1)
-                return new Location { A = location.A, B = 0, G = location.B };
-
-            // not valid if we rotate G -> A , since G will allways be zero
-            //if (ARotation == 1)
-            //    return new Location { A = location.A, B = -location.G, G = location.B + location.G };
-
-            if (ARotation == 2)
-                return new Location { A = location.A + location.B, B = -location.B, G = 0 };
-
-            // not valid if we rotate G -> A , since G will allways be zero
-            //if (ARotation == 1)
-            //    return new Location { A = location.A + location.B + location.G, B = -location.B, G = -(location.B + location.G) };
-
-
-            throw new Exception("invalid ARotation");
-        }
-
-        private Location RotateB(Location location)
-        {
-            if (BRotation == 0)
-                return location;
-
-            if (BRotation == 1)
-                return new Location { A = 0, B = location.B, G = location.A };
-
-            if (BRotation == 2)
-                return new Location { A = -location.A, B = location.B + location.A, G = 0 };
-
-            throw new Exception("invalid BRotation");
         }
 
         public bool IsInSamePositionAs(Piece piece)
