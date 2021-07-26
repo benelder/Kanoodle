@@ -110,7 +110,7 @@ namespace Kanoodle.App
                 }
                 else if (next.Key == ConsoleKey.LeftArrow)
                 {
-                    if (i > 1)
+                    if (i > 0)
                         i -= 2;
                 }
             }
