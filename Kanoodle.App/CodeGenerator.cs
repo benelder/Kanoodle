@@ -15,7 +15,7 @@ namespace Kanoodle.App
             Console.WriteLine($"    var {varName} = new {GetColorName(piece.Character)}().Shapes.ElementAt({piece.Name});");
             Console.WriteLine($"    {varName}.RootPosition = new Location({piece.RootPosition.A}, {piece.RootPosition.B}, {piece.RootPosition.G});");
             Console.WriteLine($"    {varName}.Plane = {piece.Plane};");
-            Console.WriteLine($"    {varName}.Lean = {piece.Lean};");
+            Console.WriteLine($"    {varName}.Lean = {piece.Lean.ToString().ToLower()};");
             Console.WriteLine($"    {varName}.Rotation = {piece.Rotation};");
             Console.WriteLine($"    toRet.Add({varName});");
             Console.WriteLine();

@@ -22,6 +22,7 @@ namespace Kanoodle.App
                     //_games.Add(44, Game44());
                     //_games.Add(45, Game45());
                     //_games.Add(89, Game89());
+                    _games.Add(89, Game82());
                     //_games.Add(95, Game95());
                     //_games.Add(96, Game96());
                     //_games.Add(99, Game99());
@@ -566,5 +567,33 @@ namespace Kanoodle.App
 
         //    return toRet;
         //}
+
+        public static IEnumerable<Piece> Game82()
+        {
+            var toRet = new List<Piece>();
+
+            var h = new White().Shapes.ElementAt(0);
+            h.RootPosition = new Location(2, 1, 0);
+            h.Plane = 1;
+            h.Lean = false;
+            h.Rotation = 1;
+            toRet.Add(h);
+
+            var e = new Red().Shapes.ElementAt(0);
+            e.RootPosition = new Location(4, 1, 0);
+            e.Plane = 1;
+            e.Lean = true;
+            e.Rotation = 2;
+            toRet.Add(e);
+
+            var c = new DarkBlue().Shapes.ElementAt(0);
+            c.RootPosition = new Location(1, 0, 2);
+            c.Plane = 1;
+            c.Lean = true;
+            c.Rotation = 5;
+            toRet.Add(c);
+
+            return toRet;
+        }
     }
 }

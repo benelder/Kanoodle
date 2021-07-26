@@ -108,14 +108,14 @@ namespace Kanoodle.App
                                     // test flat orientation
                                     _totalPositionsTested++; 
 
-                                    if (shape.IsOutOfBounds())
-                                        continue;
-
-                                    if (toRet.Any(m => m.IsInSamePositionAs(shape)))
-                                        continue;
-
-                                    toRet.Add(shape);
-
+                                    if (!shape.IsOutOfBounds())
+                                    {
+                                        if (!toRet.Any(m => m.IsInSamePositionAs(shape)))
+                                        {
+                                            toRet.Add(shape);
+                                        }
+                                    }
+                                        
                                     // test lean orientation
                                     _totalPositionsTested++;
 
@@ -127,13 +127,13 @@ namespace Kanoodle.App
                                     shape.Rotation = rg;
                                     shape.Lean = true;
 
-                                    if (shape.IsOutOfBounds())
-                                        continue;
-
-                                    if (toRet.Any(m => m.IsInSamePositionAs(shape)))
-                                        continue;
-
-                                    toRet.Add(shape);
+                                    if (!shape.IsOutOfBounds())
+                                    {
+                                        if (!toRet.Any(m => m.IsInSamePositionAs(shape)))
+                                        {
+                                            toRet.Add(shape);
+                                        }
+                                    }
                                 }
                             }
                         }

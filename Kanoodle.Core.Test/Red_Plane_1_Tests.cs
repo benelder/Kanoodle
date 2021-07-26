@@ -77,6 +77,7 @@ namespace Kanoodle.Core.Test
             Assert.Contains(new Node(1, 2, 1), result);
             Assert.Contains(new Node(0, 3, 1), result);
             Assert.Contains(new Node(0, 2, 2), result);
+            Assert.False(piece.IsOutOfBounds());
         }
     }
 }
