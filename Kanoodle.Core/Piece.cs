@@ -44,7 +44,7 @@ namespace Kanoodle.Core
 
         public string AbsId()
         {
-            return $"{Character}{RootPosition.A}{RootPosition.B}{RootPosition.G}{Plane}{Rotation}";
+            return $"{Character}{RootPosition.X}{RootPosition.Y}{RootPosition.Z}{Plane}{Rotation}";
         }
 
         private Node[] _absolutePosition;
@@ -59,13 +59,13 @@ namespace Kanoodle.Core
                     var offset = Rotate(Nodes[i].Offset);
                     var lean = ApplyLean(offset);
 
-                    var origin = new Location(RootPosition.A + lean.A,
-                        RootPosition.B + lean.B,
-                        RootPosition.G + lean.G);
+                    var origin = new Location(RootPosition.X + lean.X,
+                        RootPosition.Y + lean.Y,
+                        RootPosition.Z + lean.Z);
 
                     var transpose = TransposeToPlane(origin);
                     
-                    toRet.Add(new Node(transpose.A, transpose.B, transpose.G));
+                    toRet.Add(new Node(transpose.X, transpose.Y, transpose.Z));
                 }
                 _absolutePosition = toRet.ToArray();
             }
@@ -77,7 +77,7 @@ namespace Kanoodle.Core
         {
             if (Lean)
             {
-                return new Location { A = offset.A, B = 0, G = offset.B };
+                return new Location { X = offset.X, Y = 0, Z = offset.Y };
             }
             else
             {
@@ -94,12 +94,12 @@ namespace Kanoodle.Core
 
             else if (Plane == 1)
             {
-                return new Location { A = 5 - (origin.A + origin.B + origin.G), B = origin.A, G = origin.G };
+                return new Location { X = 5 - (origin.X + origin.Y + origin.Z), Y = origin.X, Z = origin.Z };
             }
 
             else if (Plane == 2)
             {
-                return new Location { A = origin.B, B = 5 - (origin.A + origin.B + origin.G), G = origin.G };
+                return new Location { X = origin.Y, Y = 5 - (origin.X + origin.Y + origin.Z), Z = origin.Z };
             }
 
             throw new Exception("Plane must be between 0 and 2");
@@ -108,16 +108,16 @@ namespace Kanoodle.Core
         public bool IsOutOfBounds()
         {
             var abs = GetAbsolutePosition();
-            if (abs.Any(m => m.Offset.G < 0))
+            if (abs.Any(m => m.Offset.Z < 0))
                 return true;
 
-            if (abs.Any(m => m.Offset.A < 0))
+            if (abs.Any(m => m.Offset.X < 0))
                 return true;
 
-            if (abs.Any(m => m.Offset.B < 0))
+            if (abs.Any(m => m.Offset.Y < 0))
                 return true;
 
-            if (abs.Any(m => m.Offset.A + m.Offset.B + m.Offset.G > 5))
+            if (abs.Any(m => m.Offset.X + m.Offset.Y + m.Offset.Z > 5))
                 return true;
 
             return false;
@@ -129,19 +129,19 @@ namespace Kanoodle.Core
                 return location;
 
             if (Rotation == 1)
-                return new Location { A = -location.B, B = location.A + location.B, G = location.G };
+                return new Location { X = -location.Y, Y = location.X + location.Y, Z = location.Z };
 
             if (Rotation == 2)
-                return new Location { A = -(location.A + location.B + location.G), B = location.A, G = location.G };
+                return new Location { X = -(location.X + location.Y + location.Z), Y = location.X, Z = location.Z };
 
             if (Rotation == 3)
-                return new Location { A = -location.A, B = -(location.B + location.G), G = location.G };
+                return new Location { X = -location.X, Y = -(location.Y + location.Z), Z = location.Z };
 
             if (Rotation == 4)
-                return new Location { A = location.B, B = -(location.A + location.B + location.G), G = location.G };
+                return new Location { X = location.Y, Y = -(location.X + location.Y + location.Z), Z = location.Z };
 
             if (Rotation == 5)
-                return new Location { A = location.A + location.B, B = -(location.A + location.G), G = location.G };
+                return new Location { X = location.X + location.Y, Y = -(location.X + location.Z), Z = location.Z };
 
             throw new Exception("invalid GRotation");
         }

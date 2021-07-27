@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Kanoodle.Core;
 using System.Linq;
-using System.Text;
 
 namespace Kanoodle.App
 {
@@ -69,10 +68,10 @@ namespace Kanoodle.App
                             if (coords == "Q")
                                 break;
 
-                            var a = int.Parse(coords[0].ToString());
-                            var b = int.Parse(coords[1].ToString());
-                            var g = int.Parse(coords[2].ToString());
-                            var positions = Board.PieceRegistry.Colors[module].Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g)).ToArray();
+                            var x = int.Parse(coords[0].ToString());
+                            var y = int.Parse(coords[1].ToString());
+                            var z = int.Parse(coords[2].ToString());
+                            var positions = Board.PieceRegistry.Colors[module].Where(m => m.GetAbsolutePosition().Any(n => n.Offset.X == x && n.Offset.Y == y && n.Offset.Z == z)).ToArray();
                             
                             BrowseThroughPositions(positions);
                         }

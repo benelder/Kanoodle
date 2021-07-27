@@ -2,18 +2,18 @@
 {
     public struct Location
     {
-        public Location(int a, int b, int g)
+        public Location(int x, int y, int z)
         {
-            A = a;
-            B = b;
-            G = g;
+            X = x;
+            Y = y;
+            Z = z;
         }
-        public int A { get; set; }
-        public int B { get; set; }
-        public int G { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Z { get; set; }
         public override string ToString()
         {
-            return $"{{{A}, {B}, {G}}}";
+            return $"{{{X}, {Y}, {Z}}}";
         }
     }
 }

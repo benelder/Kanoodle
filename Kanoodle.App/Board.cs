@@ -62,25 +62,25 @@ namespace Kanoodle.App
 
         public void Print()
         {
-            for (int g = 5; g >= 0; g--)
+            for (int z = 5; z >= 0; z--)
             {
-                for (int b = 5; b >= 0; b--)
+                for (int y = 5; y >= 0; y--)
                 {
                     var toPrint = "    ";
 
-                    for (int i = 0; i < b; i++)
+                    for (int i = 0; i < y; i++)
                     {
                         toPrint += " ";
                     }
 
-                    for (int i = 0; i < g; i++)
+                    for (int i = 0; i < z; i++)
                     {
                         toPrint += " ";
                     }
 
-                    for (int a = 0; a < 6; a++)
+                    for (int x = 0; x < 6; x++)
                     {
-                        toPrint += BoardMap[a, b, g].FormatForBoardPrint() + " ";
+                        toPrint += BoardMap[x, y, z].FormatForBoardPrint() + " ";
                     }
 
                     if (!string.IsNullOrWhiteSpace(toPrint.Trim())) AnsiConsole.MarkupLine(toPrint);
@@ -96,11 +96,11 @@ namespace Kanoodle.App
                 var abs = piece.GetAbsolutePosition();
                 for (int i = 0; i < abs.Length; i++)
                 {
-                    var mapNode = BoardMap[abs[i].Offset.A, abs[i].Offset.B, abs[i].Offset.G];
+                    var mapNode = BoardMap[abs[i].Offset.X, abs[i].Offset.Y, abs[i].Offset.Z];
                     if (mapNode != '-')
                         throw new Exception("Attempt to add piece in used location");
 
-                    BoardMap[abs[i].Offset.A, abs[i].Offset.B, abs[i].Offset.G] = piece.Character;
+                    BoardMap[abs[i].Offset.X, abs[i].Offset.Y, abs[i].Offset.Z] = piece.Character;
                     UsedLocations.Add(abs[i].Offset);
                 }
                 PiecesUsed.Add(piece.Character);
@@ -118,7 +118,7 @@ namespace Kanoodle.App
             var abs = piece.GetAbsolutePosition();
             for (int i = 0; i < abs.Length; i++)
             {
-                BoardMap[abs[i].Offset.A, abs[i].Offset.B, abs[i].Offset.G] = '-';
+                BoardMap[abs[i].Offset.X, abs[i].Offset.Y, abs[i].Offset.Z] = '-';
                 UsedLocations.Remove(abs[i].Offset);
             }
             PiecesUsed.Remove(piece.Character);
@@ -155,7 +155,7 @@ namespace Kanoodle.App
             var toRet = false;
             for (int i = 0; i < abs.Length; i++)
             {
-                var mapNode = BoardMap[abs[i].Offset.A, abs[i].Offset.B, abs[i].Offset.G];
+                var mapNode = BoardMap[abs[i].Offset.X, abs[i].Offset.Y, abs[i].Offset.Z];
                 if (mapNode != '-')
                 {
                     toRet = true;

@@ -2,9 +2,9 @@
 {
     public struct Node
     {
-        public Node(int a, int b, int g)
+        public Node(int x, int y, int z)
         {
-            Offset = new Location() { A = a, B = b, G = g };
+            Offset = new Location() { X = x, Y = y, Z = z };
         }
 
         public Location Offset { get; set; }

@@ -13,7 +13,7 @@ namespace Kanoodle.App
             var varName = piece.Character.ToString().ToLower();
 
             Console.WriteLine($"    var {varName} = new {GetColorName(piece.Character)}().Shapes.ElementAt({piece.Name});");
-            Console.WriteLine($"    {varName}.RootPosition = new Location({piece.RootPosition.A}, {piece.RootPosition.B}, {piece.RootPosition.G});");
+            Console.WriteLine($"    {varName}.RootPosition = new Location({piece.RootPosition.X}, {piece.RootPosition.Y}, {piece.RootPosition.Z});");
             Console.WriteLine($"    {varName}.Plane = {piece.Plane};");
             Console.WriteLine($"    {varName}.Lean = {piece.Lean.ToString().ToLower()};");
             Console.WriteLine($"    {varName}.Rotation = {piece.Rotation};");

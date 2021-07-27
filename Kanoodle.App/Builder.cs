@@ -195,17 +195,17 @@ namespace Kanoodle.App
                     {
                         try
                         {
-                            Console.WriteLine("Filter to positions that include a specific location. Enter the three-digit position as ABG or Q to quit");
+                            Console.WriteLine("Filter to positions that include a specific location. Enter the three-digit position as XYZ or Q to quit");
                             var coords = Console.ReadLine();
 
                             if (coords == "Q")
                                 break;
 
-                            var a = int.Parse(coords[0].ToString());
-                            var b = int.Parse(coords[1].ToString());
-                            var g = int.Parse(coords[2].ToString());
+                            var x = int.Parse(coords[0].ToString());
+                            var y = int.Parse(coords[1].ToString());
+                            var z = int.Parse(coords[2].ToString());
                             var positions = Board.PieceRegistry.Colors[color]
-                                .Where(m => m.GetAbsolutePosition().Any(n => n.Offset.A == a && n.Offset.B == b && n.Offset.G == g) &&
+                                .Where(m => m.GetAbsolutePosition().Any(n => n.Offset.X == x && n.Offset.Y == y && n.Offset.Z == z) &&
                                 m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset)))
                                 .ToArray();
                             var result = CycleThroughPositions(positions);

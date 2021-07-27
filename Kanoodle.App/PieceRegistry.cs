@@ -84,25 +84,25 @@ namespace Kanoodle.App
 
             for (int i = 0; i < color.Shapes.Count(); i++)
             {
-                for (int g = 0; g < 6; g++) // for each root position
+                for (int z = 0; z < 6; z++) // for each root position
                 {
-                    for (int b = 0; b < 6; b++) // for each root position
+                    for (int y = 0; y < 6; y++) // for each root position
                     {
-                        for (int a = 0; a < 6; a++) // for each root position
+                        for (int x = 0; x < 6; x++) // for each root position
                         {
-                            if (a + b + g > 5) // will be out of bounds
+                            if (x + y + z > 5) // will be out of bounds
                                 continue;
 
-                            for (int rg = 0; rg < 6; rg++) // for each rotated position
+                            for (int r = 0; r < 6; r++) // for each rotated position
                             {
                                 for (int p = 0; p < 3; p++) // for each plane
                                 {
                                     color = new T();
                                     var shape = color.Shapes.ElementAt(i);
 
-                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.RootPosition = new Location(x, y, z);
                                     shape.Plane = p;
-                                    shape.Rotation = rg;
+                                    shape.Rotation = r;
                                     shape.Lean = false;
 
                                     // test flat orientation
@@ -122,9 +122,9 @@ namespace Kanoodle.App
                                     color = new T();
                                     shape = color.Shapes.ElementAt(i);
 
-                                    shape.RootPosition = new Location(a, b, g);
+                                    shape.RootPosition = new Location(x, y, z);
                                     shape.Plane = p;
-                                    shape.Rotation = rg;
+                                    shape.Rotation = r;
                                     shape.Lean = true;
 
                                     if (!shape.IsOutOfBounds())
