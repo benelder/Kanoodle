@@ -7,7 +7,7 @@ Start here to learn more about Kanoodle and the inner-workings of this Solver ap
 
 Learn about the features of the Solver
 
-[Walkthrough of Kanoodle Extreme Console App Functionality](https://github.com/benelder/Kanoodle/wiki/Kanoodle-Extreme-Solver-Wiki)
+[Walkthrough of Kanoodle Extreme Console App Functionality](https://github.com/benelder/Kanoodle/wiki/Kanoodle-Extreme-Solver-User-Guide)
 
 
 Or, jump right in..
