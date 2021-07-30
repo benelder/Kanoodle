@@ -3,7 +3,7 @@ Welcome to the Kanoodle Extreme Solver
 
 Start here to learn more about Kanoodle and the inner-workings of this Solver app
 
-[Background on development of the Kanoodle Extreme Solver](https://github.com/benelder/Kanoodle/wiki/Kanoodle-Extreme-Solver-Wiki)
+[Background on development of the Kanoodle Extreme Solver](https://github.com/benelder/Kanoodle/wiki/Kanoodle-Extreme-Solver-Background)
 
 Learn about the features of the Solver
 
