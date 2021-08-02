@@ -127,26 +127,20 @@ namespace Kanoodle.Core
         {
             // rotation is performed first, in the order of placement operations
             // location input is the Node offset, relative to Root
-
             if (Rotation == 0)
                 return location;
 
-            if (Rotation == 1)
-                return new Location { X = -location.Y, Y = location.X + location.Y, Z = location.Z };
+            if (Rotation > 5)
+                throw new Exception("Invalid rotation");
 
-            if (Rotation == 2)
-                return new Location { X = -(location.X + location.Y), Y = location.X, Z = location.Z };
+            var toRet = new Location(location.X, location.Y, location.Z);
 
-            if (Rotation == 3)
-                return new Location { X = -location.X, Y = -(location.Y), Z = location.Z };
+            for (int i = 0; i < Rotation; i++)
+            {
+                toRet = new Location(-toRet.Y, toRet.X + toRet.Y, toRet.Z);
+            }
 
-            if (Rotation == 4)
-                return new Location { X = location.Y, Y = -(location.X + location.Y), Z = location.Z };
-
-            if (Rotation == 5)
-                return new Location { X = location.X + location.Y, Y = -(location.X), Z = location.Z };
-
-            throw new Exception("invalid Rotation");
+            return toRet;
         }
 
         public bool IsInSamePositionAs(Piece piece)

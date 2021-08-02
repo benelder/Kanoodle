@@ -62,7 +62,7 @@ namespace Kanoodle.App
                     {
                         try
                         {
-                            Console.WriteLine("Filter to positions that include a specific location. Enter the three-digit position as ABG or Q to quit");
+                            Console.WriteLine("Filter to positions that include a specific location. Enter the three-digit position as XYZ or Q to quit");
                             var coords = Console.ReadLine();
 
                             if (coords == "Q")
