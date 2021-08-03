@@ -102,7 +102,6 @@ namespace Kanoodle.App
                                 piece.Rotation = r;
                                 piece.Lean = false;
                                 piece.MirrorX = false;
-                                piece.MirrorY = false;
 
                                 // test flat orientation
                                 _totalPositionsTested++;
@@ -125,7 +124,6 @@ namespace Kanoodle.App
                                 piece.Rotation = r;
                                 piece.Lean = true;
                                 piece.MirrorX = false;
-                                piece.MirrorY = false;
 
                                 if (!piece.IsOutOfBounds())
                                 {
@@ -144,7 +142,6 @@ namespace Kanoodle.App
                                 piece.Rotation = r;
                                 piece.Lean = false;
                                 piece.MirrorX = true;
-                                piece.MirrorY = false;
 
                                 // test flat orientation
                                 _totalPositionsTested++;
@@ -167,48 +164,6 @@ namespace Kanoodle.App
                                 piece.Rotation = r;
                                 piece.Lean = true;
                                 piece.MirrorX = true;
-                                piece.MirrorY = false;
-
-                                if (!piece.IsOutOfBounds())
-                                {
-                                    if (!toRet.Any(m => m.IsInSamePositionAs(piece)))
-                                    {
-                                        toRet.Add(piece);
-                                    }
-                                }
-
-                                // mirror y
-                                piece = new T();
-
-                                piece.RootPosition = new Location(x, y, z);
-                                piece.Plane = p;
-                                piece.Rotation = r;
-                                piece.Lean = false;
-                                piece.MirrorY = true;
-                                piece.MirrorX = false;
-
-                                // test flat orientation
-                                _totalPositionsTested++;
-
-                                if (!piece.IsOutOfBounds())
-                                {
-                                    if (!toRet.Any(m => m.IsInSamePositionAs(piece)))
-                                    {
-                                        toRet.Add(piece);
-                                    }
-                                }
-
-                                // test lean orientation
-                                _totalPositionsTested++;
-
-                                piece = new T();
-
-                                piece.RootPosition = new Location(x, y, z);
-                                piece.Plane = p;
-                                piece.Rotation = r;
-                                piece.Lean = true;
-                                piece.MirrorY = true;
-                                piece.MirrorX = false;
 
                                 if (!piece.IsOutOfBounds())
                                 {

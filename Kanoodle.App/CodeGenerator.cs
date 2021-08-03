@@ -18,7 +18,6 @@ namespace Kanoodle.App
             Console.WriteLine($"    {varName}.Lean = {piece.Lean.ToString().ToLower()};");
             Console.WriteLine($"    {varName}.Rotation = {piece.Rotation};");
             Console.WriteLine($"    {varName}.MirrorX = {piece.MirrorX};");
-            Console.WriteLine($"    {varName}.MirrorY = {piece.MirrorY};");
             Console.WriteLine($"    toRet.Add({varName});");
             Console.WriteLine();
         }
