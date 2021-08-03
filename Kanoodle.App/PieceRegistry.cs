@@ -95,13 +95,14 @@ namespace Kanoodle.App
                         {
                             for (int p = 0; p < 3; p++) // for each plane
                             {
-                                var piece = new T();
-
-                                piece.RootPosition = new Location(x, y, z);
-                                piece.Plane = p;
-                                piece.Rotation = r;
-                                piece.Lean = false;
-                                piece.MirrorX = false;
+                                var piece = new T
+                                {
+                                    RootPosition = new Location(x, y, z),
+                                    Plane = p,
+                                    Rotation = r,
+                                    Lean = false,
+                                    MirrorX = false
+                                };
 
                                 // test flat orientation
                                 _totalPositionsTested++;
@@ -117,13 +118,14 @@ namespace Kanoodle.App
                                 // test lean orientation
                                 _totalPositionsTested++;
 
-                                piece = new T();
-
-                                piece.RootPosition = new Location(x, y, z);
-                                piece.Plane = p;
-                                piece.Rotation = r;
-                                piece.Lean = true;
-                                piece.MirrorX = false;
+                                piece = new T
+                                {
+                                    RootPosition = new Location(x, y, z),
+                                    Plane = p,
+                                    Rotation = r,
+                                    Lean = true,
+                                    MirrorX = false
+                                };
 
                                 if (!piece.IsOutOfBounds())
                                 {
@@ -135,13 +137,14 @@ namespace Kanoodle.App
 
 
                                 // flip x
-                                piece = new T();
-
-                                piece.RootPosition = new Location(x, y, z);
-                                piece.Plane = p;
-                                piece.Rotation = r;
-                                piece.Lean = false;
-                                piece.MirrorX = true;
+                                piece = new T
+                                {
+                                    RootPosition = new Location(x, y, z),
+                                    Plane = p,
+                                    Rotation = r,
+                                    Lean = false,
+                                    MirrorX = true
+                                };
 
                                 // test flat orientation
                                 _totalPositionsTested++;
@@ -157,13 +160,14 @@ namespace Kanoodle.App
                                 // test lean orientation
                                 _totalPositionsTested++;
 
-                                piece = new T();
-
-                                piece.RootPosition = new Location(x, y, z);
-                                piece.Plane = p;
-                                piece.Rotation = r;
-                                piece.Lean = true;
-                                piece.MirrorX = true;
+                                piece = new T
+                                {
+                                    RootPosition = new Location(x, y, z),
+                                    Plane = p,
+                                    Rotation = r,
+                                    Lean = true,
+                                    MirrorX = true
+                                };
 
                                 if (!piece.IsOutOfBounds())
                                 {
