@@ -1,19 +1,16 @@
 ﻿namespace Kanoodle.Core
 {
-    public class Red : Color
+    public class Red : Piece
     {
-        public Red()
-        {
-            Shapes = new Piece[] {
-                new Piece(new Node[] {
+        public Red() : 
+            base(new Node[] {
                     new Node(0,0,0),
                     new Node(1,0,0),
                     new Node(2,0,0),
                     new Node(0,1,0),
                     new Node(1,1,0)
-                }, "Red 0", 'E')
-            };
-        }
+                }, "Red", 'E')
+        { }
     }
 }
 

@@ -12,8 +12,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Red_410_0_0_0()
         {
-            var color = new Red();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Red();
             piece.RootPosition = new Location(4, 1, 0);
             piece.Plane = 0;
             piece.Rotation = 0;
@@ -30,8 +29,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Red_410_0_2_0()
         {
-            var color = new Red();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Red();
             piece.RootPosition = new Location(4, 1, 0);
             piece.Plane = 0;
             piece.Rotation = 2;
@@ -48,8 +46,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Red_410_0_2_1()
         {
-            var color = new Red();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Red();
             piece.RootPosition = new Location(4, 1, 0);
             piece.Plane = 0;
             piece.Rotation = 2;
@@ -65,8 +62,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Red_410_1_2_1()
         {
-            var color = new Red();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Red();
             piece.RootPosition = new Location(4, 1, 0);
             piece.Plane = 1;
             piece.Rotation = 2;

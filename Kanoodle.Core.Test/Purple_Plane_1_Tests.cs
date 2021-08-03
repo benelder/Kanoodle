@@ -12,8 +12,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Purple_000_1_0_0()
         {
-            var color = new Purple();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Purple();
             piece.RootPosition = new Location(0, 0, 0);
             piece.Plane = 1;
             piece.Rotation = 0;
@@ -28,8 +27,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Purple_100_1_1_0()
         {
-            var color = new Purple();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Purple();
             piece.RootPosition = new Location(1, 0, 0);
             piece.Plane = 1;
             piece.Rotation = 1;
@@ -44,8 +42,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Purple_500_1_2_0()
         {
-            var color = new Purple();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Purple();
             piece.RootPosition = new Location(5, 0, 0);
             piece.Plane = 1;
             piece.Rotation = 2;
@@ -60,8 +57,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Purple_210_1_3_0()
         {
-            var color = new Purple();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Purple();
             piece.RootPosition = new Location(2, 1, 0);
             piece.Plane = 1;
             piece.Rotation = 3;
@@ -76,8 +72,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Purple_020_1_4_0()
         {
-            var color = new Purple();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Purple();
             piece.RootPosition = new Location(0, 2, 0);
             piece.Plane = 1;
             piece.Rotation = 4;
@@ -92,8 +87,7 @@ namespace Kanoodle.Core.Test
         [Fact]
         public void Purple_020_1_5_0()
         {
-            var color = new Purple();
-            var piece = color.Shapes.ElementAt(0);
+            var piece = new Purple();
             piece.RootPosition = new Location(0, 2, 0);
             piece.Plane = 1;
             piece.Rotation = 5;

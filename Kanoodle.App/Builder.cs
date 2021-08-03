@@ -241,7 +241,7 @@ namespace Kanoodle.App
                 Board.PlacePiece(item);
                 Board.Print();
                 Console.WriteLine("Position {1} of {2}", item.Name, i + 1, total);
-                Console.WriteLine("{0} @ Root:{1} Plane:{2} Rotation:{3} Lean:{4}", item.Name, item.RootPosition, item.Plane, item.Rotation, item.Lean);
+                Console.WriteLine(item.ToString());
                 Console.WriteLine("Press SPACE to select this piece position");
                 var next = Console.ReadKey();
                 if (next.Key == ConsoleKey.Spacebar)

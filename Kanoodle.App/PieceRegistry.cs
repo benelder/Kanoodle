@@ -77,62 +77,144 @@ namespace Kanoodle.App
 
         private int _totalPositionsTested = 0;
 
-        private List<Piece> LoadPositionsForColor<T>() where T : Color, new()
+        private List<Piece> LoadPositionsForColor<T>() where T : Piece, new()
         {
-            var color = new T();
             var toRet = new List<Piece>();
 
-            for (int i = 0; i < color.Shapes.Count(); i++)
+
+            for (int z = 0; z < 6; z++) // for each root position
             {
-                for (int z = 0; z < 6; z++) // for each root position
+                for (int y = 0; y < 6; y++) // for each root position
                 {
-                    for (int y = 0; y < 6; y++) // for each root position
+                    for (int x = 0; x < 6; x++) // for each root position
                     {
-                        for (int x = 0; x < 6; x++) // for each root position
+                        if (x + y + z > 5) // will be out of bounds
+                            continue;
+
+                        for (int r = 0; r < 6; r++) // for each rotated position
                         {
-                            if (x + y + z > 5) // will be out of bounds
-                                continue;
-
-                            for (int r = 0; r < 6; r++) // for each rotated position
+                            for (int p = 0; p < 3; p++) // for each plane
                             {
-                                for (int p = 0; p < 3; p++) // for each plane
+                                var piece = new T();
+
+                                piece.RootPosition = new Location(x, y, z);
+                                piece.Plane = p;
+                                piece.Rotation = r;
+                                piece.Lean = false;
+                                piece.MirrorX = false;
+                                piece.MirrorY = false;
+
+                                // test flat orientation
+                                _totalPositionsTested++;
+
+                                if (!piece.IsOutOfBounds())
                                 {
-                                    color = new T();
-                                    var shape = color.Shapes.ElementAt(i);
-
-                                    shape.RootPosition = new Location(x, y, z);
-                                    shape.Plane = p;
-                                    shape.Rotation = r;
-                                    shape.Lean = false;
-
-                                    // test flat orientation
-                                    _totalPositionsTested++; 
-
-                                    if (!shape.IsOutOfBounds())
+                                    if (!toRet.Any(m => m.IsInSamePositionAs(piece)))
                                     {
-                                        if (!toRet.Any(m => m.IsInSamePositionAs(shape)))
-                                        {
-                                            toRet.Add(shape);
-                                        }
+                                        toRet.Add(piece);
                                     }
-                                        
-                                    // test lean orientation
-                                    _totalPositionsTested++;
+                                }
 
-                                    color = new T();
-                                    shape = color.Shapes.ElementAt(i);
+                                // test lean orientation
+                                _totalPositionsTested++;
 
-                                    shape.RootPosition = new Location(x, y, z);
-                                    shape.Plane = p;
-                                    shape.Rotation = r;
-                                    shape.Lean = true;
+                                piece = new T();
 
-                                    if (!shape.IsOutOfBounds())
+                                piece.RootPosition = new Location(x, y, z);
+                                piece.Plane = p;
+                                piece.Rotation = r;
+                                piece.Lean = true;
+                                piece.MirrorX = false;
+                                piece.MirrorY = false;
+
+                                if (!piece.IsOutOfBounds())
+                                {
+                                    if (!toRet.Any(m => m.IsInSamePositionAs(piece)))
                                     {
-                                        if (!toRet.Any(m => m.IsInSamePositionAs(shape)))
-                                        {
-                                            toRet.Add(shape);
-                                        }
+                                        toRet.Add(piece);
+                                    }
+                                }
+
+
+                                // flip x
+                                piece = new T();
+
+                                piece.RootPosition = new Location(x, y, z);
+                                piece.Plane = p;
+                                piece.Rotation = r;
+                                piece.Lean = false;
+                                piece.MirrorX = true;
+                                piece.MirrorY = false;
+
+                                // test flat orientation
+                                _totalPositionsTested++;
+
+                                if (!piece.IsOutOfBounds())
+                                {
+                                    if (!toRet.Any(m => m.IsInSamePositionAs(piece)))
+                                    {
+                                        toRet.Add(piece);
+                                    }
+                                }
+
+                                // test lean orientation
+                                _totalPositionsTested++;
+
+                                piece = new T();
+
+                                piece.RootPosition = new Location(x, y, z);
+                                piece.Plane = p;
+                                piece.Rotation = r;
+                                piece.Lean = true;
+                                piece.MirrorX = true;
+                                piece.MirrorY = false;
+
+                                if (!piece.IsOutOfBounds())
+                                {
+                                    if (!toRet.Any(m => m.IsInSamePositionAs(piece)))
+                                    {
+                                        toRet.Add(piece);
+                                    }
+                                }
+
+                                // mirror y
+                                piece = new T();
+
+                                piece.RootPosition = new Location(x, y, z);
+                                piece.Plane = p;
+                                piece.Rotation = r;
+                                piece.Lean = false;
+                                piece.MirrorY = true;
+                                piece.MirrorX = false;
+
+                                // test flat orientation
+                                _totalPositionsTested++;
+
+                                if (!piece.IsOutOfBounds())
+                                {
+                                    if (!toRet.Any(m => m.IsInSamePositionAs(piece)))
+                                    {
+                                        toRet.Add(piece);
+                                    }
+                                }
+
+                                // test lean orientation
+                                _totalPositionsTested++;
+
+                                piece = new T();
+
+                                piece.RootPosition = new Location(x, y, z);
+                                piece.Plane = p;
+                                piece.Rotation = r;
+                                piece.Lean = true;
+                                piece.MirrorY = true;
+                                piece.MirrorX = false;
+
+                                if (!piece.IsOutOfBounds())
+                                {
+                                    if (!toRet.Any(m => m.IsInSamePositionAs(piece)))
+                                    {
+                                        toRet.Add(piece);
                                     }
                                 }
                             }
@@ -140,6 +222,7 @@ namespace Kanoodle.App
                     }
                 }
             }
+
 
             return toRet;
         }

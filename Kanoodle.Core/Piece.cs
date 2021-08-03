@@ -20,7 +20,7 @@ namespace Kanoodle.Core
 
         public override string ToString()
         {
-            return $"{Name} / {RootPosition} / P:{Plane} R:{Rotation}";
+            return $"{Name} @ Root:{RootPosition} Plane:{Plane} Rotation:{Rotation} Lean:{Lean} MirrorX:{MirrorX.ToString().ToLower()} MirrorY:{MirrorY.ToString().ToLower()}";
         }
 
         public Piece(Node[] nodes, string name, char character) : this(new Location(0, 0, 0), nodes, name, character) { }
@@ -36,6 +36,12 @@ namespace Kanoodle.Core
 
         public bool _lean { get; set; }
         public bool Lean { get { return _lean; } set { _absolutePosition = null; _lean = value; } }
+
+        public bool _mirrorX { get; set; }
+        public bool MirrorX { get { return _mirrorX; } set { _absolutePosition = null; _mirrorX = value; } }
+
+        public bool _mirrorY { get; set; }
+        public bool MirrorY { get { return _mirrorY; } set { _absolutePosition = null; _mirrorY = value; } }
 
         private int _rotation;
         public int Rotation { get { return _rotation; } set { _absolutePosition = null; _rotation = value; } }
@@ -56,7 +62,8 @@ namespace Kanoodle.Core
 
                 for (int i = 0; i < Nodes.Length; i++)
                 {
-                    var offset = Rotate(Nodes[i].Offset);
+                    var start = MirrorX ? ApplyMirrorX(Nodes[i].Offset) : MirrorY ? ApplyMirrorY(Nodes[i].Offset) : Nodes[i].Offset;
+                    var offset = Rotate(start);
                     var lean = ApplyLean(offset);
 
                     var origin = new Location(RootPosition.X + lean.X,
@@ -83,6 +90,16 @@ namespace Kanoodle.Core
             {
                 return offset;
             }
+        }
+
+        private Location ApplyMirrorX(Location offset)
+        {
+            return new Location { X = offset.X + offset.Y, Y = -offset.Y, Z = offset.Z };
+        }
+
+        private Location ApplyMirrorY(Location offset)
+        {
+            return new Location { X = -(offset.X + offset.Y), Y = offset.Y, Z = offset.Z  };
         }
 
         private Location TransposeToPlane(Location origin)

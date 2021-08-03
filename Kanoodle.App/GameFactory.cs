@@ -572,21 +572,21 @@ namespace Kanoodle.App
         {
             var toRet = new List<Piece>();
 
-            var h = new White().Shapes.ElementAt(0);
+            var h = new White();
             h.RootPosition = new Location(2, 1, 0);
             h.Plane = 1;
             h.Lean = false;
             h.Rotation = 1;
             toRet.Add(h);
 
-            var e = new Red().Shapes.ElementAt(0);
+            var e = new Red();
             e.RootPosition = new Location(4, 1, 0);
             e.Plane = 1;
             e.Lean = true;
             e.Rotation = 2;
             toRet.Add(e);
 
-            var c = new DarkBlue().Shapes.ElementAt(0);
+            var c = new DarkBlue();
             c.RootPosition = new Location(1, 0, 2);
             c.Plane = 1;
             c.Lean = true;
