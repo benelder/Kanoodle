@@ -20,7 +20,7 @@ namespace Kanoodle.App
                     //_games.Add(20, Game20());
                     //_games.Add(28, Game28());
                     //_games.Add(44, Game44());
-                    //_games.Add(45, Game45());
+                   _games.Add(45, Game45());
                     //_games.Add(89, Game89());
                     _games.Add(82, Game82());
                     //_games.Add(95, Game95());
@@ -224,36 +224,52 @@ namespace Kanoodle.App
         //    return toRet;
         //}
 
-        //public static IEnumerable<Piece> Game45()
-        //{
-        //    var toRet = new List<Piece>();
+        public static IEnumerable<Piece> Game45()
+        {
+            var toRet = new List<Piece>();
 
-        //    var green = new Green().Shapes.ElementAt(1);
-        //    green.Rotation = 1;
-        //    green.RootPosition = new Location(0, 0, 0);
-        //    toRet.Add(green);
+            var h = new White();
+            h.RootPosition = new Location(0, 0, 0);
+            h.Plane = 2;
+            h.Lean = false;
+            h.Rotation = 0;
+            h.MirrorX = false;
+            toRet.Add(h);
 
-        //    var yellow = new Yellow().Shapes.ElementAt(3);
-        //    yellow.ARotation = 1;
-        //    yellow.RootPosition = new Location(1, 0, 1);
-        //    toRet.Add(yellow);
+            var g = new Green();
+            g.RootPosition = new Location(0, 0, 0);
+            g.Plane = 0;
+            g.Lean = false;
+            g.Rotation = 1;
+            g.MirrorX = true;
+            toRet.Add(g);
 
-        //    var lightBlue = new LightBlue().Shapes.ElementAt(3);
-        //    lightBlue.RootPosition = new Location(1, 1, 0);
-        //    toRet.Add(lightBlue);
+            var d = new LightBlue();
+            d.RootPosition = new Location(1, 0, 0);
+            d.Plane = 1;
+            d.Lean = false;
+            d.Rotation = 1;
+            d.MirrorX = true;
+            toRet.Add(d);
 
-        //    var white = new White().Shapes.ElementAt(2);
-        //    white.RootPosition = new Location(0, 3, 0);
-        //    toRet.Add(white);
+            var i = new Orange();
+            i.RootPosition = new Location(3, 1, 0);
+            i.Plane = 1;
+            i.Lean = true;
+            i.Rotation = 3;
+            i.MirrorX = true;
+            toRet.Add(i);
 
-        //    var orange = new Orange().Shapes.ElementAt(0);
-        //    orange.ARotation = 1;
-        //    orange.Rotation = 5;
-        //    orange.RootPosition = new Location(1, 3, 0);
-        //    toRet.Add(orange);
+            var b = new Yellow();
+            b.RootPosition = new Location(4, 0, 0);
+            b.Plane = 0;
+            b.Lean = true;
+            b.Rotation = 3;
+            b.MirrorX = true;
+            toRet.Add(b);
 
-        //    return toRet;
-        //}
+            return toRet;
+        }
 
         //public static IEnumerable<Piece> Game89()
         //{

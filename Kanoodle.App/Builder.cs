@@ -252,6 +252,7 @@ namespace Kanoodle.App
                 }
                 else if (next.Key == ConsoleKey.Escape)
                 {
+                    Board.RemovePiece(item);
                     break;
                 }
                 else if (next.Key == ConsoleKey.LeftArrow)
