@@ -21,6 +21,7 @@ namespace Kanoodle.App
                     //_games.Add(28, Game28());
                     //_games.Add(44, Game44());
                    _games.Add(45, Game45());
+                    _games.Add(47, Game47());
                     //_games.Add(89, Game89());
                     _games.Add(82, Game82());
                     //_games.Add(95, Game95());
@@ -267,6 +268,53 @@ namespace Kanoodle.App
             b.Rotation = 3;
             b.MirrorX = true;
             toRet.Add(b);
+
+            return toRet;
+        }
+
+        public static IEnumerable<Piece> Game47()
+        {
+            var toRet = new List<Piece>();
+
+            var e = new Red();
+            e.RootPosition = new Location(0, 0, 0);
+            e.Plane = 2;
+            e.Lean = false;
+            e.Rotation = 1;
+            e.MirrorX = true;
+            toRet.Add(e);
+
+            var b = new Yellow();
+            b.RootPosition = new Location(2, 0, 0);
+            b.Plane = 2;
+            b.Lean = false;
+            b.Rotation = 0;
+            b.MirrorX = false;
+            toRet.Add(b);
+
+            var k = new Gray();
+            k.RootPosition = new Location(3, 0, 0);
+            k.Plane = 0;
+            k.Lean = false;
+            k.Rotation = 1;
+            k.MirrorX = false;
+            toRet.Add(k);
+
+            var g = new Green();
+            g.RootPosition = new Location(0, 2, 1);
+            g.Plane = 0;
+            g.Lean = true;
+            g.Rotation = 0;
+            g.MirrorX = true;
+            toRet.Add(g);
+
+            var a = new Lime();
+            a.RootPosition = new Location(4, 0, 1);
+            a.Plane = 1;
+            a.Lean = true;
+            a.Rotation = 3;
+            a.MirrorX = true;
+            toRet.Add(a);
 
             return toRet;
         }
