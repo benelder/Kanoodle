@@ -12,13 +12,13 @@ namespace Kanoodle.App
             var escape = false;
             while (!escape)
             {
-                Console.WriteLine("Choose and option: (S)olver, (P)ieces, (I)nfo, (B)uilder, (E)xit");
+                Console.WriteLine("Choose and option: (S)olutions, (P)ieces, (I)nfo, (B)uilder, (E)xit");
                 var module = Console.ReadLine();
 
-                if (module == "S") // solve a pre-configured game state
+                if (module == "S") // view game solutions
                 {
                     var solver = new Solver();
-                    solver.Solve();
+                    solver.ViewSolution();
                 }
                 if (module == "B") // build a board state with the option to solve it
                 {

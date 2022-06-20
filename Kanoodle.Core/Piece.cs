@@ -6,6 +6,7 @@ namespace Kanoodle.Core
 {
     public class Piece
     {
+        public Piece() { }
         public Piece(Location rootPosition, Node[] nodes, string name, char character) : this(rootPosition, 0, 0, false, nodes, name, character) { }
 
         public Piece(Location rootPosition, int rotation, int plane, bool lean, Node[] nodes, string name, char character)
@@ -68,7 +69,7 @@ namespace Kanoodle.Core
                         RootPosition.Z + lean.Z);
 
                     var transpose = TransposeToPlane(origin);
-                    
+
                     toRet.Add(new Node(transpose.X, transpose.Y, transpose.Z));
                 }
                 _absolutePosition = toRet.ToArray();
@@ -132,7 +133,7 @@ namespace Kanoodle.Core
             return false;
         }
 
-        private Location Rotate(Location location) 
+        private Location Rotate(Location location)
         {
             // rotation is performed first, in the order of placement operations
             // location input is the Node offset, relative to Root

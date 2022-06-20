@@ -15,4 +15,10 @@
     <ProjectReference Include="..\Kanoodle.Core\Kanoodle.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Games.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

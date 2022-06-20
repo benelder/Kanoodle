@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace Kanoodle.App
 {
@@ -12,24 +14,21 @@ namespace Kanoodle.App
         public Board Board { get; set; }
         public int PositionCount { get; set; }
 
-        public void Solve()
+        public void ViewSolution()
         {
-            Solve(null);
+            Board = new Board();
+            SelectAndLoadSolution();
+            Board.Print();
+
+            Console.ReadLine();
         }
 
         public void Solve(IEnumerable<Piece> state)
         {
             Board = new Board();
 
-            if (state != null)
-            {
-                // load state
-                LoadState(state);
-            }
-            else
-            {
-                SelectAndLoadGame();
-            }
+            // load state
+            LoadState(state);
 
             Console.WriteLine("Board loaded. Initial setup looks like this");
 
@@ -49,18 +48,23 @@ namespace Kanoodle.App
 
             while (!escape)
             {
-                Console.WriteLine("(C)ount all possible solutions. or (S)olve");
+                Console.WriteLine("(C)ount all possible solutions, (S)olve, or (W)rite solution");
 
                 var response = Console.ReadLine();
 
-                if(response == "S")
+                if (response == "S")
                 {
                     AttemptToSolve();
                     escape = true;
                 }
-                else if(response == "C")
+                else if (response == "C")
                 {
                     CountPossibleSolutions();
+                    escape = true;
+                }
+                else if (response == "W")
+                {
+                    AttemptToSolve(true);
                     escape = true;
                 }
                 else
@@ -93,8 +97,13 @@ namespace Kanoodle.App
             }
         }
 
-        private void AttemptToSolve()
+        private void AttemptToSolve(bool writeSolution = false)
         {
+            var game = new Game();
+
+            if (writeSolution)
+                game.State = Board.PiecesUsed.Select(m => m.Value).ToArray();
+
             var timer = new Stopwatch();
             timer.Start();
 
@@ -109,6 +118,11 @@ namespace Kanoodle.App
                 Console.WriteLine("SOLUTION FOUND!!");
                 Console.WriteLine("Time elapsed: {0}", timer.Elapsed);
                 Console.WriteLine("Piece positions tried: {0}", PositionCount.ToString("N0"));
+                if (writeSolution)
+                {
+                    game.Solution = Board.PiecesUsed.Select(m => m.Value).ToArray();
+                    File.AppendAllText("Solution.txt", JsonSerializer.Serialize(game));
+                }
             }
             else
             {
@@ -116,7 +130,7 @@ namespace Kanoodle.App
             }
         }
 
-        private void SelectAndLoadGame()
+        private void SelectAndLoadSolution()
         {
             var gameLoaded = false;
 
@@ -127,19 +141,11 @@ namespace Kanoodle.App
                     Console.WriteLine(item.Key);
                 }
 
-                Console.WriteLine("Select a game number from the list to load a game");
+                Console.WriteLine("Select a game number from the list to see the solution");
 
                 var gameNumStr = Console.ReadLine();
 
-                var isNum = int.TryParse(gameNumStr, out int gameNum);
-
-                if (!isNum)
-                {
-                    Console.WriteLine("Not a number");
-                    continue;
-                }
-
-                gameLoaded = Board.LoadGame(gameNum);
+                gameLoaded = Board.LoadSolution(gameNumStr);
 
                 if (!gameLoaded)
                 {
@@ -172,7 +178,7 @@ namespace Kanoodle.App
         private bool PlacePieces()
         {
             var unusedColors = Board.GetUnusedColors();
-            
+
             if (unusedColors.Count() == 0) // all pieces have been placed! We've solved it!
             {
                 return true;
@@ -181,7 +187,7 @@ namespace Kanoodle.App
             // take next unused color ensuring it doesn't collide with a taken position
             var pieces = unusedColors.First().Value
                 .Where(s => s.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset)))
-                .ToArray(); 
+                .ToArray();
 
             foreach (var position in pieces)
             {
@@ -189,7 +195,7 @@ namespace Kanoodle.App
 
                 if (!Board.Collision(position)) // if piece fits onto board
                 {
-                    Board.PlacePiece(position); 
+                    Board.PlacePiece(position);
                     var s = PlacePieces(); // recurse
                     if (s) return true;
                     Board.RemovePiece(position); // remove piece from board and loop to try next position
@@ -203,7 +209,7 @@ namespace Kanoodle.App
         private bool CountSolutions()
         {
             var unusedColors = Board.GetUnusedColors();
-            
+
             if (unusedColors.Count() == 0) // all pieces have been placed! We've solved it!
             {
                 _solutionCount++;

@@ -11,7 +11,7 @@ namespace Kanoodle.App
     {
 
         public HashSet<Location> UsedLocations { get; set; }
-        private List<char> PiecesUsed { get; set; }
+        public Dictionary<char, Piece> PiecesUsed { get; set; }
         private char[,,] BoardMap { get; set; }
         public PieceRegistry PieceRegistry { get; set; }
 
@@ -25,7 +25,7 @@ namespace Kanoodle.App
         public ulong GetTotalPositionCount()
         {
             return PieceRegistry.Colors
-                .Where(m => !PiecesUsed.Contains(m.Key))
+                .Where(m => !PiecesUsed.ContainsKey(m.Key))
                 .Aggregate((ulong)1, (x, y) => x * (ulong)y.Value.Count());
         }
 
@@ -46,18 +46,18 @@ namespace Kanoodle.App
                     }
                 }
             }
-            PiecesUsed = new List<char>();
+            PiecesUsed = new Dictionary<char, Piece>();
             UsedLocations = new HashSet<Location>();
         }
 
         public bool IsPieceUsed(string key)
         {
-            return PiecesUsed.Contains(char.Parse(key));
+            return PiecesUsed.ContainsKey(char.Parse(key));
         }
 
         public IEnumerable<KeyValuePair<char, List<Piece>>> GetUnusedColors()
         {
-            return PieceRegistry.Colors.Where(m => !PiecesUsed.Contains(m.Key));
+            return PieceRegistry.Colors.Where(m => !PiecesUsed.ContainsKey(m.Key));
         }
 
         public void Print()
@@ -103,7 +103,7 @@ namespace Kanoodle.App
                     BoardMap[abs[i].Offset.X, abs[i].Offset.Y, abs[i].Offset.Z] = piece.Character;
                     UsedLocations.Add(abs[i].Offset);
                 }
-                PiecesUsed.Add(piece.Character);
+                PiecesUsed.Add(piece.Character, piece);
             }
             catch (Exception)
             {
@@ -124,13 +124,33 @@ namespace Kanoodle.App
             PiecesUsed.Remove(piece.Character);
         }
 
-        public bool LoadGame(int gameNum)
+        public bool LoadGame(string gameNum)
         {
             try
             {
                 var game = GameFactory.Games[gameNum];
 
-                foreach (var piece in game)
+                foreach (var piece in game.State)
+                {
+                    PlacePiece(piece);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                Clear();
+                return false;
+            }
+        }
+
+        public bool LoadSolution(string gameNum)
+        {
+            try
+            {
+                var game = GameFactory.Games[gameNum];
+
+                foreach (var piece in game.Solution)
                 {
                     PlacePiece(piece);
                 }

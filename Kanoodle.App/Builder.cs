@@ -24,10 +24,7 @@ namespace Kanoodle.App
 
             DisplayFinalBoardState();
 
-            RequestCodeGenInput();
-
             return RequestSolverInput();
-
         }
 
         private void LoadInitialState()
@@ -55,19 +52,11 @@ namespace Kanoodle.App
 
                         var gameNumStr = Console.ReadLine();
 
-                        var isNum = int.TryParse(gameNumStr, out int gameNum);
-
-                        if (!isNum)
-                        {
-                            Console.WriteLine("Not a number");
-                            continue;
-                        }
-
                         try
                         {
-                            var game = GameFactory.Games[gameNum];
+                            var game = GameFactory.Games[gameNumStr];
 
-                            foreach (var piece in game)
+                            foreach (var piece in game.State)
                             {
                                 PositionsUsed.Add(piece);
                                 Board.PlacePiece(piece);
@@ -129,26 +118,6 @@ namespace Kanoodle.App
             {
                 var piece = PositionsUsed.ElementAt(i);
                 Console.WriteLine(piece);
-            }
-        }
-
-        private void RequestCodeGenInput()
-        {
-            var showCode = false;
-            while (!showCode)
-            {
-                Console.WriteLine("Would you like to generate code to add this build to the solution? (Y)es, (N)o");
-                var result = Console.ReadLine();
-                if (result == "Y")
-                {
-                    var codeGen = new CodeGenerator();
-                    codeGen.GenerateCode(PositionsUsed);
-                    showCode = true;
-                }
-                else if (result == "N")
-                {
-                    showCode = true;
-                }
             }
         }
 
