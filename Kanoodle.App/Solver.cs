@@ -136,7 +136,7 @@ namespace Kanoodle.App
 
             while (!gameLoaded)
             {
-                foreach (var item in GameFactory.Games)
+                foreach (var item in GameFactory.Games.OrderBy(m => m.Key))
                 {
                     Console.WriteLine(item.Key);
                 }
