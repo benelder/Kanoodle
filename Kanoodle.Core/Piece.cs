@@ -32,13 +32,13 @@ namespace Kanoodle.Core
         private Location _rootPosition;
         public Location RootPosition { get { return _rootPosition; } set { _absolutePosition = null; _rootPosition = value; } }
 
-        public int _plane { get; set; }
+        private int _plane { get; set; }
         public int Plane { get { return _plane; } set { _absolutePosition = null; _plane = value; } }
 
-        public bool _lean { get; set; }
+        private bool _lean { get; set; }
         public bool Lean { get { return _lean; } set { _absolutePosition = null; _lean = value; } }
 
-        public bool _mirrorX { get; set; }
+        private bool _mirrorX { get; set; }
         public bool MirrorX { get { return _mirrorX; } set { _absolutePosition = null; _mirrorX = value; } }
 
         private int _rotation;

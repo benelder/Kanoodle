@@ -10,11 +10,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 0,
         "Nodes": [
@@ -56,11 +53,8 @@
           "Y": 1,
           "Z": 1
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 0,
         "Nodes": [
@@ -109,11 +103,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 3,
         "Nodes": [
@@ -157,11 +148,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 0,
         "Nodes": [
@@ -203,11 +191,8 @@
           "Y": 1,
           "Z": 1
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 0,
         "Nodes": [
@@ -256,11 +241,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 3,
         "Nodes": [
@@ -302,11 +284,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 0,
         "Plane": 0,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 0,
         "Nodes": [
@@ -355,11 +334,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": false,
         "Lean": false,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 1,
         "Nodes": [
@@ -408,11 +384,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 1,
         "Nodes": [
@@ -461,11 +434,8 @@
           "Y": 0,
           "Z": 4
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 5,
         "Nodes": [
@@ -514,11 +484,8 @@
           "Y": 0,
           "Z": 3
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 1,
         "Nodes": [
@@ -567,11 +534,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 0,
         "Plane": 0,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 2,
         "Nodes": [
@@ -620,11 +584,8 @@
           "Y": 1,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 2,
         "Nodes": [
@@ -673,11 +634,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 1,
         "Nodes": [
@@ -719,11 +677,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 1,
         "Nodes": [
@@ -760,7 +715,7 @@
     ]
   },
   {
-    "Name": "Game 99",
+    "Name": "Game 099",
     "State": [
       {
         "Name": "Yellow",
@@ -770,11 +725,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 0,
         "Nodes": [
@@ -823,11 +775,8 @@
           "Y": 1,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": false,
         "Lean": false,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 0,
         "Nodes": [
@@ -869,11 +818,8 @@
           "Y": 0,
           "Z": 2
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 4,
         "Nodes": [
@@ -924,11 +870,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 0,
         "Nodes": [
@@ -977,11 +920,8 @@
           "Y": 1,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": false,
         "Lean": false,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 0,
         "Nodes": [
@@ -1023,11 +963,8 @@
           "Y": 0,
           "Z": 2
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 4,
         "Nodes": [
@@ -1076,11 +1013,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": false,
         "Lean": false,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 2,
         "Nodes": [
@@ -1129,11 +1063,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 0,
         "Plane": 0,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 0,
         "Nodes": [
@@ -1182,11 +1113,8 @@
           "Y": 0,
           "Z": 4
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 4,
         "Nodes": [
@@ -1235,11 +1163,8 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 2,
         "Plane": 2,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 2,
         "Nodes": [
@@ -1288,11 +1213,8 @@
           "Y": 0,
           "Z": 2
         },
-        "_plane": 0,
         "Plane": 0,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 2,
         "Nodes": [
@@ -1341,11 +1263,8 @@
           "Y": 1,
           "Z": 3
         },
-        "_plane": 0,
         "Plane": 0,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 4,
         "Nodes": [
@@ -1394,11 +1313,8 @@
           "Y": 1,
           "Z": 2
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": true,
         "MirrorX": true,
         "Rotation": 4,
         "Nodes": [
@@ -1440,11 +1356,8 @@
           "Y": 0,
           "Z": 1
         },
-        "_plane": 0,
         "Plane": 0,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
         "MirrorX": false,
         "Rotation": 1,
         "Nodes": [
@@ -1486,11 +1399,2181 @@
           "Y": 0,
           "Z": 0
         },
-        "_plane": 1,
         "Plane": 1,
-        "_lean": true,
         "Lean": true,
-        "_mirrorX": false,
+        "MirrorX": false,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Game 098",
+    "State": [
+      {
+        "Name": "DarkBlue",
+        "Character": "C",
+        "RootPosition": {
+          "X": 1,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": false,
+        "MirrorX": true,
+        "Rotation": 1,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "White",
+        "Character": "H",
+        "RootPosition": {
+          "X": 1,
+          "Y": 1,
+          "Z": 2
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 4,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Green",
+        "Character": "G",
+        "RootPosition": {
+          "X": 5,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": true,
+        "Rotation": 3,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      }
+    ],
+    "Solution": [
+      {
+        "Name": "DarkBlue",
+        "Character": "C",
+        "RootPosition": {
+          "X": 1,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": false,
+        "MirrorX": true,
+        "Rotation": 1,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "White",
+        "Character": "H",
+        "RootPosition": {
+          "X": 1,
+          "Y": 1,
+          "Z": 2
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 4,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Green",
+        "Character": "G",
+        "RootPosition": {
+          "X": 5,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": true,
+        "Rotation": 3,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Lime",
+        "Character": "A",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 2,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Yellow",
+        "Character": "B",
+        "RootPosition": {
+          "X": 1,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 1,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "LightBlue",
+        "Character": "D",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 4
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 5,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 3,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Red",
+        "Character": "E",
+        "RootPosition": {
+          "X": 2,
+          "Y": 0,
+          "Z": 1
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": true,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Pink",
+        "Character": "F",
+        "RootPosition": {
+          "X": 2,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 3,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Orange",
+        "Character": "I",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 5
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 4,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Peach",
+        "Character": "J",
+        "RootPosition": {
+          "X": 1,
+          "Y": 2,
+          "Z": 0
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 1,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Gray",
+        "Character": "K",
+        "RootPosition": {
+          "X": 3,
+          "Y": 0,
+          "Z": 2
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Purple",
+        "Character": "L",
+        "RootPosition": {
+          "X": 2,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Game 097",
+    "State": [
+      {
+        "Name": "Lime",
+        "Character": "A",
+        "RootPosition": {
+          "X": 3,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 2,
+        "Lean": false,
+        "MirrorX": true,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 2,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Red",
+        "Character": "E",
+        "RootPosition": {
+          "X": 3,
+          "Y": 1,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "DarkBlue",
+        "Character": "C",
+        "RootPosition": {
+          "X": 5,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": true,
+        "Rotation": 3,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      }
+    ],
+    "Solution": [
+      {
+        "Name": "Lime",
+        "Character": "A",
+        "RootPosition": {
+          "X": 3,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 2,
+        "Lean": false,
+        "MirrorX": true,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 2,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Red",
+        "Character": "E",
+        "RootPosition": {
+          "X": 3,
+          "Y": 1,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "DarkBlue",
+        "Character": "C",
+        "RootPosition": {
+          "X": 5,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": true,
+        "Rotation": 3,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Yellow",
+        "Character": "B",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "LightBlue",
+        "Character": "D",
+        "RootPosition": {
+          "X": 3,
+          "Y": 0,
+          "Z": 1
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": true,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 3,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Pink",
+        "Character": "F",
+        "RootPosition": {
+          "X": 3,
+          "Y": 0,
+          "Z": 2
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 3,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Green",
+        "Character": "G",
+        "RootPosition": {
+          "X": 4,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": true,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "White",
+        "Character": "H",
+        "RootPosition": {
+          "X": 2,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Orange",
+        "Character": "I",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 4
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 4,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Peach",
+        "Character": "J",
+        "RootPosition": {
+          "X": 3,
+          "Y": 1,
+          "Z": 0
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": true,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Gray",
+        "Character": "K",
+        "RootPosition": {
+          "X": 2,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Purple",
+        "Character": "L",
+        "RootPosition": {
+          "X": 2,
+          "Y": 0,
+          "Z": 2
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 5,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Game 096",
+    "State": [
+      {
+        "Name": "Green",
+        "Character": "G",
+        "RootPosition": {
+          "X": 4,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": false,
+        "MirrorX": true,
+        "Rotation": 3,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Peach",
+        "Character": "J",
+        "RootPosition": {
+          "X": 0,
+          "Y": 2,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Purple",
+        "Character": "L",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 2
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 4,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      }
+    ],
+    "Solution": [
+      {
+        "Name": "Green",
+        "Character": "G",
+        "RootPosition": {
+          "X": 4,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 1,
+        "Lean": false,
+        "MirrorX": true,
+        "Rotation": 3,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Peach",
+        "Character": "J",
+        "RootPosition": {
+          "X": 0,
+          "Y": 2,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Purple",
+        "Character": "L",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 2
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 4,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Lime",
+        "Character": "A",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 2,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Yellow",
+        "Character": "B",
+        "RootPosition": {
+          "X": 4,
+          "Y": 1,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "DarkBlue",
+        "Character": "C",
+        "RootPosition": {
+          "X": 4,
+          "Y": 0,
+          "Z": 1
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "LightBlue",
+        "Character": "D",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 4
+        },
+        "Plane": 1,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 5,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 3,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Red",
+        "Character": "E",
+        "RootPosition": {
+          "X": 2,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 2,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 1,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Pink",
+        "Character": "F",
+        "RootPosition": {
+          "X": 5,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 2,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 3,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "White",
+        "Character": "H",
+        "RootPosition": {
+          "X": 2,
+          "Y": 0,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": false,
+        "MirrorX": false,
+        "Rotation": 0,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 2,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Orange",
+        "Character": "I",
+        "RootPosition": {
+          "X": 0,
+          "Y": 0,
+          "Z": 5
+        },
+        "Plane": 0,
+        "Lean": true,
+        "MirrorX": false,
+        "Rotation": 4,
+        "Nodes": [
+          {
+            "Offset": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 1,
+              "Z": 0
+            }
+          },
+          {
+            "Offset": {
+              "X": 1,
+              "Y": 2,
+              "Z": 0
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Gray",
+        "Character": "K",
+        "RootPosition": {
+          "X": 0,
+          "Y": 1,
+          "Z": 0
+        },
+        "Plane": 0,
+        "Lean": true,
         "MirrorX": false,
         "Rotation": 0,
         "Nodes": [
@@ -1527,4 +3610,3 @@
     ]
   }
 ]
-
