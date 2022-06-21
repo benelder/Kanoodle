@@ -43,7 +43,7 @@ namespace Kanoodle.App
 
                     while (!gameLoaded)
                     {
-                        foreach (var item in GameFactory.Games.OrderBy(m=>m.Key))
+                        foreach (var item in GameFactory.Games.OrderBy(m => m.Key))
                         {
                             Console.WriteLine(item.Key);
                         }
@@ -68,7 +68,7 @@ namespace Kanoodle.App
                         {
                             gameLoaded = false;
                         }
-                        
+
 
                         if (!gameLoaded)
                         {
@@ -100,7 +100,7 @@ namespace Kanoodle.App
                     Console.WriteLine("Invalid selection");
                     continue;
                 }
-                    
+
 
                 if (module == "Q")
                 {
@@ -121,7 +121,7 @@ namespace Kanoodle.App
                     Console.WriteLine("Invalid selection");
                     continue;
                 }
-                
+
 
                 SelectPosition(char.Parse(module));
             }
@@ -164,28 +164,25 @@ namespace Kanoodle.App
 
             while (!escape)
             {
-                Console.WriteLine("(F)ilter by location or (A)ll; (Q) to exit");
-                var selection = Console.ReadLine();
-
-                if (selection == "Q")
+                var success = false;
+                while (!success)
                 {
-                    escape = true;
-                    continue;
-                }
-
-                if (selection == "F")
-                {
-                    var success = false;
-                    while (!success)
+                    try
                     {
-                        try
+                        Console.WriteLine("Filter to positions that include a specific location. Enter the three-digit position as XYZ, (A)ll positions, or (Q)uit");
+                        var coords = Console.ReadLine();
+
+                        if (coords == "Q")
+                            break;
+
+                        if (coords == "A") // cycle through ALL possible positions
                         {
-                            Console.WriteLine("Filter to positions that include a specific location. Enter the three-digit position as XYZ or Q to quit");
-                            var coords = Console.ReadLine();
-
-                            if (coords == "Q")
-                                break;
-
+                            var positions = Board.PieceRegistry.Colors[color].Where(m => m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset))).ToArray();
+                            var result = CycleThroughPositions(positions);
+                            escape = result;
+                        }
+                        else
+                        {
                             var x = int.Parse(coords[0].ToString());
                             var y = int.Parse(coords[1].ToString());
                             var z = int.Parse(coords[2].ToString());
@@ -197,18 +194,11 @@ namespace Kanoodle.App
                             success = result;
                             escape = result;
                         }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid coordinates. Please try again");
-                        }
                     }
-                }
-
-                if (selection == "A") // cycle through ALL possible positions
-                {
-                    var positions = Board.PieceRegistry.Colors[color].Where(m => m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset))).ToArray();
-                    var result = CycleThroughPositions(positions);
-                    escape = result;
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Invalid coordinates. Please try again");
+                    }
                 }
             }
         }
