@@ -95,17 +95,33 @@ namespace Kanoodle.App
                 Console.WriteLine("Select a color A-L to place a piece on the board, or Q to exit");
                 var module = Console.ReadLine();
 
+                if (module.Length != 1)
+                {
+                    Console.WriteLine("Invalid selection");
+                    continue;
+                }
+                    
+
                 if (module == "Q")
                 {
                     escape = true;
                     continue;
                 }
 
-                if (Board.IsPieceUsed(module))
+                try
                 {
-                    Console.WriteLine("That piece is already in use");
+                    if (Board.IsPieceUsed(module))
+                    {
+                        Console.WriteLine("That piece is already in use");
+                        continue;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid selection");
                     continue;
                 }
+                
 
                 SelectPosition(char.Parse(module));
             }
