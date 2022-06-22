@@ -172,9 +172,12 @@ namespace Kanoodle.App
                         Console.WriteLine("Filter to positions that include a specific location. Enter the three-digit position as XYZ, (A)ll positions, or (Q)uit");
                         var coords = Console.ReadLine();
 
-                        if (coords == "Q")
-                            break;
-
+                        if (coords == "Q") { 
+                            escape = true;
+                            success = true;
+                            break; 
+                        }
+                            
                         if (coords == "A") // cycle through ALL possible positions
                         {
                             var positions = Board.PieceRegistry.Colors[color].Where(m => m.GetAbsolutePosition().All(m => !Board.UsedLocations.Contains(m.Offset))).ToArray();

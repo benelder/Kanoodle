@@ -9,19 +9,14 @@ namespace Kanoodle.App
 {
     public static class GameFactory
     {
-        private static Dictionary<string, Game> _games;
         public static Dictionary<string, Game> Games
         {
             get
             {
-
-                if (_games == null)
-                {
-                    var g = JsonSerializer.Deserialize<IEnumerable<Game>>(File.ReadAllText("Games.json"));
-                    _games = g.ToDictionary(m => m.Name, m => m);
-                }
-
-                return _games;
+                // intentionally not caching the deserialized result into a private field
+                // so that newly added games are immediately available at runtime
+                return JsonSerializer.Deserialize<IEnumerable<Game>>(File.ReadAllText("Games.json"))
+                    .ToDictionary(m => m.Name, m => m);
             }
         }
 

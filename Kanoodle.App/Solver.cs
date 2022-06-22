@@ -48,7 +48,7 @@ namespace Kanoodle.App
 
             while (!escape)
             {
-                Console.WriteLine("(C)ount all possible solutions, (S)olve, or (W)rite solution");
+                Console.WriteLine("(C)ount all possible solutions, (S)olve, (W)rite solution to File or (A)dd to games file");
 
                 var response = Console.ReadLine();
 
@@ -65,6 +65,11 @@ namespace Kanoodle.App
                 else if (response == "W")
                 {
                     AttemptToSolve(true);
+                    escape = true;
+                }
+                else if (response == "A")
+                {
+                    AddToGames();
                     escape = true;
                 }
                 else
@@ -123,6 +128,41 @@ namespace Kanoodle.App
                     game.Solution = Board.PiecesUsed.Select(m => m.Value).ToArray();
                     File.AppendAllText("Solution.txt", JsonSerializer.Serialize(game));
                 }
+            }
+            else
+            {
+                Console.WriteLine("It appears that this is an unsolvable state");
+            }
+        }
+
+        private void AddToGames()
+        {
+            Console.WriteLine("Enter a name for this game");
+            var name = Console.ReadLine();
+            var games = GameFactory.Games;
+            var game = new Game();
+            game.Name = name;
+
+            game.State = Board.PiecesUsed.Select(m => m.Value).ToArray();
+
+            var timer = new Stopwatch();
+            timer.Start();
+
+            Console.WriteLine("Attempting to place pieces");
+
+            var solutionFound = PlacePieces();
+
+            if (solutionFound)
+            {
+                timer.Stop();
+                Board.Print();
+                Console.WriteLine("SOLUTION FOUND!!");
+                Console.WriteLine("Time elapsed: {0}", timer.Elapsed);
+                Console.WriteLine("Piece positions tried: {0}", PositionCount.ToString("N0"));
+
+                game.Solution = Board.PiecesUsed.Select(m => m.Value).ToArray();
+                games.Add(game.Name, game);
+                File.WriteAllText("games.json", JsonSerializer.Serialize(games.Select(m=>m.Value).ToArray()));
             }
             else
             {
