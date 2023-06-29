@@ -1,4 +1,7 @@
 # Kanoodle Extreme Solver
+
+Check out the [New 3D version of the Kanoodle Extreme Solver](https://github.com/benelder/kanoodle-3d)
+
 Welcome to the Kanoodle Extreme Solver
 
 Start here to learn more about Kanoodle and the inner-workings of this Solver app
