@@ -1,4 +1,4 @@
-# Kanoodle
+# Kanoodle Extreme Solver
 Welcome to the Kanoodle Extreme Solver
 
 Start here to learn more about Kanoodle and the inner-workings of this Solver app
